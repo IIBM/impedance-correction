@@ -1,0 +1,12 @@
+# Text editors files
+*.swp
+*.~lock.*
+*.vim
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.bak
+*.synctex.gz

@@ -1,0 +1,246 @@
+%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||%
+%|||||||||||||||||||||||||||||| Carga de paquetes |||||||||||||||||||||||||||||%
+%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||%
+
+% Acá se define el tamaño de letra principal:
+\documentclass[12pt]{article}
+
+% Definición del tamaño de página y los márgenes:
+\usepackage[a4paper,scale={0.80,0.80},
+            headheight=15pt,headsep=20pt,voffset=15pt,footskip=50pt]{geometry}
+
+% Vamos a escribir en castellano:
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+
+% El paquete amsmath agrega algunas funcionalidades extra a las fórmulas.
+% Además defino la numeración de las tablas y figuras al estilo "Figura 2.3",
+% en lugar de "Figura 7". (Por lo tanto, aunque no uses fórmulas, si querés
+% este tipo de numeración dejá el paquete amsmath descomentado).
+\usepackage{amsmath}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+% Agregado de algunos símbolos matemáticos
+\usepackage{amssymb}
+
+% Para tener cabecera y pie de página con un estilo personalizado:
+\usepackage{fancyhdr}
+
+% Para poner el texto "Figura X" en negrita:
+% (Si no tenés el paquete 'caption2', probá con 'caption').
+\usepackage[hang,bf]{caption}
+
+% Para poder usar subfiguras: (al estilo Figura 2.3(b) )
+%\usepackage{subfigure}
+
+% Para poder agregar notas al pie en tablas:
+%\usepackage{threeparttable}
+
+% Para incluir imágenes, el siguiente código carga el paquete graphicx
+% según se esté generando un archivo dvi o un pdf (con pdflatex).
+%
+%     Para generar dvi, descomentá la linea siguiente:
+%\usepackage[dvips]{graphicx}
+%
+%     Para generar pdf, descomentá las dos lineas siguientes:
+\usepackage[pdftex]{graphicx}
+\pdfcompresslevel=9
+
+% Directorio de imágenes:
+\graphicspath{{\imgdir/}}
+
+% Para ubicar las imágenes en un lugar específico
+\usepackage{float}
+
+% Para la utilización de colores
+\usepackage[usenames,dvipsnames]{xcolor, colortbl}
+
+% Para insertar código fuente (configuración en archivo externo)
+% \input{listings_config.tex}
+
+% Para utilizar hipervínculos
+\usepackage{hyperref}
+
+% Para dibujar gráficos vectoriales (también añade el bucle 'for')
+\usepackage{tikz}
+
+% Agregado de caligrafía matemática
+\usepackage{bbold}
+
+% Tablas con filas y columnas colapsadas
+\usepackage{multirow}
+
+% Unidades del SI
+\usepackage{siunitx}
+\sisetup{per-mode=fraction} % Fración en vez de exponente -1
+\sisetup{output-decimal-marker = {,}} % Coma en vez de punto decimal
+\ifx \bit \undefined % Definición de bit, si falta
+    \DeclareSIUnit\bit{bit}
+\fi
+
+% Flechas largas
+% \usepackage{extarrows}
+
+% Configuración de párrafos
+\usepackage{parskip}
+\setlength{\parindent}{8pt}
+
+%------------------- Datos modificables desde archivo aparte ------------------%
+\newcommand\integrante[3]{
+    & #1, #2 & #3 \\ \cline{2-3}
+}
+\input{datos.tex}
+%------------------------------------------------------------------------------%
+
+% Título y autor(es):
+\title{\titulo}
+\author{\autores}
+
+
+
+%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||%
+%|||||||||||||||||||||||||||| Inicio del documento ||||||||||||||||||||||||||||%
+%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||%
+\begin{document}
+
+% Estilo de encabezado y pie de página:
+\pagestyle{fancy}
+\renewcommand{\headrule}{\vspace{-3mm}\textcolor{Gray}{\hrule}}
+\renewcommand{\footrule}{\textcolor{Gray}{\hrule}\vspace{1mm}}
+\lhead{\textcolor{Gray}{\textsf{\codmateria\ - \nommateria}}}
+\chead{}
+\rhead{\textcolor{Gray}{\textsf{\titulo}}}
+\lfoot{\textcolor{Gray}{\textsf{\autores}}}
+\cfoot{}
+\rfoot{\textcolor{Gray}{\boxed{\textbf{\textsf{\thepage}}}}}
+
+% Carátula:
+\begin{titlepage}
+
+    \thispagestyle{empty}
+
+    \begin{center}
+
+        \minipage{0.4\textwidth}
+            \minipage{0.16\textwidth}
+                \includegraphics[scale=0.11]{fiuba}
+            \endminipage
+            \minipage{0.84\textwidth}
+                \huge{\textbf{F\ i\ u\ b\ a}}\\
+                \large{\textrm{Facultad de Ingeniería}}\\
+                \normalsize{\textrm{Universidad de Buenos Aires}}
+            \endminipage
+        \endminipage
+        \minipage{0.6\textwidth}
+            \begin{center}
+                \large{\textsc{\nommateria\\(\codmateria)}}
+            \end{center}
+        \endminipage
+
+        \vfill
+
+        \hrule
+        \large{\textsc{Informe de Ante-Proyecto}}
+        \vspace{2mm}\hrule
+
+        \vfill
+
+        \begin{tabular}{|p{0.3\textwidth}|p{0.4\textwidth}|p{0.2\textwidth}|}
+            \hline
+            \textbf{Anteproyecto:} &
+                \multicolumn{2}{p{0.6\textwidth}|}{\textbf{\titulo}}\\[6pt]
+            \hline
+            Autores: \integrantes
+            \hline
+            Turno de T.P. &
+                \multicolumn{2}{p{0.6\textwidth}|}{\turno}\\
+            \hline
+            Año y Cuatrimestre & \anio & \cuatrim \\
+            \hline
+            Docente Guía: &
+                \multicolumn{2}{p{0.6\textwidth}|}{\docente}\\
+            \hline
+        \end{tabular}
+
+        \vfill
+
+        \begin{tabular}{|p{0.95\textwidth}|}
+            \hline \vfill
+            Observaciones Generales
+            \\[6pt] \hline
+            \\[12pt] \hline
+            \\[12pt] \hline
+            \\[12pt] \hline
+            \\[12pt] \hline
+            \\[12pt] \hline
+            \\[12pt] \hline
+            \\[12pt] \hline
+        \end{tabular}
+
+        \vfill
+
+        \begin{tabular}{|p{0.25\textwidth}|p{0.675\textwidth}|}
+            \hline
+            \vfill Firma del Docente \vfill & \\[48pt]
+            \hline
+            \vfill Fecha \vfill & \\[6pt]
+            \hline
+        \end{tabular}
+
+    \end{center}
+
+\end{titlepage}
+
+% Hago que las páginas se comiencen a contar desde aquí
+\setcounter{page}{1}
+
+% Pongo el índice en una página aparte:
+\ifx \indice \undefined
+\else
+    \tableofcontents
+    \newpage
+\fi
+
+
+
+%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||%
+%||||||||||||||||||||||||| Definiciones para abreviado ||||||||||||||||||||||||%
+%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||%
+
+% Gráficos comunes:
+% \figuregraph{escala}{nombre/etiqueta}{pie de imagen}
+\newcommand{\figuregraph}[3]{
+    \begin{figure}[H]
+        \center
+        \includegraphics[scale=#1]{#2}
+        \caption{#3}\label{#2}
+    \end{figure}
+}
+
+% Dos gráficos horizontales:
+% \twofigures{escala1}{nombre/etiqueta1}{pie1}{escala2}{nombre/etiqueta2}{pie2}
+\newcommand{\twofigures}[6]{
+    \begin{figure}[H]
+        \minipage{0.5\textwidth}
+            \center
+            \includegraphics[scale=#1]{#2}
+            \caption{#3}\label{#2}
+        \endminipage
+        \minipage{0.5\textwidth}
+            \center
+            \includegraphics[scale=#4]{#5}
+            \caption{#6}\label{#5}
+        \endminipage
+    \end{figure}
+}
+
+
+%------------------- Cuerpo del documento en archivo aparte -------------------%
+\input{cuerpo.tex}
+%------------------------------------------------------------------------------%
+
+\end{document} % Fin!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
