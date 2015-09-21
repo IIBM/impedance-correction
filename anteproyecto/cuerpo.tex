@@ -2,8 +2,9 @@
 %|//////////////////////////| Objetivo del Proyecto |\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Objetivo del Proyecto}
-    El objetivo es la respuesta a la pregunta “¿para qué?”; tiene que satisfacer
-    alguna necesidad del usuario.
+\color{blue}El objetivo es la respuesta a la pregunta “¿para qué?”; tiene que satisfacer alguna necesidad del usuario.\\ \color{black}
+
+El presente proyecto se basa en el diseño y desarrollo de un dispositivo de medición y corrección automática de impedancias de electrodos, a fin de alcanzar un valor de impedancia definido como ``aceptable'' por el usuario. Este instrumento se utilizará en el futuro en aplicaciones biomédicas.\\
 
 
 
@@ -11,8 +12,13 @@
 %|////////////////////////| Descripción del Proyecto |\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Descripción del Proyecto}
-    En esta sección se responde la pregunta “¿cómo?”. Aquí se enumeran las
-    prestaciones, las funciones y el comportamiento o uso del equipo.
+\color{blue}En esta sección se responde la pregunta “¿cómo?”. Aquí se enumeran las prestaciones, las funciones y el comportamiento o uso del equipo.\\ \color{black}
+    
+En líneas generales, el sistema consta de un primer módulo que consiste en un amplificador de trasconductancia $i_o/v_i$ que se emplea para medir la impedancia de cada electrodo a estudiar. La señal de entrada a este circuito es una corriente senoidal de unos $30\ nA$ y $1\ kHz$, generada con el microcontrolador. Considerando la ley de Ohm y tomando los valores pico de corriente y tensión \color{red}(NI IDEA SI ES ASÍ!)\color{black}, se calcula la impedancia del electrodo en estudio. Luego, un segundo módulo se encarga de imponer una corriente continua de referencia en el sistema, también con un valor de $30\ nA$, para poder disminuir el valor de la impedancia en caso de ser necesario. Esto se hace con los electrodos en una solución acuosa que contiene oro, de modo de que se produzca \color{red}ELECTRÓLISIS? GALVANOPLASTÍA? QUÉ?\color{black} y así disminuya la impedancia. Si es necesario este proceso o no, dependerá del resultado previo y de la comparación entre el valor obtenido en la medición y el de referencia establecido previamente por el usuario. Estos dos circuitos se conectan a uno o más multiplexores que permiten seleccionar la opción correcta de acuerdo a la cantidad de electrodos analizados (cantidad variable que puede ser 4, 8, 12 ó 16). Todo esto se conecta al microcontrolador desde el que se automatiza todo.\\ 
+	
+Previo a la medición hay que verificar que ningún electrodo esté en cortocircuito con otro. \color{red}ESTO CÓMO SE HACÍA? YA ME OLVIDÉ.\\ \color{black}
+	
+Cada cierto determinado tiempo tiene que medirse la impedancia y corregirla de ser necesario del modo explicado. Este proceso debe repetirse tantas veces como sea necesario hasta llegar al valor de impedancia deseada determinado previamente en la configuración (los valores aceptables están entre $1\ M\Omega$ y $5\ M\Omega$), junto con la cantidad de electrodos utilizados. Además, hay que pautar un tiempo máximo de sensado y corrección, para que el sistema deje de actuar en caso de haber pasado ese tiempo sin haber llegado al valor buscado.\\
 
 
 
@@ -20,29 +26,28 @@
 %|///////////////| Características y Especificaciones Mínimas |\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Características y Especificaciones Mínimas}
-    Las especificaciones acotan las bondades del equipo. Deben listarse los
-    rangos de funcionamiento o requerimientos externos (por ejemplo: tensión de
-    alimentación, consumo, temperatura de funcionamiento, protocolos de
-    comunicaciones, rangos de medición, etc.)
+\color{blue}Las especificaciones acotan las bondades del equipo. Deben listarse los rangos de funcionamiento o requerimientos externos (por ejemplo: tensión de alimentación, consumo, temperatura de funcionamiento, protocolos de comunicaciones, rangos de medición, etc.)\\ \color{black}
 
+El requisito más importante a cumplir es el valor de impedancia que se busca obtener luego del proceso para cada electrodo: un valor aceptable se encuentra entre $1\ M\Omega$ y $5\ M\Omega$ (aunque en cada caso será el usuario quien fije el máximo, entre estos valores).\\
+Además, para alimentar al circuito es necesaria una fuente de \color{red}CARACTERÍSTICAS\color{black}.\\
 
 
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|/////////////////////////| Periféricos Principales |\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Periféricos Principales}
-    Los periféricos son los elementos ajenos al microcontrolador con los que
-    interactúa el equipo y deben estar claramente definidos (por ejemplo:
-    motores, display, teclado, puertos de comunicación, sensores, etc.)
+\color{blue}Los periféricos son los elementos ajenos al microcontrolador con los que interactúa el equipo y deben estar claramente definidos (por ejemplo: motores, display, teclado, puertos de comunicación, sensores, etc.)\\ \color{black}
+    
+El dispositivo tiene una pantalla LCD donde se muestran las opciones de configuración para seleccionar y también los resultados del proceso, además de los mensajes de error o alerta (en caso de ocurrir algún imprevisto o no llegar al valor deseado en el tiempo pautado, por ejemplo). Las opciones se seleccionan desde un teclado.\\
 
+Además, como periféricos principales están los dos circuitos mencionados antes, el de medición y el de corrección. Asimismo, otros elementos importantes con los que interactúa el microcontrolador son los electrodos, la cuba electrolítica donde se produce la reacción química para disminuir la impedancia, y  los multiplexores.\\
 
 
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|////////////////| Diagrama en Bloques Preliminar (hardware) |\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Diagrama en Bloques Preliminar (hardware)}
-    El esquema general de interconexión de todos los dispositivos importantes se
-    representa mediante un diagrama en bloques.
+\color{blue}El esquema general de interconexión de todos los dispositivos importantes se representa mediante un diagrama en bloques.\color{black}
 
 
 
@@ -50,8 +55,7 @@
 %|/////////////////| Diagrama de Flujo Preliminar (firmware) |\\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Diagrama de Flujo Preliminar (firmware)}
-    El diagrama de flujo ilustra de manera general la interacción entre los
-    distintos bloques (o rutinas) de código.
+\color{blue}El diagrama de flujo ilustra de manera general la interacción entre los distintos bloques (o rutinas) de código.\color{black}
 
 
 
@@ -59,10 +63,7 @@
 %|/////////////////////////| Plan de Trabajo (Gantt) |\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Plan de Trabajo (Gantt)}
-    Un diagrama de Gantt es la propuesta de distribución de tiempos y recursos a
-    lo largo del proyecto. Es necesario elaborar un plan inicial y ajustarlo en
-    forma continua para no perder de vista el objetivo final, los hitos y el
-    camino crítico para alcanzarlo.
+\color{blue}Un diagrama de Gantt es la propuesta de distribución de tiempos y recursos a lo largo del proyecto. Es necesario elaborar un plan inicial y ajustarlo en forma continua para no perder de vista el objetivo final, los hitos y el camino crítico para alcanzarlo.\color{black}
 
 
 
@@ -70,10 +71,7 @@
 %|////////////////| Listado de Componentes y Costos Estimados |\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Listado de Componentes y Costos Estimados}
-    En esta instancia se pretende un listado de los componentes más
-    significativos con sus costos aproximados más una previsión general de
-    elementos menores. Lo que se busca es considerar la viabilidad económica
-    del proyecto.
+\color{blue}En esta instancia se pretende un listado de los componentes másmsignificativos con sus costos aproximados más una previsión general de elementos menores. Lo que se busca es considerar la viabilidad económica del proyecto.\color{black}
 
 
 
@@ -81,6 +79,4 @@
 %|///////////////////////| Factores Críticos de Éxito |\\\\\\\\\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Factores Críticos de Éxito}
-    Es importante analizar cuáles son los riesgos potenciales más importantes
-    que podrían dificultar la realización del proyecto. Una vez identificados,
-    conviene hacerles un seguimiento cercano para evitar contratiempos.
+\color{blue}Es importante analizar cuáles son los riesgos potenciales más importantes que podrían dificultar la realización del proyecto. Una vez identificados, conviene hacerles un seguimiento cercano para evitar contratiempos.\color{black}
