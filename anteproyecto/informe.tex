@@ -42,10 +42,10 @@
 % Para incluir imágenes, el siguiente código carga el paquete graphicx
 % según se esté generando un archivo dvi o un pdf (con pdflatex).
 %
-%     Para generar dvi, descomentá la linea siguiente:
+% Para generar dvi, descomentá la linea siguiente:
 %\usepackage[dvips]{graphicx}
 %
-%     Para generar pdf, descomentá las dos lineas siguientes:
+% Para generar pdf, descomentá las dos lineas siguientes:
 \usepackage[pdftex]{graphicx}
 \pdfcompresslevel=9
 
@@ -74,19 +74,19 @@
 \usepackage{multirow}
 
 % Unidades del SI
-\usepackage{siunitx}
-\sisetup{per-mode=fraction} % Fración en vez de exponente -1
-\sisetup{output-decimal-marker = {,}} % Coma en vez de punto decimal
-\ifx \bit \undefined % Definición de bit, si falta
-    \DeclareSIUnit\bit{bit}
-\fi
+%\usepackage{siunitx}
+%\sisetup{per-mode=fraction} % Fración en vez de exponente -1
+%\sisetup{output-decimal-marker = {,}} % Coma en vez de punto decimal
+%\ifx \bit \undefined % Definición de bit, si falta
+%    \DeclareSIUnit\bit{bit}
+%\fi
 
 % Flechas largas
 % \usepackage{extarrows}
 
 % Configuración de párrafos
 \usepackage{parskip}
-\setlength{\parindent}{8pt}
+\setlength{\parindent}{20pt}
 
 %------------------- Datos modificables desde archivo aparte ------------------%
 \newcommand\integrante[3]{
