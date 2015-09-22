@@ -74,12 +74,12 @@
 \usepackage{multirow}
 
 % Unidades del SI
-%\usepackage{siunitx}
-%\sisetup{per-mode=fraction} % Fración en vez de exponente -1
-%\sisetup{output-decimal-marker = {,}} % Coma en vez de punto decimal
-%\ifx \bit \undefined % Definición de bit, si falta
-%    \DeclareSIUnit\bit{bit}
-%\fi
+\usepackage{siunitx}
+\sisetup{per-mode=fraction} % Fración en vez de exponente -1
+\sisetup{output-decimal-marker = {,}} % Coma en vez de punto decimal
+\ifx \bit \undefined % Definición de bit, si falta
+    \DeclareSIUnit\bit{bit}
+\fi
 
 % Flechas largas
 % \usepackage{extarrows}
