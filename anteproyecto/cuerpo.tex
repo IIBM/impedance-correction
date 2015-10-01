@@ -60,6 +60,7 @@ Se presentan las siguientes especificaciones a cumplir:
 (*) una vez cumplido este tiempo se abandonan los esfuerzos.
 
 
+
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|/////////////////////////| Periféricos Principales |\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
@@ -102,8 +103,9 @@ Además, como periféricos principales están los dos circuitos mencionados ante
 % Un diagrama de Gantt es la propuesta de distribución de tiempos y recursos a lo largo del proyecto. Es necesario elaborar un plan inicial y ajustarlo en forma continua para no perder de vista el objetivo final, los hitos y el camino crítico para alcanzarlo.
 \begin{center}
     \vspace{-4mm}
-    \includegraphics[scale=0.65]{Gantt}
+    \includegraphics[scale=0.63]{gantt}
 \end{center}
+
 
 
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
@@ -115,22 +117,27 @@ Los componentes más significativos que se emplearán para la construcción del 
 
 \begin{table}[H]
 \begin{center}
-\begin{tabular}{|r|l|}
+\begin{tabular}{|l|rr|}
     \hline
-    \textbf{Componente} &
-    \textbf{Costo aproximado} \\ \hline
-    Atmega32 & $??$ \\ \hline
-    REF200 & $??$ \\ \hline
-    OPA128 & $??$ \\ \hline
-    INA105 & $??$ \\ \hline
-    CD74HC4067 x3 & $??$ \\ \hline
-    Resistencias & $??$ \\ \hline
-    Capacitores & $??$ \\ \hline
-    Display LCD & $??$ \\ \hline
-    Pulsadores x6 & $??$ \\ \hline
+    \textbf{Componente} & \multicolumn{2}{c|}{\textbf{Costo aproximado}} \\ \hline
+    Atmega32            & \hspace{2.8cm}\$ &   85 \\ \hline
+    REF200 (*)          & \$               &   84 \\ \hline
+    OPA128 (*)          & \$               &  758 \\ \hline
+    INA105 (*)          & \$               &  120 \\ \hline
+    CD74HC4067 x2 (*)   & \$               &   74 \\ \hline
+    CD4053B (*)         & \$               &   10 \\ \hline
+    Resistencias        & \$               &   15 \\ \hline
+    Capacitores         & \$               &   20 \\ \hline
+    Display LCD         & \$               &  146 \\ \hline
+    Pulsadores x6       & \$               &   10 \\ \hline
+    TOTAL               & \$               & 1322 \\ \hline
 \end{tabular}
 \end{center}
 \end{table}
+
+(*) estos componentes son de Texas Instruments y en el marco del IIBM y de la Facultad pueden ser obtenidos en muestras gratis.
+
+
 
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|///////////////////////| Factores Críticos de Éxito |\\\\\\\\\\\\\\\\\\\\\\\|%
@@ -139,8 +146,8 @@ Los componentes más significativos que se emplearán para la construcción del 
 % Es importante analizar cuáles son los riesgos potenciales más importantes que podrían dificultar la realización del proyecto. Una vez identificados, conviene hacerles un seguimiento cercano para evitar contratiempos.
 Como factores riesgosos a la hora de cumplir con los objetivos se pueden mencionar:
 \begin{itemize}
-\item La complejidad de los circuitos analógicos involucrados
-\item La resolución a nivel software de la entrada de teclado
-\item La generación de la señal seniodal con PWM
-\item La coordinación con el IIBM
+    \item La complejidad de los circuitos analógicos involucrados
+    \item La resolución a nivel software de la entrada de teclado
+    \item La generación de la señal seniodal con PWM como DAC
+    \item La coordinación con el IIBM
 \end{itemize}
