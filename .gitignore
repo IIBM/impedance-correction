@@ -10,3 +10,6 @@
 *.toc
 *.bak
 *.synctex.gz
+
+# LTspice raw data files
+*.raw
