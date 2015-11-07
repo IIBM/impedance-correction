@@ -1,5 +1,6 @@
 .INCLUDE "M32DEF.INC"
 
+
 			LDI R16,HIGH(RAMEND) ;Inicialización de la pila al final de la RAM
 			OUT SPH,R16
 			LDI R16,LOW(RAMEND)
@@ -8,24 +9,7 @@
 			LDI R19,1 ;Electrodo 1
 			LDI ZL,0x60  ;Apunto a la direccion de memoria 60(esto es arbitrario), acá deberian estar los resultados
 			LDI ZH,0x00
-			
-			.ORG 0
-			JMP RESULTADOS
-			.ORG 0X02  ;INTERRUPCION 0
-			JMP SUBIR
-			.ORG 0X04  ;INTERRUPCION 1
-			JMP BAJAR
-			
-			LDI R16,0X00
-			OUT DDRD,R16   ;En el puerto D estan las interrupciones 0 y 1
-			LDI R16, (1<<ISC11)|(1<<ISC01)   ;Para que se habiliten por flanco ascendente
-			OUT MCUCR, R16
-	  
-			LDI R16, (1<<INT1)|(1<<INT0)    ;Para que se habiliten las interrupciones 0 y 1
-			OUT GICR,R16
-
-			SEI ;Activa las interrupciones globales
-
+		
 			
 RESULTADOS:
 			
@@ -51,7 +35,7 @@ RESULTADOS:
 			CALL DATAWRT
 			LDI R16,' '
 			CALL DATAWRT	  
-			LDI R16,R19   ;El numero del electrodo(1,2,..16)
+			LDI R16,R19   ;El numero del electrodo(1,2,..16) 
 			CALL DATAWRT	
 			LDI R16,$C0   ;Esto hay que revisarlo, es para bajar a la segunda linea del LCD
 			CALL DATAWRT
@@ -65,7 +49,12 @@ RESULTADOS:
 			LDI R16,0X0F
 			CALL CMNDWRT
 			
-FIN:RJMP FIN ;Se queda esperando las interrupciones
+BOTONES_4:		
+		IN R17 ,PINA
+		BST R17,3  ;Pin 3 del puerto A (AUMENTAR)
+		BRTS SUBIR
+		BST R17,4  ;Pin 4 del puerto A (REDUCIR)
+JMP BOTONES_4
 			
 SUBIR:
 		INC ZL ;Avanza el puntero
@@ -164,5 +153,3 @@ DATAWRT:
 			CBI PORTC,5
 			CALL DELAY_100us
 			RET
-			
-			
