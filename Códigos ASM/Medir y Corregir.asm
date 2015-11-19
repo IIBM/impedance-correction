@@ -1,7 +1,18 @@
-;Inicio
+.INCLUDE "M32DEF.INC"
+	
+			LDI R16,HIGH(RAMEND) ;Inicialización de la pila al final de la RAM
+			OUT SPH,R16
+			LDI R16,LOW(RAMEND)
+			OUT SPL,R16
 
-PANTALLA:
+			LDI R16,0x00 ;Configuración de todos los pines del puerto A como entrada
+			OUT DDRA,R16
 
+
+	
+		CALL LCD_INIT
+			
+	
 		LDI R16, 0x00  ;Puerto A entrada
 		OUT DDRA, R16
 		CALL LCD_INIT
@@ -57,7 +68,7 @@ PANTALLA:
 BOTONES:
 
 		IN R17, PINA
-		BST R17,3 ;Pin 3 del puerto A (MEDIR)
+		BST R17,1 ;Pin 3 del puerto A (MEDIR)
 		BRTS MEDIR
 		BST R17,4 ;Pin 4 del puerto A (CORREGIR)
 		BRTS CORREGIR
@@ -67,12 +78,11 @@ BOTONES:
 JMP BOTONES
 
 CALIBRAR:
-		CALL RUTINA_CALIBRAR
+		NOP
 		RET
 		
 MEDIR:
-		CALL RUTINA_MEDICION
-		CALL RESULTADOS
+		NOP
 		RET
 		
 CORREGIR:
@@ -129,7 +139,7 @@ CORREGIR:
 
 BOTONES_2:		
 		IN R17 ,PINA
-		BST R17,3  ;Pin 3 del puerto A (AUMENTAR)
+		BST R17,1  ;Pin 3 del puerto A (AUMENTAR)
 		BRTS AUMENTAR
 		BST R17,4  ;Pin 4 del puerto A (REDUCIR)
 		BRTS REDUCIR_OK
@@ -314,11 +324,16 @@ TMAX:
 		
 		LDI R20,0
 		LDI R21,0
+		LDI R22,48 
+
+		CALL DELAY_40ms
+		CALL DELAY_40ms
+		CALL DELAY_40ms
 		
 		
 	BOTONES_3:		
 		IN R17 ,PINA
-		BST R17,3  ;Pin 3 del puerto A (AUMENTAR)
+		BST R17,1  ;Pin 3 del puerto A (AUMENTAR)
 		BRTS AUMENTAR_T
 		BST R17,4  ;Pin 4 del puerto A (REDUCIR)
 		BRTS REDUCIR_T
@@ -349,13 +364,13 @@ TMAX:
 		CALL DATAWRT
 		
 		LDI R16,$C0   
-		CALL DATAWRT
+		CALL CMNDWRT
 		
 		ADD R20,R22
 		
 		MOV R16,R20  
 		CALL DATAWRT  
-		LDI R16,'0'
+		LDI R16,0X30
 		CALL DATAWRT	
 		
 		LDI R16,'M'
@@ -383,6 +398,7 @@ TMAX:
 		
 	REDUCIR_TP:
 		
+		DEC R20
 		LDI R16, 0X01
 		CALL CMNDWRT	 
 		CALL DELAY_1_6ms
@@ -420,9 +436,89 @@ TMAX:
 		CALL DELAY_40ms	
 		
 	JMP BOTONES_3
-	
-	
-	
 		
 		
+
+		
+		FIN2:RJMP FIN2
+	
+	
+	;***************************************************************************************************************************
+		
+		LCD_INIT:	
+			LDI R21,0xFF	  
+			OUT DDRB, R21
+			OUT DDRD, R21
+			CBI PORTD,2
+			CALL DELAY_40ms
+			LDI R16,0X38
+			CALL CMNDWRT
+			CALL CMNDWRT
+			LDI R16,0X0E
+			CALL CMNDWRT
+			LDI R16,0X01
+			CALL CMNDWRT
+			CALL DELAY_1_6ms
+			LDI R16,0X06
+			CALL CMNDWRT
+			RET
+			
+		;**********************************************************************************************************************************	
+		
+		DELAY_40ms:
+			LDI R17,25
+		DR2:  
+			CALL DELAY_1_6ms
+			DEC R17
+			BRNE DR2
+			RET
+
+		;*********************************************************************************************************************************
+		DELAY_1_6ms:
+			PUSH R17
+			LDI R17,16
+		DR1:  
+		CALL DELAY_100us
+		DEC R17
+		BRNE DR1
+		POP R17
+		RET
+
+		;********************************************************************************************************************************
+		DELAY_100us:
+			PUSH R17
+			LDI R17,13
+		DR0:  CALL SDELAY
+		DEC R17
+		BRNE DR0
+		POP R17
+		RET
+
+		;**************************************************************************************************************************
+
+		SDELAY:
+			  NOP
+			  NOP
+			  RET
+
+		;**************************************************************************************************************************
+		CMNDWRT:
+			OUT PORTB,R16
+			CBI PORTD,0
+			CBI PORTD,1
+			SBI PORTD,2
+			CALL SDELAY
+			CBI PORTD,2
+			CALL DELAY_100us
+			RET
+		;*************************************************************************************************************************
+		DATAWRT:
+			OUT PORTB,R16
+			SBI PORTD,0
+			CBI PORTD,1 
+			SBI PORTD,2
+			CALL SDELAY
+			CBI PORTD,2
+			CALL DELAY_100us
+			RET
 		
