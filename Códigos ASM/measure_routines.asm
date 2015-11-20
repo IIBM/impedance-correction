@@ -1,6 +1,6 @@
 #ifdef AVRA
     .nolist
-    .include "m328def.inc"
+    .include "m32def.inc"
     .list
 #endif
 
@@ -42,9 +42,9 @@ MIN_TABLE: ; Tabla: mínimos de cada período, se ordenará para obtener la medi
 ;|/////////////////////////////| Datos en flash |\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
 ;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Solo para testear, se cargan estos datos en RAM, generados con octave ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; Solo para testear, se cargan estos datos en RAM, generados con octave ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 TEST_SAMPLES_FLASH_TABLE:
     .db 0x82, 0x95, 0xAC, 0xC2, 0xCC, 0xD5, 0xE0, 0xE7, 0xE3, 0xD8, 0xCE, 0xC3
     .db 0xAA, 0x9A, 0x81, 0x66, 0x55, 0x44, 0x30, 0x29, 0x1B, 0x1D, 0x1B, 0x27
@@ -79,9 +79,9 @@ MAIN:
     ldi     R16,LOW(RAMEND)
     out     SPL,R16 ; Stack pointer
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;;; Solo para testear, se cargan estos datos en RAM, generados con octave ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; Solo para testear, se cargan estos datos en RAM, generados con octave ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ldi     ZH,HIGH(TEST_SAMPLES_FLASH_TABLE<<1)
     ldi     ZL,LOW(TEST_SAMPLES_FLASH_TABLE<<1)
     ldi     XH,HIGH(SAMPLES_RAM_TABLE)
@@ -92,8 +92,8 @@ loop_test_samples_table:
     st      X+,R17
     dec     R16
     brne    loop_test_samples_table
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     rcall   SEARCH_FOR_LOCAL_EXTREMES_AND_LOAD_MIN_MAX_TABLES
 
     ldi     R16,N_PERIODS_TO_SAMPLE ; Cantidad de elementos en tablas MIN/MAX
@@ -215,7 +215,7 @@ loop_table_elements:
     st      Y,R3    ; En la primera posición se pone la segunda
     std     Y+1,R2  ; En la segunda posición se pone la primera
 do_not_interchange:
-    ld      R2,Y+   ; Incremento de Y, arruina R2 pero este valor no es usado
+    adiw    YL,1    ; Incremento de Y
     dec     R17     ; Decremento del contador
     brne    loop_table_elements
     brts    table_has_changed_loop
@@ -227,7 +227,7 @@ do_not_interchange:
     mov     YH,ZH
     mov     YL,ZL   ; Se inicializa el puntero Y en Z
     add     YL,R17  ; Se le suma a Y el lugar de la mitad de la tabla
-    brcc    skip_ZH_increase
+    brcc    skip_ZH_increase ; TODO: usar registro vacío y adc
     inc     YH      ; Se actualiza la parte alta de Y de ser necesario
 skip_ZH_increase:
     ld      R1,Y    ; Finalmente se obtiene la mediana en R1 para devolverla

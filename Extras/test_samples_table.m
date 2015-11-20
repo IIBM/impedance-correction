@@ -17,7 +17,7 @@ b = 8;           # bits de trabajo
 f = 1e3;         # frecuencia de la onda: 1 kHz
 T = 1/f;         # período de la onda
 A = 100;         # amplitud de la onda
-Nl = 5;          # nivel de ruido, valor pico
+Nl = 2;          # nivel de ruido, valor pico
 off = 128;       # nivel de offset
 
 Ts = T/SAMPLES_PER_PERIOD; # período de muestreo
