@@ -1,19 +1,45 @@
 .INCLUDE "M32DEF.INC"
 
+;HAY QUE CAMBIAR LOS PUERTOS DE A PARA LA LCD 
 
 			LDI R16,HIGH(RAMEND) ;Inicialización de la pila al final de la RAM
 			OUT SPH,R16
 			LDI R16,LOW(RAMEND)
 			OUT SPL,R16
 			
+			LDI R25,33
+			LDI R26,43
+			LDI R27,53
+			
+			
 			LDI R19,1 ;Electrodo 1
 			LDI ZL,0x60  ;Apunto a la direccion de memoria 60(esto es arbitrario), acá deberian estar los resultados
 			LDI ZH,0x00
+			
+			ST Z+,R25
+			ST Z+,R26
+			ST Z+,R27
+			
+			LDI ZL,0x60  ;Apunto a la direccion de memoria 60(esto es arbitrario), acá deberian estar los resultados
+			LDI ZH,0x00
+		
+			
+			
 		
 			
 RESULTADOS:
 			
 			CALL LCD_INIT ;Funcion para inicializar la LCD
+			MOV R21,R19
+			LDI R22,48    ;PARA PASAR A ASCII
+			
+			CPI R21,10
+			BRLO RESULTADOS_1
+			
+			DIEZ:JMP DIEZ_I
+			
+RESULTADOS_1:
+			ADD R19,R22
 			
 			LDI R16,'E'
 			CALL DATAWRT
@@ -35,25 +61,36 @@ RESULTADOS:
 			CALL DATAWRT
 			LDI R16,' '
 			CALL DATAWRT	  
-			LDI R16,R19   ;El numero del electrodo(1,2,..16) 
+			MOV R16,R19   ;El numero del electrodo(1,2,..16) 
 			CALL DATAWRT	
 			LDI R16,$C0   ;Esto hay que revisarlo, es para bajar a la segunda linea del LCD
-			CALL DATAWRT
+			CALL CMNDWRT
 			LD R16,Z   ;El resultado de la corrección
 			CALL DATAWRT
 			LDI R16,'M'
 			CALL DATAWRT
-			LDI R16,'Ω'  ;No se si lo va a leer
-			CALL DATAWRT
+			LDI R16,'O'  
+		    CALL DATAWRT
+		    LDI R16,'h'  
+		    CALL DATAWRT
+		    LDI R16,'m'  
+		    CALL DATAWRT
+			
+			SUB R19,R22  ;VUELVO A LA VARIABLE
 			
 			LDI R16,0X0F
 			CALL CMNDWRT
 			
+			CALL DELAY_40ms
+			CALL DELAY_40ms
+			CALL DELAY_40ms
+			
 BOTONES_4:		
 		IN R17 ,PINA
-		BST R17,3  ;Pin 3 del puerto A (AUMENTAR)
+		BST R17,4  ;Pin 3 del puerto A (AUMENTAR)
 		BRTS SUBIR
-		BST R17,4  ;Pin 4 del puerto A (REDUCIR)
+		BST R17,5  ;Pin 4 del puerto A (REDUCIR)
+		BRTS BAJAR
 JMP BOTONES_4
 			
 SUBIR:
@@ -63,10 +100,9 @@ SUBIR:
 		BREQ PRIMERO
 		JMP RESULTADOS
 PRIMERO:
-		R19,1
-		LDI ZL,0x60  
-		LDI ZH,0x00
-		JMP RESULTADOS
+		LDI R19,16
+		DEC ZL
+		JMP BOTONES_4
 BAJAR: 
 		DEC ZL ;Retrocede el puntero
 		DEC R19
@@ -74,18 +110,70 @@ BAJAR:
 		BREQ ULTIMO
 		JMP RESULTADOS
 ULTIMO:
-		R19,16
-		LDI ZL,0X75
-		LDI ZH,0X00
-		JMP RESULTADOS
+		LDI R19,1
+		INC ZL
+		JMP BOTONES_4
+		
+		
+DIEZ_I:     
+			SUBI R21,10
+			ADD R21,R22
+
+			LDI R16,'E'
+			CALL DATAWRT
+			LDI R16,'l'
+			CALL DATAWRT
+			LDI R16,'e'
+			CALL DATAWRT
+			LDI R16,'c'
+			CALL DATAWRT
+			LDI R16,'t'
+			CALL DATAWRT
+			LDI R16,'r'
+			CALL DATAWRT
+			LDI R16,'o'
+			CALL DATAWRT
+			LDI R16,'d'
+			CALL DATAWRT
+			LDI R16,'o'
+			CALL DATAWRT
+			LDI R16,' '
+			CALL DATAWRT	
+			LDI R16,0x31
+			CALL DATAWRT
+			MOV R16,R21   ;El numero del electrodo(1,2,..16) 
+			CALL DATAWRT	
+			LDI R16,$C0   ;Esto hay que revisarlo, es para bajar a la segunda linea del LCD
+			CALL CMNDWRT
+			LD R16,Z   ;El resultado de la corrección
+			CALL DATAWRT
+			LDI R16,'M'
+			CALL DATAWRT
+			LDI R16,'O'  
+		    CALL DATAWRT
+		    LDI R16,'h'  
+		    CALL DATAWRT
+		    LDI R16,'m'  
+		    CALL DATAWRT
 			
-;**************************************************************************************************************		
+			SUB R21,R22  ;VUELVO A LA VARIABLE
+			
+
+			LDI R16,0X0F
+			CALL CMNDWRT
+			
+			CALL DELAY_40ms
+			CALL DELAY_40ms
+			CALL DELAY_40ms
+			
+			JMP BOTONES_4
+
 			
 LCD_INIT:	
 			LDI R21,0xFF	  
 			OUT DDRB, R21
-			OUT DDRC, R21
-			CBI PORTC,5
+			OUT DDRD, R21
+			CBI PORTD,2
 			CALL DELAY_40ms
 			LDI R16,0X38
 			CALL CMNDWRT
@@ -99,8 +187,9 @@ LCD_INIT:
 			CALL CMNDWRT
 			RET
 			
-
-DELAY_40ms:
+		;**********************************************************************************************************************************	
+		
+		DELAY_40ms:
 			LDI R17,25
 		DR2:  
 			CALL DELAY_1_6ms
@@ -108,7 +197,8 @@ DELAY_40ms:
 			BRNE DR2
 			RET
 
-DELAY_1_6ms:
+		;*********************************************************************************************************************************
+		DELAY_1_6ms:
 			PUSH R17
 			LDI R17,16
 		DR1:  
@@ -117,9 +207,9 @@ DELAY_1_6ms:
 		BRNE DR1
 		POP R17
 		RET
-		
-			
-DELAY_100us:
+
+		;********************************************************************************************************************************
+		DELAY_100us:
 			PUSH R17
 			LDI R17,13
 		DR0:  CALL SDELAY
@@ -128,28 +218,33 @@ DELAY_100us:
 		POP R17
 		RET
 
+		;**************************************************************************************************************************
 
-SDELAY:
+		SDELAY:
 			  NOP
 			  NOP
 			  RET
 
-CMNDWRT:
+		;**************************************************************************************************************************
+		CMNDWRT:
 			OUT PORTB,R16
-			CBI PORTC,7
-			CBI PORTC,6
-			SBI PORTC,5
+			CBI PORTD,0
+			CBI PORTD,1
+			SBI PORTD,2
 			CALL SDELAY
-			CBI PORTC,5
+			CBI PORTD,2
 			CALL DELAY_100us
 			RET
-	
-DATAWRT:
+		;*************************************************************************************************************************
+		DATAWRT:
 			OUT PORTB,R16
-			SBI PORTC,7
-			CBI PORTC,6 
-			SBI PORTC,5
+			SBI PORTD,0
+			CBI PORTD,1 
+			SBI PORTD,2
 			CALL SDELAY
-			CBI PORTC,5
+			CBI PORTD,2
 			CALL DELAY_100us
+			RET
+		
+		
 			RET
