@@ -1,0 +1,166 @@
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|//////////////////////////| Objetivo del Proyecto |\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+\section{Índice}
+
+
+\section{Objetivo del Proyecto}
+% El objetivo es la respuesta a la pregunta “¿para qué?”; tiene que satisfacer alguna necesidad del usuario.
+
+El presente proyecto consiste en el diseño y desarrollo de un sistema de calibración de impedancia y ajuste por electrodeposición (galvanoplastía). Este instrumento se utilizará en el futuro en aplicaciones biomédicas, más precisamente en la fabricación de electrodos de registro extracelular.
+
+
+
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|////////////////////////| Descripción del Proyecto |\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+\section{Descripción del Proyecto}
+% En esta sección se responde la pregunta “¿cómo?”. Aquí se enumeran las prestaciones, las funciones y el comportamiento o uso del equipo.
+
+El equipo incluye una cuba conductora, que contiene una solución acuosa, donde se colocan los electrodos. Éstos son similares a un filamento de cobre recubierto con esmalte aislante en su totalidad, excepto en los extremos, los cuales uno va sumergido en la solución y el otro conectado al equipo por medio de un conector especial.\\
+
+El sistema funciona con 1, 4, 8, 12 ó 16 electrodos, corrigiendo de a uno por vez. El usuario coloca los electrodos procurando que no se produzcan cortocircuitos entre los mismos (se prevé detectar esto antes de comenzar), selecciona la impedancia final deseada y da la orden de inicio. Luego de algunos chequeos básicos se da comienzo al proceso mostrando un mensaje de inicio. Al terminar con todos los electrodos, se muestra la impedancia final de cada uno. 
+
+En líneas generales, el sistema consta de un primer módulo que consiste en una fuente de corriente alterna (se espera construirla con un amplificador de trasconductancia $i_o/v_i$, utilizando como entrada una señal senoidal de tensión generada en el microcontrolador, obteniendo en la salida una señal de corriente) que se emplea para medir la impedancia de cada electrodo a estudiar. La señal de salida de este circuito es una corriente senoidal de unos \SI{30}{\nano\ampere} y \SI{1}{\kilo\hertz}. Considerando la ley de Ohm y midiendo el valor pico de tensión, se calcula la impedancia del electrodo en estudio como $Z@\SI{1}{\kilo\hertz} = \frac{\hat{v}}{\hat{\i}}$. Luego, un segundo módulo se encarga de imponer una corriente continua de referencia en el sistema, también con un valor de \SI{30}{\nano\ampere} o bien de \SI{120}{\nano\ampere}, para poder disminuir el valor de la impedancia en caso de ser necesario. Esto es posible porque la solución acuosa contiene oro o plata, de modo de que se produce un recubrimiento por \emph{galvanoplastía} sobre el electrodo y así disminuye la impedancia. Si este proceso es necesario o no, dependerá del resultado previo y de la comparación entre el valor obtenido en la medición y el de referencia establecido previamente por el usuario. Estos dos circuitos se conectan mediante multiplexores analógicos (ver diagrama en bloques) que permiten seleccionar la opción correcta de acuerdo a la cantidad de electrodos analizados. 
+
+Como se mencionó, previo a la medición hay que verificar que ningún electrodo esté en cortocircuito con otro. Para ello se propuso inyectar señal en cada electrodo chequeando sobre cada uno de los restantes que no se reciba un nivel elevado de la misma, siendo necesario un multiplexor más, en paralelo con el que se utiliza para inyectar las señales.
+
+Cada determinado tiempo (del orden de \SI{1}{\minute}) tiene que medirse la impedancia y corregirla de ser necesario del modo explicado. Este proceso debe repetirse tantas veces como sea necesario hasta llegar al valor de impedancia deseada determinado previamente en la configuración (los valores aceptables para empezar el proceso están entre \SI{1}{\mega\ohm} y \SI{5}{\mega\ohm}), junto con la cantidad de electrodos utilizados. Además, hay que pautar un tiempo máximo de sensado y corrección, para que el sistema deje de actuar en caso de haber pasado ese tiempo sin haber llegado al valor buscado.
+
+
+
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|///////////////| Características y Especificaciones Mínimas |\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+
+% Las especificaciones acotan las bondades del equipo. Deben listarse los rangos de funcionamiento o requerimientos externos (por ejemplo: tensión de alimentación, consumo, temperatura de funcionamiento, protocolos de comunicaciones, rangos de medición, etc.)
+
+Se presentan las siguientes especificaciones a cumplir:
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|r|l|}
+    \hline
+    Tensión de alimentación &
+    \SI{5}{\volt} \\ \hline
+    Consumo &
+    $<$ \SI{500}{\milli\ampere} (\SI{2.5}{\watt}) \\ \hline
+    Temperatura de funcionamiento &
+    \SI{5}{\celsius} - \SI{70}{\celsius} \\ \hline
+    Rango de impedancias de los electrodos medidos &
+    \SI{0}{\mega\ohm} - \SI{20}{\mega\ohm} (@ \SI{1}{\kilo\hertz})\\ \hline
+    Impedancia buscada & $\simeq$ \SI{1}{\mega\ohm}\\ \hline
+    Cantidad de electrodos a conectar &
+    1, 4, 8, 12 ó 16 \\ \hline
+    Tiempo máximo de corrección por electrodo &
+    \SI{60}{\minute} (*)\\ \hline
+    Modo medición & señal senoidal, \SI{1}{\kilo\hertz}, error $<$ 10 \% \\ \hline
+    Modo corrección & señal continua \SI{30/120}{\nano\ampere}, error $<$ 20\% \\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+(*) una vez cumplido este tiempo se abandonan los esfuerzos.
+
+
+
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|/////////////////////////| Periféricos Principales |\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+
+% Los periféricos son los elementos ajenos al microcontrolador con los que interactúa el equipo y deben estar claramente definidos (por ejemplo: motores, display, teclado, puertos de comunicación, sensores, etc.)
+
+El dispositivo tiene una pantalla LCD donde se muestran las opciones de configuración para seleccionar a través de un menú y también los resultados del proceso, además de los mensajes de error o alerta (en caso de ocurrir algún imprevisto o no llegar al valor deseado en el tiempo pautado, por ejemplo). Las opciones se seleccionan desde un teclado de 4 ó [6] botones (\texttt{ok}, \texttt{cancelar}, [\texttt{mover arriba}], [\texttt{mover abajo}], \texttt{mover izquierda}, \texttt{mover derecha}).
+
+Además, como periféricos principales están los dos circuitos mencionados antes, el de medición y el de corrección, a través de los cuales se interactúa directamente con los electrodos. Asimismo, otros elementos importantes con los que interactúa el microcontrolador son los multiplexores, que tienen 1 ó 4 entradas de control, según sean de 2 canales o 16, y la cuba electrolítica donde se produce la reacción química para disminuir la impedancia, que está compuesta por un material conductor, el cual también debe conectarse.
+
+
+
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|////////////////| Diagrama en Bloques Preliminar (hardware) |\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+\section{Diagrama en Bloques (hardware)}
+% El esquema general de interconexión de todos los dispositivos importantes se representa mediante un diagrama en bloques.
+%\begin{center}
+%    \includegraphics[scale=0.9]{bloques}
+%\end{center}
+
+
+
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|/////////////////| Diagrama de Flujo Preliminar (firmware) |\\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+\section{Diagrama de Flujo  (firmware)}
+% El diagrama de flujo ilustra de manera general la interacción entre los distintos bloques (o rutinas) de código.
+%\begin{center}
+%    \vspace{-4mm}
+%    \includegraphics[scale=1.18]{flujo}
+%\end{center}
+
+
+
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|/////////////////////////| Circuito Esquemático |\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+\section{Circuito Esquemático}
+% La representación del circuito eléctrico final del prototipo debe realizarse en algún sistema CAD; no es necesario el diseño del circuito impreso (PCB), basta con el circuito esquemático.
+%\begin{center}
+%    \vspace{-4mm}
+%    \includegraphics[scale=0.63]{gantt}
+%\end{center}
+
+
+
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|////////////////| Listado de Componentes y Costos Estimados |\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+\section{Listado de Componentes y Costos}
+% En esta sección se debe incluir el listado final de componentes con sus respectivos costos. Además deben incorporar la estimación de horas-hombre insumidas en la realización del proyecto. 
+Los componentes que se emplearon para la construcción del dispositivo se muestran en la tabla siguiente:
+
+%\begin{table}[H]
+%\begin{center}
+%\begin{tabular}{|l|rr|}
+%    \hline
+%    \textbf{Componente} & \multicolumn{2}{c|}%{\textbf{Costo aproximado}} \\ \hline
+%    Atmega32            & \hspace{2.8cm}\$ &   85 \%\ \hline
+%    REF200 (*)          & \$               &   84 \%\ \hline
+%    OPA128 (*)          & \$               &  758 \%\ \hline
+%    INA105 (*)          & \$               &  120 \%\ \hline
+%    CD74HC4067 x2 (*)   & \$               &   74 \%\ \hline
+%    CD4053B (*)         & \$               &   10 \%\ \hline
+%    Resistencias        & \$               &   15 \%\ \hline
+%    Capacitores         & \$               &   20 \%\ \hline
+%    Display LCD         & \$               &  146 \%\ \hline
+%    Pulsadores x5       & \$               &   10 \%\ \hline
+%    TOTAL               & \$               & 1322 \%\ \hline
+%\end{tabular}
+%\end{center}
+%\end{table}
+
+(*) estos componentes son de Texas Instruments y en el marco del IIBM y de la Facultad pueden ser obtenidos en muestras gratis.
+
+
+
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|///////////////////////| Resultados |\\\\\\\\\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+\section{Resultados}
+% No siempre se logran los objetivos propuestos (o al menos en su totalidad); es importante que puedan validar y/o ajustar las expectativas indicando las limitaciones finales del prototipo construido.
+
+
+
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|///////////////////////| Conclusiones |\\\\\\\\\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+\section{Conclusiones}
+% En este punto tienen que describir mejoras posibles que podrían hacerse al equipo, cambios sugeridos en función de las experiencias aprendidas y cualquier otra sugerencia relacionada con el proyecto.
+
+
+
+
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|///////////////////////| Apéndices |\\\\\\\\\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+\section{Apéndices}
+% Como complemento al informe, en esta sección deben agregar el listado completo de software, las hojas de datos principales y cualquier otra información, referencia o cálculo relacionada con el proyecto (por ejemplo el uso de interrupciones).
