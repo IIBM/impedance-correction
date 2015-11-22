@@ -452,7 +452,7 @@ F 3 "" H 8100 5950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 4400 2050 0    60   ~ 0
-Vcc/2
+VCC/2
 Text Label 4000 1350 0    60   ~ 0
 MUX2IO
 Text Label 8650 5200 0    60   ~ 0
@@ -489,7 +489,7 @@ U 1 1 563EC9DF
 P 2500 3200
 F 0 "IC1" H 1650 5080 40  0000 L BNN
 F 1 "ATMEGA32-P" H 2950 1250 40  0000 L BNN
-F 2 "DIL40" H 2500 3200 30  0000 C CIN
+F 2 "Housings_DIP:DIP-40_W15.24mm_LongPads" H 2500 3200 30  0000 C CIN
 F 3 "" H 2500 3200 60  0000 C CNN
 	1    2500 3200
 	1    0    0    -1  
@@ -628,11 +628,9 @@ Text Label 9850 2600 2    60   ~ 0
 GND
 Text Label 9850 3300 0    60   ~ 0
 VCC
-Text Label 7950 1700 0    60   ~ 0
+Text Label 8100 1700 0    60   ~ 0
 VCC
 Text Label 7950 1000 2    60   ~ 0
-GND
-Text Label 6450 900  2    60   ~ 0
 GND
 Text Label 6450 1600 2    60   ~ 0
 VCC
@@ -642,7 +640,7 @@ Text Label 9300 5350 2    60   ~ 0
 GND
 Text Label 9300 6050 2    60   ~ 0
 VCC
-Text Label 6500 3300 2    60   ~ 0
+Text Label 6500 3300 0    60   ~ 0
 VCC
 $Comp
 L OPA625 U2
@@ -960,7 +958,7 @@ U 1 1 56498E45
 P 6850 5700
 F 0 "M3" H 6850 6150 60  0000 C CNN
 F 1 "DIL16" V 6850 5700 50  0000 C CNN
-F 2 "" H 6850 5700 60  0001 C CNN
+F 2 "Housings_SOIC:SOIC-16_3.9x9.9mm_Pitch1.27mm" H 6850 5700 60  0001 C CNN
 F 3 "" H 6850 5700 60  0000 C CNN
 	1    6850 5700
 	1    0    0    -1  
@@ -1026,9 +1024,9 @@ Text Label 6000 4800 3    60   ~ 0
 LCDD6
 Text Label 6100 4800 3    60   ~ 0
 LCDD7
-Text Label 4800 4800 3    60   ~ 0
+Text Label 4450 5200 0    60   ~ 0
 GND
-Text Label 4900 4800 3    60   ~ 0
+Text Label 4450 4600 0    60   ~ 0
 VCC
 $Comp
 L REG104 U1
@@ -1036,7 +1034,7 @@ U 1 1 564A6645
 P 2000 6800
 F 0 "U1" H 2200 7050 60  0000 C CNN
 F 1 "REG104" H 2250 7150 60  0000 C CNN
-F 2 "" H 2000 6800 60  0001 C CNN
+F 2 "TO_SOT_Packages_SMD:TO-263-5Lead" H 2000 6800 60  0001 C CNN
 F 3 "" H 2000 6800 60  0000 C CNN
 	1    2000 6800
 	1    0    0    -1  
@@ -1200,19 +1198,125 @@ LCDRS
 $Comp
 L POT RV1
 U 1 1 564AFA32
-P 6700 4850
-F 0 "RV1" H 6700 4750 50  0000 C CNN
-F 1 "POT" H 6700 4850 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x03" H 6700 4850 60  0001 C CNN
-F 3 "" H 6700 4850 60  0000 C CNN
-	1    6700 4850
-	0    -1   -1   0   
+P 4400 4900
+F 0 "RV1" H 4400 4800 50  0000 C CNN
+F 1 "POT" H 4400 4900 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x03" H 4400 4900 60  0001 C CNN
+F 3 "" H 4400 4900 60  0000 C CNN
+	1    4400 4900
+	0    1    1    0   
 $EndComp
-Text Label 6700 5100 0    60   ~ 0
+Text Label 6200 4800 3    60   ~ 0
 VCC
-Text Label 6700 4600 0    60   ~ 0
+Text Label 6300 4800 3    60   ~ 0
 GND
 Text Label 1350 3250 0    60   ~ 0
+GND
+Text Label 5000 650  0    60   ~ 0
+VCC
+Text Label 5000 1150 0    60   ~ 0
+GND
+$Comp
+L C C25
+U 1 1 564BF77F
+P 10700 1000
+F 0 "C25" H 10725 1100 50  0000 L CNN
+F 1 "100n" H 10725 900 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 10738 850 30  0001 C CNN
+F 3 "" H 10700 1000 60  0000 C CNN
+	1    10700 1000
+	1    0    0    -1  
+$EndComp
+Text Label 10500 750  0    60   ~ 0
+VCC
+Text Label 10500 1250 0    60   ~ 0
+GND
+$Comp
+L C C26
+U 1 1 564CE639
+P 10750 2400
+F 0 "C26" H 10775 2500 50  0000 L CNN
+F 1 "100n" H 10775 2300 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 10788 2250 30  0001 C CNN
+F 3 "" H 10750 2400 60  0000 C CNN
+	1    10750 2400
+	1    0    0    -1  
+$EndComp
+Text Label 10550 2150 0    60   ~ 0
+VCC
+Text Label 10550 2650 0    60   ~ 0
+GND
+$Comp
+L C C23
+U 1 1 564D34BA
+P 10450 3950
+F 0 "C23" H 10475 4050 50  0000 L CNN
+F 1 "100n" H 10475 3850 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 10488 3800 30  0001 C CNN
+F 3 "" H 10450 3950 60  0000 C CNN
+	1    10450 3950
+	1    0    0    -1  
+$EndComp
+Text Label 10250 3700 0    60   ~ 0
+VCC
+Text Label 10250 4200 0    60   ~ 0
+GND
+$Comp
+L C C27
+U 1 1 564D6EC4
+P 10850 5800
+F 0 "C27" H 10875 5900 50  0000 L CNN
+F 1 "100n" H 10875 5700 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 10888 5650 30  0001 C CNN
+F 3 "" H 10850 5800 60  0000 C CNN
+	1    10850 5800
+	1    0    0    -1  
+$EndComp
+Text Label 10650 5550 0    60   ~ 0
+VCC
+Text Label 10650 6050 0    60   ~ 0
+GND
+$Comp
+L CONN_01X03 P1
+U 1 1 564DDDA7
+P 1100 6800
+F 0 "P1" H 1100 7000 50  0000 C CNN
+F 1 "CONN_01X03" V 1200 6800 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x03" H 1100 6800 60  0001 C CNN
+F 3 "" H 1100 6800 60  0000 C CNN
+	1    1100 6800
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X01 P3
+U 1 1 564E1470
+P 9500 1350
+F 0 "P3" H 9500 1450 50  0000 C CNN
+F 1 "CONN_01X01" V 9600 1350 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x01" H 9500 1350 60  0001 C CNN
+F 3 "" H 9500 1350 60  0000 C CNN
+	1    9500 1350
+	-1   0    0    1   
+$EndComp
+$Comp
+L C C12
+U 1 1 564ED288
+P 5200 2600
+F 0 "C12" H 5225 2700 50  0000 L CNN
+F 1 "100n" H 5225 2500 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 5238 2450 30  0001 C CNN
+F 3 "" H 5200 2600 60  0000 C CNN
+	1    5200 2600
+	1    0    0    -1  
+$EndComp
+Text Label 5000 2350 0    60   ~ 0
+VCC
+Text Label 5000 2850 0    60   ~ 0
+GND
+NoConn ~ 3500 4600
+NoConn ~ 3500 4700
+NoConn ~ 3500 4800
+Text Label 6450 900  2    60   ~ 0
 GND
 Wire Wire Line
 	2500 6800 2700 6800
@@ -1308,8 +1412,6 @@ Wire Wire Line
 Wire Wire Line
 	5800 1350 6150 1350
 Wire Wire Line
-	4750 1900 4750 2050
-Wire Wire Line
 	5000 2050 5000 1900
 Connection ~ 5900 1350
 Wire Wire Line
@@ -1329,7 +1431,6 @@ Wire Wire Line
 	7050 750  7050 1350
 Wire Wire Line
 	4400 2050 7050 2050
-Connection ~ 4800 2050
 Connection ~ 5000 2050
 Wire Wire Line
 	6950 1250 7200 1250
@@ -1474,14 +1575,6 @@ Connection ~ 2550 6800
 Wire Wire Line
 	2000 6400 1450 6400
 Wire Wire Line
-	6200 4800 6200 5100
-Wire Wire Line
-	6200 5100 6700 5100
-Wire Wire Line
-	6550 4850 6300 4850
-Wire Wire Line
-	6300 4850 6300 4800
-Wire Wire Line
 	2500 1000 2900 1000
 Wire Wire Line
 	2900 1300 3050 1300
@@ -1495,10 +1588,6 @@ Wire Wire Line
 	4000 1350 4350 1350
 Wire Wire Line
 	1350 3250 1350 3100
-Text Label 5000 650  0    60   ~ 0
-VCC
-Text Label 5000 1150 0    60   ~ 0
-GND
 Wire Wire Line
 	5200 650  5200 750 
 Wire Wire Line
@@ -1507,21 +1596,6 @@ Wire Wire Line
 	5000 1150 5200 1150
 Wire Wire Line
 	5000 650  5200 650 
-$Comp
-L C C25
-U 1 1 564BF77F
-P 10700 1000
-F 0 "C25" H 10725 1100 50  0000 L CNN
-F 1 "100n" H 10725 900 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 10738 850 30  0001 C CNN
-F 3 "" H 10700 1000 60  0000 C CNN
-	1    10700 1000
-	1    0    0    -1  
-$EndComp
-Text Label 10500 750  0    60   ~ 0
-VCC
-Text Label 10500 1250 0    60   ~ 0
-GND
 Wire Wire Line
 	10700 750  10700 850 
 Wire Wire Line
@@ -1537,21 +1611,6 @@ Wire Wire Line
 Wire Wire Line
 	8750 750  10100 750 
 Connection ~ 4900 3750
-$Comp
-L C C26
-U 1 1 564CE639
-P 10750 2400
-F 0 "C26" H 10775 2500 50  0000 L CNN
-F 1 "100n" H 10775 2300 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 10788 2250 30  0001 C CNN
-F 3 "" H 10750 2400 60  0000 C CNN
-	1    10750 2400
-	1    0    0    -1  
-$EndComp
-Text Label 10550 2150 0    60   ~ 0
-VCC
-Text Label 10550 2650 0    60   ~ 0
-GND
 Wire Wire Line
 	10750 2150 10750 2250
 Wire Wire Line
@@ -1562,21 +1621,6 @@ Wire Wire Line
 	10550 2150 10750 2150
 Wire Wire Line
 	10350 2950 11050 2950
-$Comp
-L C C23
-U 1 1 564D34BA
-P 10450 3950
-F 0 "C23" H 10475 4050 50  0000 L CNN
-F 1 "100n" H 10475 3850 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 10488 3800 30  0001 C CNN
-F 3 "" H 10450 3950 60  0000 C CNN
-	1    10450 3950
-	1    0    0    -1  
-$EndComp
-Text Label 10250 3700 0    60   ~ 0
-VCC
-Text Label 10250 4200 0    60   ~ 0
-GND
 Wire Wire Line
 	10450 3700 10450 3800
 Wire Wire Line
@@ -1585,21 +1629,6 @@ Wire Wire Line
 	10250 4200 10450 4200
 Wire Wire Line
 	10250 3700 10450 3700
-$Comp
-L C C27
-U 1 1 564D6EC4
-P 10850 5800
-F 0 "C27" H 10875 5900 50  0000 L CNN
-F 1 "100n" H 10875 5700 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 10888 5650 30  0001 C CNN
-F 3 "" H 10850 5800 60  0000 C CNN
-	1    10850 5800
-	1    0    0    -1  
-$EndComp
-Text Label 10650 5550 0    60   ~ 0
-VCC
-Text Label 10650 6050 0    60   ~ 0
-GND
 Wire Wire Line
 	10850 5550 10850 5650
 Wire Wire Line
@@ -1608,43 +1637,6 @@ Wire Wire Line
 	10650 6050 10850 6050
 Wire Wire Line
 	10650 5550 10850 5550
-$Comp
-L CONN_01X03 P1
-U 1 1 564DDDA7
-P 1100 6800
-F 0 "P1" H 1100 7000 50  0000 C CNN
-F 1 "CONN_01X03" V 1200 6800 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x03" H 1100 6800 60  0001 C CNN
-F 3 "" H 1100 6800 60  0000 C CNN
-	1    1100 6800
-	-1   0    0    1   
-$EndComp
-$Comp
-L CONN_01X01 P3
-U 1 1 564E1470
-P 9500 1350
-F 0 "P3" H 9500 1450 50  0000 C CNN
-F 1 "CONN_01X01" V 9600 1350 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x01" H 9500 1350 60  0001 C CNN
-F 3 "" H 9500 1350 60  0000 C CNN
-	1    9500 1350
-	-1   0    0    1   
-$EndComp
-$Comp
-L C C12
-U 1 1 564ED288
-P 5200 2600
-F 0 "C12" H 5225 2700 50  0000 L CNN
-F 1 "100n" H 5225 2500 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 5238 2450 30  0001 C CNN
-F 3 "" H 5200 2600 60  0000 C CNN
-	1    5200 2600
-	1    0    0    -1  
-$EndComp
-Text Label 5000 2350 0    60   ~ 0
-VCC
-Text Label 5000 2850 0    60   ~ 0
-GND
 Wire Wire Line
 	5200 2350 5200 2450
 Wire Wire Line
@@ -1653,4 +1645,33 @@ Wire Wire Line
 	5000 2850 5200 2850
 Wire Wire Line
 	5000 2350 5200 2350
+Wire Wire Line
+	4400 5150 4400 5200
+Wire Wire Line
+	4400 4650 4400 4600
+Wire Wire Line
+	4400 4600 4600 4600
+Wire Wire Line
+	4550 4900 5000 4900
+Wire Wire Line
+	5000 4900 5000 4800
+Wire Wire Line
+	4900 4800 4900 4850
+Wire Wire Line
+	4900 4850 4600 4850
+Wire Wire Line
+	4600 4850 4600 4600
+Connection ~ 2650 1200
+Connection ~ 2350 1200
+Connection ~ 4750 2050
+Wire Wire Line
+	4750 2050 4750 1900
+Wire Wire Line
+	7950 1700 8100 1700
+NoConn ~ 1300 6700
+NoConn ~ 1300 6900
+Wire Wire Line
+	4400 5200 4450 5200
+Text Label 4800 4800 2    60   ~ 0
+GND
 $EndSCHEMATC

@@ -2,11 +2,11 @@
 
   (general
     (links 224)
-    (no_connects 72)
+    (no_connects 73)
     (area 80.75 -81.28 281.427601 162.005001)
     (thickness 1.6)
     (drawings 0)
-    (tracks 514)
+    (tracks 509)
     (zones 0)
     (modules 79)
     (nets 88)
@@ -2921,11 +2921,6 @@
       (net 4 "Net-(C3-Pad1)"))
   )
 
-  (segment (start 176.15 148.717) (end 176.277 148.844) (width 0.4) (layer F.Cu) (net 1) (status C00000))
-  (segment (start 176.277 148.844) (end 187.198 148.844) (width 0.4) (layer F.Cu) (net 1) (tstamp 56515540) (status 400000))
-  (segment (start 188.214 123.444) (end 186.69 121.92) (width 0.4) (layer F.Cu) (net 1) (tstamp 5651554B) (status 800000))
-  (segment (start 188.214 147.828) (end 188.214 123.444) (width 0.4) (layer F.Cu) (net 1) (tstamp 56515548))
-  (segment (start 187.198 148.844) (end 188.214 147.828) (width 0.4) (layer F.Cu) (net 1) (tstamp 56515546))
   (segment (start 137.54 150.495) (end 137.667 150.368) (width 0.4) (layer F.Cu) (net 1))
   (segment (start 137.667 150.368) (end 140.462 150.368) (width 0.4) (layer F.Cu) (net 1) (tstamp 5651525D))
   (segment (start 140.462 150.368) (end 142.748 148.082) (width 0.4) (layer F.Cu) (net 1) (tstamp 5651525E))

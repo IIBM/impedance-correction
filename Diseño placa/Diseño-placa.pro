@@ -1,4 +1,4 @@
-update=17/11/2015 12:28:22
+update=20/11/2015 01:09:23
 version=1
 last_client=kicad
 [pcbnew]
@@ -59,3 +59,13 @@ LibName30=opa625
 [cvpcb]
 version=1
 NetIExt=net
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
