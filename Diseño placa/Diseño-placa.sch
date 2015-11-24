@@ -562,41 +562,41 @@ $EndComp
 $Comp
 L R R1
 U 1 1 564067B0
-P 1350 5550
-F 0 "R1" V 1430 5550 50  0000 C CNN
-F 1 "330k" V 1350 5550 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 1280 5550 30  0001 C CNN
-F 3 "" H 1350 5550 30  0000 C CNN
-	1    1350 5550
+P 1350 5600
+F 0 "R1" V 1430 5600 50  0000 C CNN
+F 1 "330k" V 1350 5600 50  0000 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 1280 5600 30  0001 C CNN
+F 3 "" H 1350 5600 30  0000 C CNN
+	1    1350 5600
 	0    1    1    0   
 $EndComp
-Text Label 1850 5550 0    60   ~ 0
+Text Label 1850 5600 0    60   ~ 0
 VCC
 $Comp
 L SW_PUSH SW1
 U 1 1 56406A1A
-P 1350 5850
-F 0 "SW1" H 1500 5960 50  0000 C CNN
-F 1 "SW_PUSH" H 1350 5770 50  0000 C CNN
-F 2 "Buttons_Switches_ThroughHole:SW_PUSH-12mm" H 1350 5850 60  0001 C CNN
-F 3 "" H 1350 5850 60  0000 C CNN
-	1    1350 5850
+P 1350 5900
+F 0 "SW1" H 1500 6010 50  0000 C CNN
+F 1 "SW_PUSH" H 1350 5820 50  0000 C CNN
+F 2 "Buttons_Switches_ThroughHole:SW_PUSH-12mm" H 1350 5900 60  0001 C CNN
+F 3 "" H 1350 5900 60  0000 C CNN
+	1    1350 5900
 	1    0    0    -1  
 $EndComp
 $Comp
 L C C2
 U 1 1 56406ADD
-P 1300 6100
-F 0 "C2" H 1325 6200 50  0000 L CNN
-F 1 "100n" H 1325 6000 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 1338 5950 30  0001 C CNN
-F 3 "" H 1300 6100 60  0000 C CNN
-	1    1300 6100
+P 1300 6150
+F 0 "C2" H 1325 6250 50  0000 L CNN
+F 1 "100n" H 1325 6050 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 1338 6000 30  0001 C CNN
+F 3 "" H 1300 6150 60  0000 C CNN
+	1    1300 6150
 	0    1    1    0   
 $EndComp
-Text Label 950  5550 2    60   ~ 0
+Text Label 950  5600 2    60   ~ 0
 RESET
-Text Label 1850 5850 0    60   ~ 0
+Text Label 1850 5900 0    60   ~ 0
 GND
 $Comp
 L C C11
@@ -648,7 +648,7 @@ U 1 1 563EB63D
 P 6600 1200
 F 0 "U2" H 6750 1100 60  0000 C CNN
 F 1 "OPA625" H 6750 1000 60  0000 C CNN
-F 2 "Housings_SOT-23_SOT-143_TSOT-6:SC-70-6" H 6350 800 60  0001 C CNN
+F 2 "Housings_SOT-23_SOT-143_TSOT-6:TSOT-6-MK06A_Handsoldering" H 6350 800 60  0001 C CNN
 F 3 "" H 6350 800 60  0000 C CNN
 	1    6600 1200
 	1    0    0    1   
@@ -659,7 +659,7 @@ U 1 1 563F0B8D
 P 8100 1300
 F 0 "U4" H 8250 1200 60  0000 C CNN
 F 1 "OPA625" H 8250 1100 60  0000 C CNN
-F 2 "Housings_SOT-23_SOT-143_TSOT-6:SC-70-6" H 7850 900 60  0001 C CNN
+F 2 "Housings_SOT-23_SOT-143_TSOT-6:TSOT-6-MK06A_Handsoldering" H 7850 900 60  0001 C CNN
 F 3 "" H 7850 900 60  0000 C CNN
 	1    8100 1300
 	1    0    0    1   
@@ -670,7 +670,7 @@ U 1 1 563F38AC
 P 10000 2900
 F 0 "U7" H 10150 2800 60  0000 C CNN
 F 1 "OPA625" H 10150 2700 60  0000 C CNN
-F 2 "Housings_SOT-23_SOT-143_TSOT-6:SC-70-6" H 9750 2500 60  0001 C CNN
+F 2 "Housings_SOT-23_SOT-143_TSOT-6:TSOT-6-MK06A_Handsoldering" H 9750 2500 60  0001 C CNN
 F 3 "" H 9750 2500 60  0000 C CNN
 	1    10000 2900
 	1    0    0    1   
@@ -681,7 +681,7 @@ U 1 1 563FABB5
 P 9550 4500
 F 0 "U6" H 9700 4400 60  0000 C CNN
 F 1 "OPA625" H 9700 4300 60  0000 C CNN
-F 2 "Housings_SOT-23_SOT-143_TSOT-6:SC-70-6" H 9300 4100 60  0001 C CNN
+F 2 "Housings_SOT-23_SOT-143_TSOT-6:TSOT-6-MK06A_Handsoldering" H 9300 4100 60  0001 C CNN
 F 3 "" H 9300 4100 60  0000 C CNN
 	1    9550 4500
 	1    0    0    1   
@@ -692,7 +692,7 @@ U 1 1 563FF3E3
 P 6650 2900
 F 0 "U3" H 6800 2800 60  0000 C CNN
 F 1 "OPA625" H 6800 2700 60  0000 C CNN
-F 2 "Housings_SOT-23_SOT-143_TSOT-6:SC-70-6" H 6400 2500 60  0001 C CNN
+F 2 "Housings_SOT-23_SOT-143_TSOT-6:TSOT-6-MK06A_Handsoldering" H 6400 2500 60  0001 C CNN
 F 3 "" H 6400 2500 60  0000 C CNN
 	1    6650 2900
 	1    0    0    1   
@@ -703,24 +703,24 @@ U 1 1 564010A1
 P 9450 5650
 F 0 "U5" H 9600 5550 60  0000 C CNN
 F 1 "OPA625" H 9600 5450 60  0000 C CNN
-F 2 "Housings_SOT-23_SOT-143_TSOT-6:SC-70-6" H 9200 5250 60  0001 C CNN
+F 2 "Housings_SOT-23_SOT-143_TSOT-6:TSOT-6-MK06A_Handsoldering" H 9200 5250 60  0001 C CNN
 F 3 "" H 9200 5250 60  0000 C CNN
 	1    9450 5650
 	1    0    0    1   
 $EndComp
-Text Label 4850 6300 0    60   ~ 0
+Text Label 4750 6500 0    60   ~ 0
 VCC
-Text Label 4150 7400 2    60   ~ 0
+Text Label 4050 7600 2    60   ~ 0
 GND
 $Comp
 L DIL24 M1
 U 1 1 5641949E
-P 4500 6850
-F 0 "M1" H 4500 7550 70  0000 C CNN
-F 1 "DIL24" H 4500 6750 70  0000 C CNN
-F 2 "Housings_SOIC:SOIC-24_7.5x15.4mm_Pitch1.27mm" H 4500 6850 60  0001 C CNN
-F 3 "" H 4500 6850 60  0000 C CNN
-	1    4500 6850
+P 4400 7050
+F 0 "M1" H 4400 7750 70  0000 C CNN
+F 1 "DIL24" H 4400 6950 70  0000 C CNN
+F 2 "Housings_SOIC:SOIC-24_7.5x15.4mm_Pitch1.27mm" H 4400 7050 60  0001 C CNN
+F 3 "" H 4400 7050 60  0000 C CNN
+	1    4400 7050
 	1    0    0    -1  
 $EndComp
 Text Label 3500 2800 0    60   ~ 0
@@ -801,52 +801,52 @@ Text Label 3500 1700 0    60   ~ 0
 LCDE
 Text Label 2450 5950 2    60   ~ 0
 BDOWN
-Text Label 2450 5600 2    60   ~ 0
+Text Label 2450 5450 2    60   ~ 0
 BUP
 Text Label 3550 5950 2    60   ~ 0
 BESC
-Text Label 3550 5600 2    60   ~ 0
+Text Label 3500 5450 2    60   ~ 0
 BOK
-Text Label 4150 5600 0    60   ~ 0
+Text Label 4100 5450 0    60   ~ 0
 GND
-Text Label 4150 6300 2    60   ~ 0
+Text Label 4050 6500 2    60   ~ 0
 MUX0IO
-Text Label 4150 7200 2    60   ~ 0
+Text Label 4050 7400 2    60   ~ 0
 MUX0S0
-Text Label 4150 7300 2    60   ~ 0
+Text Label 4050 7500 2    60   ~ 0
 MUX0S1
-Text Label 4850 7300 0    60   ~ 0
+Text Label 4750 7500 0    60   ~ 0
 MUX0S2
-Text Label 4850 7400 0    60   ~ 0
+Text Label 4750 7600 0    60   ~ 0
 MUX0S3
-Text Label 4850 7200 0    60   ~ 0
+Text Label 4750 7400 0    60   ~ 0
 GND
 $Comp
 L DIL24 M2
 U 1 1 56481F56
-P 6200 6850
-F 0 "M2" H 6200 7550 70  0000 C CNN
-F 1 "DIL24" H 6200 6750 70  0000 C CNN
-F 2 "Housings_SOIC:SOIC-24_7.5x15.4mm_Pitch1.27mm" H 6200 6850 60  0001 C CNN
-F 3 "" H 6200 6850 60  0000 C CNN
-	1    6200 6850
+P 6100 7050
+F 0 "M2" H 6100 7750 70  0000 C CNN
+F 1 "DIL24" H 6100 6950 70  0000 C CNN
+F 2 "Housings_SOIC:SOIC-24_7.5x15.4mm_Pitch1.27mm" H 6100 7050 60  0001 C CNN
+F 3 "" H 6100 7050 60  0000 C CNN
+	1    6100 7050
 	1    0    0    -1  
 $EndComp
-Text Label 6550 6300 0    60   ~ 0
+Text Label 6450 6500 0    60   ~ 0
 VCC
-Text Label 5850 7400 2    60   ~ 0
+Text Label 5750 7600 2    60   ~ 0
 GND
-Text Label 6550 7200 0    60   ~ 0
+Text Label 6450 7400 0    60   ~ 0
 GND
 Text Label 3500 4500 0    60   ~ 0
 MUX1S3
-Text Label 5850 7200 2    60   ~ 0
+Text Label 5750 7400 2    60   ~ 0
 MUX1S0
-Text Label 5850 7300 2    60   ~ 0
+Text Label 5750 7500 2    60   ~ 0
 MUX1S1
-Text Label 6550 7300 0    60   ~ 0
+Text Label 6450 7500 0    60   ~ 0
 MUX1S2
-Text Label 6550 7400 0    60   ~ 0
+Text Label 6450 7600 0    60   ~ 0
 MUX1S3
 $Comp
 L R R7
@@ -933,7 +933,7 @@ Text Label 7200 5950 0    60   ~ 0
 MUX2A
 Text Label 7200 6050 0    60   ~ 0
 MUX2B
-Text Label 5850 6300 2    60   ~ 0
+Text Label 5750 6500 2    60   ~ 0
 MUX1IO
 Text Label 7200 5650 0    60   ~ 0
 MUX2IO
@@ -1025,109 +1025,109 @@ GND
 $Comp
 L CONN_02X08 P2
 U 1 1 564AFCEF
-P 3400 6700
-F 0 "P2" H 3400 7150 50  0000 C CNN
-F 1 "CONN_02X08" V 3400 6700 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Angled_2x08" H 3400 5500 60  0001 C CNN
-F 3 "" H 3400 5500 60  0000 C CNN
-	1    3400 6700
+P 3300 6900
+F 0 "P2" H 3300 7350 50  0000 C CNN
+F 1 "CONN_02X08" V 3300 6900 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Angled_2x08" H 3300 5700 60  0001 C CNN
+F 3 "" H 3300 5700 60  0000 C CNN
+	1    3300 6900
 	1    0    0    -1  
 $EndComp
-Text Label 4150 7000 2    60   ~ 0
+Text Label 4050 7200 2    60   ~ 0
 E1
-Text Label 4150 7100 2    60   ~ 0
+Text Label 4050 7300 2    60   ~ 0
 E0
-Text Label 4150 6900 2    60   ~ 0
+Text Label 4050 7100 2    60   ~ 0
 E2
-Text Label 4150 6800 2    60   ~ 0
+Text Label 4050 7000 2    60   ~ 0
 E3
-Text Label 4150 6700 2    60   ~ 0
+Text Label 4050 6900 2    60   ~ 0
 E4
-Text Label 4150 6600 2    60   ~ 0
+Text Label 4050 6800 2    60   ~ 0
 E5
-Text Label 4150 6500 2    60   ~ 0
+Text Label 4050 6700 2    60   ~ 0
 E6
-Text Label 4150 6400 2    60   ~ 0
+Text Label 4050 6600 2    60   ~ 0
 E7
-Text Label 4850 6400 0    60   ~ 0
+Text Label 4750 6600 0    60   ~ 0
 E8
-Text Label 4850 6500 0    60   ~ 0
+Text Label 4750 6700 0    60   ~ 0
 E9
-Text Label 4850 6600 0    60   ~ 0
+Text Label 4750 6800 0    60   ~ 0
 E10
-Text Label 4850 6700 0    60   ~ 0
+Text Label 4750 6900 0    60   ~ 0
 E11
-Text Label 4850 6800 0    60   ~ 0
+Text Label 4750 7000 0    60   ~ 0
 E12
-Text Label 4850 6900 0    60   ~ 0
+Text Label 4750 7100 0    60   ~ 0
 E13
-Text Label 4850 7000 0    60   ~ 0
+Text Label 4750 7200 0    60   ~ 0
 E14
-Text Label 4850 7100 0    60   ~ 0
+Text Label 4750 7300 0    60   ~ 0
 E15
-Text Label 6550 6400 0    60   ~ 0
+Text Label 6450 6600 0    60   ~ 0
 E8
-Text Label 6550 6500 0    60   ~ 0
+Text Label 6450 6700 0    60   ~ 0
 E9
-Text Label 6550 6600 0    60   ~ 0
+Text Label 6450 6800 0    60   ~ 0
 E10
-Text Label 6550 6700 0    60   ~ 0
+Text Label 6450 6900 0    60   ~ 0
 E11
-Text Label 6550 6800 0    60   ~ 0
+Text Label 6450 7000 0    60   ~ 0
 E12
-Text Label 6550 6900 0    60   ~ 0
+Text Label 6450 7100 0    60   ~ 0
 E13
-Text Label 6550 7000 0    60   ~ 0
+Text Label 6450 7200 0    60   ~ 0
 E14
-Text Label 6550 7100 0    60   ~ 0
+Text Label 6450 7300 0    60   ~ 0
 E15
-Text Label 5850 7100 2    60   ~ 0
+Text Label 5750 7300 2    60   ~ 0
 E0
-Text Label 5850 7000 2    60   ~ 0
+Text Label 5750 7200 2    60   ~ 0
 E1
-Text Label 5850 6900 2    60   ~ 0
+Text Label 5750 7100 2    60   ~ 0
 E2
-Text Label 5850 6800 2    60   ~ 0
+Text Label 5750 7000 2    60   ~ 0
 E3
-Text Label 5850 6700 2    60   ~ 0
+Text Label 5750 6900 2    60   ~ 0
 E4
-Text Label 5850 6600 2    60   ~ 0
+Text Label 5750 6800 2    60   ~ 0
 E5
-Text Label 5850 6500 2    60   ~ 0
+Text Label 5750 6700 2    60   ~ 0
 E6
-Text Label 5850 6400 2    60   ~ 0
+Text Label 5750 6600 2    60   ~ 0
 E7
-Text Label 3150 6350 2    60   ~ 0
+Text Label 3050 6550 2    60   ~ 0
 E7
-Text Label 3150 6450 2    60   ~ 0
+Text Label 3050 6650 2    60   ~ 0
 E6
-Text Label 3150 6550 2    60   ~ 0
+Text Label 3050 6750 2    60   ~ 0
 E5
-Text Label 3150 6650 2    60   ~ 0
+Text Label 3050 6850 2    60   ~ 0
 E4
-Text Label 3150 6750 2    60   ~ 0
+Text Label 3050 6950 2    60   ~ 0
 E3
-Text Label 3150 6850 2    60   ~ 0
+Text Label 3050 7050 2    60   ~ 0
 E2
-Text Label 3150 6950 2    60   ~ 0
+Text Label 3050 7150 2    60   ~ 0
 E1
-Text Label 3150 7050 2    60   ~ 0
+Text Label 3050 7250 2    60   ~ 0
 E0
-Text Label 3650 6350 0    60   ~ 0
+Text Label 3550 6550 0    60   ~ 0
 E8
-Text Label 3650 6450 0    60   ~ 0
+Text Label 3550 6650 0    60   ~ 0
 E9
-Text Label 3650 6550 0    60   ~ 0
+Text Label 3550 6750 0    60   ~ 0
 E10
-Text Label 3650 6650 0    60   ~ 0
+Text Label 3550 6850 0    60   ~ 0
 E11
-Text Label 3650 6750 0    60   ~ 0
+Text Label 3550 6950 0    60   ~ 0
 E12
-Text Label 3650 6850 0    60   ~ 0
+Text Label 3550 7050 0    60   ~ 0
 E13
-Text Label 3650 6950 0    60   ~ 0
+Text Label 3550 7150 0    60   ~ 0
 E14
-Text Label 3650 7050 0    60   ~ 0
+Text Label 3550 7250 0    60   ~ 0
 E15
 Text Label 5300 4800 3    60   ~ 0
 LCDE
@@ -1296,21 +1296,21 @@ Wire Wire Line
 Wire Wire Line
 	2550 5300 2450 5300
 Wire Wire Line
-	1500 5550 1850 5550
+	1500 5600 1850 5600
 Wire Wire Line
-	1650 5850 1850 5850
-Connection ~ 1050 5550
-Connection ~ 1050 5850
+	1650 5900 1850 5900
+Connection ~ 1050 5600
+Connection ~ 1050 5900
 Wire Wire Line
-	950  5550 1200 5550
+	950  5600 1200 5600
 Wire Wire Line
-	1050 5550 1050 6100
+	1050 5600 1050 6150
 Wire Wire Line
-	1050 6100 1150 6100
+	1050 6150 1150 6150
 Wire Wire Line
-	1650 6100 1650 5850
+	1650 6150 1650 5900
 Wire Wire Line
-	1450 6100 1650 6100
+	1450 6150 1650 6150
 Connection ~ 900  2300
 Wire Wire Line
 	950  2300 900  2300
@@ -1627,17 +1627,17 @@ Wire Wire Line
 Connection ~ 1300 7000
 Text Label 3050 5950 0    60   ~ 0
 GND
-Text Label 3050 5600 0    60   ~ 0
+Text Label 3050 5450 0    60   ~ 0
 GND
 $Comp
 L SW_PUSH SW2
 U 1 1 56431DBF
-P 2750 5600
-F 0 "SW2" H 2900 5710 50  0000 C CNN
-F 1 "SW_PUSH" H 2750 5520 50  0000 C CNN
-F 2 "Buttons_Switches_ThroughHole:SW_PUSH-12mm" H 2750 5600 60  0001 C CNN
-F 3 "" H 2750 5600 60  0000 C CNN
-	1    2750 5600
+P 2750 5450
+F 0 "SW2" H 2900 5560 50  0000 C CNN
+F 1 "SW_PUSH" H 2750 5370 50  0000 C CNN
+F 2 "Buttons_Switches_ThroughHole:SW_PUSH-12mm" H 2750 5450 60  0001 C CNN
+F 3 "" H 2750 5450 60  0000 C CNN
+	1    2750 5450
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1667,12 +1667,12 @@ $EndComp
 $Comp
 L SW_PUSH SW4
 U 1 1 5643606F
-P 3850 5600
-F 0 "SW4" H 4000 5710 50  0000 C CNN
-F 1 "SW_PUSH" H 3850 5520 50  0000 C CNN
-F 2 "Buttons_Switches_ThroughHole:SW_PUSH-12mm" H 3850 5600 60  0001 C CNN
-F 3 "" H 3850 5600 60  0000 C CNN
-	1    3850 5600
+P 3800 5450
+F 0 "SW4" H 3950 5560 50  0000 C CNN
+F 1 "SW_PUSH" H 3800 5370 50  0000 C CNN
+F 2 "Buttons_Switches_ThroughHole:SW_PUSH-12mm" H 3800 5450 60  0001 C CNN
+F 3 "" H 3800 5450 60  0000 C CNN
+	1    3800 5450
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1693,7 +1693,7 @@ BDOWN
 Text Label 8200 4550 2    60   ~ 0
 BOK
 Text Label 8200 4650 2    60   ~ 0
-BSET
+BESC
 Text Label 8200 4750 2    60   ~ 0
 GND
 $Comp
@@ -1714,7 +1714,7 @@ BDOWN
 Text Label 8200 3900 2    60   ~ 0
 BOK
 Text Label 8200 4000 2    60   ~ 0
-BSET
+BESC
 Text Label 8200 4100 2    60   ~ 0
 GND
 Text Label 7550 3750 2    60   ~ 0
@@ -1793,4 +1793,103 @@ Wire Wire Line
 Wire Wire Line
 	10800 3050 10800 2950
 Connection ~ 10800 2950
+$Comp
+L C C29
+U 1 1 5654B450
+P 2750 5650
+F 0 "C29" H 2775 5750 50  0000 L CNN
+F 1 "100n" H 2775 5550 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 2788 5500 30  0001 C CNN
+F 3 "" H 2750 5650 60  0000 C CNN
+	1    2750 5650
+	0    1    1    0   
+$EndComp
+$Comp
+L C C31
+U 1 1 5654B573
+P 3800 5650
+F 0 "C31" H 3825 5750 50  0000 L CNN
+F 1 "100n" H 3825 5550 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 3838 5500 30  0001 C CNN
+F 3 "" H 3800 5650 60  0000 C CNN
+	1    3800 5650
+	0    1    1    0   
+$EndComp
+$Comp
+L C C30
+U 1 1 5654C2A0
+P 2750 6150
+F 0 "C30" H 2775 6250 50  0000 L CNN
+F 1 "100n" H 2775 6050 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 2788 6000 30  0001 C CNN
+F 3 "" H 2750 6150 60  0000 C CNN
+	1    2750 6150
+	0    1    1    0   
+$EndComp
+$Comp
+L C C32
+U 1 1 5654C4D8
+P 3850 6150
+F 0 "C32" H 3875 6250 50  0000 L CNN
+F 1 "100n" H 3875 6050 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L4_W2.5_P2.5" H 3888 6000 30  0001 C CNN
+F 3 "" H 3850 6150 60  0000 C CNN
+	1    3850 6150
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4000 6150 4150 6150
+Wire Wire Line
+	4150 6150 4150 5950
+Wire Wire Line
+	3950 5650 4100 5650
+Wire Wire Line
+	4100 5650 4100 5450
+Wire Wire Line
+	3650 5650 3500 5650
+Wire Wire Line
+	3500 5650 3500 5450
+Wire Wire Line
+	2900 5650 3050 5650
+Wire Wire Line
+	3050 5650 3050 5450
+Wire Wire Line
+	2600 5650 2450 5650
+Wire Wire Line
+	2450 5650 2450 5450
+Wire Wire Line
+	2600 6150 2450 6150
+Wire Wire Line
+	2450 6150 2450 5950
+Wire Wire Line
+	2900 6150 3050 6150
+Wire Wire Line
+	3050 6150 3050 5950
+Wire Wire Line
+	3700 6150 3550 6150
+Wire Wire Line
+	3550 6150 3550 5950
+$Comp
+L CONN_02X03 P7
+U 1 1 5654D4A0
+P 1250 5250
+F 0 "P7" H 1250 5450 50  0000 C CNN
+F 1 "CONN_02X03" H 1250 5050 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Angled_2x03" H 1250 4050 60  0001 C CNN
+F 3 "" H 1250 4050 60  0000 C CNN
+	1    1250 5250
+	1    0    0    -1  
+$EndComp
+Text Label 1500 5350 0    60   ~ 0
+GND
+Text Label 1500 5150 0    60   ~ 0
+VCC
+Text Label 1000 5350 2    60   ~ 0
+RESET
+Text Label 1000 5150 2    60   ~ 0
+MUX0S2
+Text Label 1000 5250 2    60   ~ 0
+MUX0S3
+Text Label 1500 5250 0    60   ~ 0
+MUX0S1
 $EndSCHEMATC
