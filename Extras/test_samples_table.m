@@ -9,19 +9,20 @@ red    = [205,  50,  50]/255;
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|/////////////////////////////| Configuraciones |\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+fCK = 16e6;          # frecuencia de clock: 16 MHz
+b = 8;               # bits de trabajo: 8
+fs = fCK/(32*13.5);  # frecuencia de muestreo: ADC clock con prescaler x32
+Ts = 1/fs;           # período de muestreo
+
+f = 1e3;             # frecuencia de la onda: 1 kHz
+T = 1/f;             # período de la onda
+A = 100;             # amplitud de la onda
+Nl = 2;              # nivel de ruido, valor pico
+off = 128;           # nivel de offset
+
 N_PERIODS_TO_SAMPLE = 9;
-SAMPLES_PER_PERIOD = 28;
+SAMPLES_PER_PERIOD = floor(fs/f);
 SAMPLES_TABLE_LEN = N_PERIODS_TO_SAMPLE * SAMPLES_PER_PERIOD;
-b = 8;           # bits de trabajo
-
-f = 1e3;         # frecuencia de la onda: 1 kHz
-T = 1/f;         # período de la onda
-A = 100;         # amplitud de la onda
-Nl = 2;          # nivel de ruido, valor pico
-off = 128;       # nivel de offset
-
-Ts = T/SAMPLES_PER_PERIOD; # período de muestreo
-fs = 1/Ts;                 # frecuencia de muestreo
 
 
 %||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||%
