@@ -2,7 +2,7 @@
 %|//////////////////////////| Objetivo del Proyecto |\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Índice}
-
+\color{red}No sé hacerlo automático \color{black}
 
 \section{Objetivo del Proyecto}
 % El objetivo es la respuesta a la pregunta “¿para qué?”; tiene que satisfacer alguna necesidad del usuario.
@@ -16,10 +16,10 @@ El presente proyecto consiste en el diseño y desarrollo de un sistema de calibr
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Descripción del Proyecto}
 % En esta sección se responde la pregunta “¿cómo?”. Aquí se enumeran las prestaciones, las funciones y el comportamiento o uso del equipo.
-
+\color{red}Falta modificar esta sección, es copy paste del anteproyecto\color{black}
 El equipo incluye una cuba conductora, que contiene una solución acuosa, donde se colocan los electrodos. Éstos son similares a un filamento de cobre recubierto con esmalte aislante en su totalidad, excepto en los extremos, los cuales uno va sumergido en la solución y el otro conectado al equipo por medio de un conector especial.\\
 
-El sistema funciona con 1, 4, 8, 12 ó 16 electrodos, corrigiendo de a uno por vez. El usuario coloca los electrodos procurando que no se produzcan cortocircuitos entre los mismos (se prevé detectar esto antes de comenzar), selecciona la impedancia final deseada y da la orden de inicio. Luego de algunos chequeos básicos se da comienzo al proceso mostrando un mensaje de inicio. Al terminar con todos los electrodos, se muestra la impedancia final de cada uno. 
+El sistema funciona con 1, 4, 8, 12 ó 16 electrodos, corrigiendo de a uno por vez. El usuario coloca los electrodos procurando que no se produzcan cortocircuitos entre los mismos (se detecta esto antes de comenzar), selecciona la impedancia final deseada y da la orden de inicio. Luego de algunos chequeos básicos se da comienzo al proceso mostrando un mensaje de inicio. Al terminar con todos los electrodos, se muestra la impedancia final de cada uno. 
 
 En líneas generales, el sistema consta de un primer módulo que consiste en una fuente de corriente alterna (se espera construirla con un amplificador de trasconductancia $i_o/v_i$, utilizando como entrada una señal senoidal de tensión generada en el microcontrolador, obteniendo en la salida una señal de corriente) que se emplea para medir la impedancia de cada electrodo a estudiar. La señal de salida de este circuito es una corriente senoidal de unos \SI{30}{\nano\ampere} y \SI{1}{\kilo\hertz}. Considerando la ley de Ohm y midiendo el valor pico de tensión, se calcula la impedancia del electrodo en estudio como $Z@\SI{1}{\kilo\hertz} = \frac{\hat{v}}{\hat{\i}}$. Luego, un segundo módulo se encarga de imponer una corriente continua de referencia en el sistema, también con un valor de \SI{30}{\nano\ampere} o bien de \SI{120}{\nano\ampere}, para poder disminuir el valor de la impedancia en caso de ser necesario. Esto es posible porque la solución acuosa contiene oro o plata, de modo de que se produce un recubrimiento por \emph{galvanoplastía} sobre el electrodo y así disminuye la impedancia. Si este proceso es necesario o no, dependerá del resultado previo y de la comparación entre el valor obtenido en la medición y el de referencia establecido previamente por el usuario. Estos dos circuitos se conectan mediante multiplexores analógicos (ver diagrama en bloques) que permiten seleccionar la opción correcta de acuerdo a la cantidad de electrodos analizados. 
 
@@ -81,6 +81,7 @@ Además, como periféricos principales están los dos circuitos mencionados ante
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Diagrama en Bloques (hardware)}
 % El esquema general de interconexión de todos los dispositivos importantes se representa mediante un diagrama en bloques.
+El diagrama de bloques aquí abajo muestra la interconexión de los dispositivos más relevantes del sistema.
 %\begin{center}
 %    \includegraphics[scale=0.9]{bloques}
 %\end{center}
@@ -92,6 +93,7 @@ Además, como periféricos principales están los dos circuitos mencionados ante
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Diagrama de Flujo  (firmware)}
 % El diagrama de flujo ilustra de manera general la interacción entre los distintos bloques (o rutinas) de código.
+El diagrama de flujo final del proyecto es el siguiente:
 %\begin{center}
 %    \vspace{-4mm}
 %    \includegraphics[scale=1.18]{flujo}
@@ -104,11 +106,18 @@ Además, como periféricos principales están los dos circuitos mencionados ante
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Circuito Esquemático}
 % La representación del circuito eléctrico final del prototipo debe realizarse en algún sistema CAD; no es necesario el diseño del circuito impreso (PCB), basta con el circuito esquemático.
-%\begin{center}
-%    \vspace{-4mm}
-%    \includegraphics[scale=0.63]{gantt}
-%\end{center}
+A continuación se muestra el circuito esquemático correspondiente al prototipo, así como también el diseño del PCB. Ambos fueron realizados con el programa KiCad.\\
+ 
+\begin{center}
+    \vspace{-4mm}
+    \includegraphics[scale=0.7]{circuito_esquematico}
+\end{center}
 
+
+\begin{center}
+    \vspace{-4mm}
+    \includegraphics[scale=0.65]{circuito_PCB}
+\end{center}
 
 
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
@@ -118,28 +127,31 @@ Además, como periféricos principales están los dos circuitos mencionados ante
 % En esta sección se debe incluir el listado final de componentes con sus respectivos costos. Además deben incorporar la estimación de horas-hombre insumidas en la realización del proyecto. 
 Los componentes que se emplearon para la construcción del dispositivo se muestran en la tabla siguiente:
 
-%\begin{table}[H]
-%\begin{center}
-%\begin{tabular}{|l|rr|}
-%    \hline
-%    \textbf{Componente} & \multicolumn{2}{c|}%{\textbf{Costo aproximado}} \\ \hline
-%    Atmega32            & \hspace{2.8cm}\$ &   85 \%\ \hline
-%    REF200 (*)          & \$               &   84 \%\ \hline
-%    OPA128 (*)          & \$               &  758 \%\ \hline
-%    INA105 (*)          & \$               &  120 \%\ \hline
-%    CD74HC4067 x2 (*)   & \$               &   74 \%\ \hline
-%    CD4053B (*)         & \$               &   10 \%\ \hline
-%    Resistencias        & \$               &   15 \%\ \hline
-%    Capacitores         & \$               &   20 \%\ \hline
-%    Display LCD         & \$               &  146 \%\ \hline
-%    Pulsadores x5       & \$               &   10 \%\ \hline
-%    TOTAL               & \$               & 1322 \%\ \hline
-%\end{tabular}
-%\end{center}
-%\end{table}
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|l|rr|}
+    \hline
+    \textbf{Componente} & \multicolumn{2}{c|}{\textbf{Costo}} \\ \hline
+    Atmega32            & \hspace{2.8cm}\$ &   130 \\ \hline
+    OPA625 x6 (*)       & \$               &   166.2 \\ \hline
+    REG104 (*)          & \$               &   70 \\ \hline
+    CD74HC4067 x2 (*)   & \$               &   16.8 \\ \hline
+    SN74LV4052 (*)      & \$               &   5 \\ \hline
+    Resistencias x31    & \$               &   11.5 \\ \hline
+    Potenciómetro       & \$               &   6.7 \\ \hline
+    Capacitores x27     & \$               &   39.9 \\ \hline
+    Display LCD         & \$               &   120 \\ \hline
+    Pulsadores x5       & \$               &   18.8 \\ \hline
+    Cristal 16 Mhz      & \$               &   6.0 \\ \hline 
+    Conectores          & \$               &   8.6 \\ \hline       
+    TOTAL               & \$               &   599.5 \\ \hline
+\end{tabular}
+\end{center}
+\end{table}
 
-(*) estos componentes son de Texas Instruments y en el marco del IIBM y de la Facultad pueden ser obtenidos en muestras gratis.
+Los componentes marcados con un asterisco(*) son de Texas Instruments y en el marco del IIBM y de la Facultad se obtuvieron como muestras gratis. Por ende, para este trabajo en particular el costo de los componentes utilizados fue de $\$ 341.5$.\\
 
+En cuanto a las horas-hombre involucradas, se puede estimar un número de \color{red}ni idea, miles\color{black}. 
 
 
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
