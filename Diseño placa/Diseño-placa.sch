@@ -471,7 +471,7 @@ Text Label 8250 2950 2    60   ~ 0
 OFFSET
 Text Label 7800 3550 0    60   ~ 0
 GND
-Text Label 11050 2950 2    60   ~ 0
+Text Label 11300 2950 2    60   ~ 0
 ADCIMPEDANCE
 Text Label 10900 4550 2    60   ~ 0
 ADCOFFSET
@@ -554,7 +554,7 @@ U 1 1 563FFDAE
 P 1100 2300
 F 0 "X1" H 1100 2450 50  0000 C CNN
 F 1 "16M" H 1100 2150 50  0000 C CNN
-F 2 "Crystals:Crystal_HC48-U_Vertical" H 1100 2300 60  0001 C CNN
+F 2 "Crystals:Crystal_HC49-U_Vertical" H 1100 2300 60  0001 C CNN
 F 3 "" H 1100 2300 60  0000 C CNN
 	1    1100 2300
 	1    0    0    -1  
@@ -578,7 +578,7 @@ U 1 1 56406A1A
 P 1350 5850
 F 0 "SW1" H 1500 5960 50  0000 C CNN
 F 1 "SW_PUSH" H 1350 5770 50  0000 C CNN
-F 2 "Buttons_Switches_ThroughHole:SW_PUSH" H 1350 5850 60  0001 C CNN
+F 2 "Buttons_Switches_ThroughHole:SW_PUSH-12mm" H 1350 5850 60  0001 C CNN
 F 3 "" H 1350 5850 60  0000 C CNN
 	1    1350 5850
 	1    0    0    -1  
@@ -799,62 +799,12 @@ Text Label 3500 1600 0    60   ~ 0
 LCDRW
 Text Label 3500 1700 0    60   ~ 0
 LCDE
-$Comp
-L SW_PUSH SW3
-U 1 1 56431899
-P 2750 5950
-F 0 "SW3" H 2900 6060 50  0000 C CNN
-F 1 "SW_PUSH" H 2750 5870 50  0000 C CNN
-F 2 "Buttons_Switches_ThroughHole:SW_PUSH" H 2750 5950 60  0001 C CNN
-F 3 "" H 2750 5950 60  0000 C CNN
-	1    2750 5950
-	1    0    0    -1  
-$EndComp
 Text Label 2450 5950 2    60   ~ 0
 BDOWN
-Text Label 3050 5950 0    60   ~ 0
-GND
-$Comp
-L SW_PUSH SW2
-U 1 1 56431DBF
-P 2750 5600
-F 0 "SW2" H 2900 5710 50  0000 C CNN
-F 1 "SW_PUSH" H 2750 5520 50  0000 C CNN
-F 2 "Buttons_Switches_ThroughHole:SW_PUSH" H 2750 5600 60  0001 C CNN
-F 3 "" H 2750 5600 60  0000 C CNN
-	1    2750 5600
-	1    0    0    -1  
-$EndComp
 Text Label 2450 5600 2    60   ~ 0
 BUP
-Text Label 3050 5600 0    60   ~ 0
-GND
-$Comp
-L SW_PUSH SW5
-U 1 1 56436066
-P 3850 5950
-F 0 "SW5" H 4000 6060 50  0000 C CNN
-F 1 "SW_PUSH" H 3850 5870 50  0000 C CNN
-F 2 "Buttons_Switches_ThroughHole:SW_PUSH" H 3850 5950 60  0001 C CNN
-F 3 "" H 3850 5950 60  0000 C CNN
-	1    3850 5950
-	1    0    0    -1  
-$EndComp
 Text Label 3550 5950 2    60   ~ 0
 BESC
-Text Label 4150 5950 0    60   ~ 0
-GND
-$Comp
-L SW_PUSH SW4
-U 1 1 5643606F
-P 3850 5600
-F 0 "SW4" H 4000 5710 50  0000 C CNN
-F 1 "SW_PUSH" H 3850 5520 50  0000 C CNN
-F 2 "Buttons_Switches_ThroughHole:SW_PUSH" H 3850 5600 60  0001 C CNN
-F 3 "" H 3850 5600 60  0000 C CNN
-	1    3850 5600
-	1    0    0    -1  
-$EndComp
 Text Label 3550 5600 2    60   ~ 0
 BOK
 Text Label 4150 5600 0    60   ~ 0
@@ -971,14 +921,6 @@ Text Label 6500 5950 2    60   ~ 0
 GND
 Text Label 6500 6050 2    60   ~ 0
 GND
-Text Label 6500 5350 2    60   ~ 0
-x30nA
-Text Label 6500 5450 2    60   ~ 0
-x120nA
-Text Label 6500 5650 2    60   ~ 0
-x200nA
-Text Label 6500 5750 2    60   ~ 0
-x80nA
 Text Label 7200 5450 0    60   ~ 0
 x120nA
 Text Label 7200 5550 0    60   ~ 0
@@ -993,8 +935,6 @@ Text Label 7200 6050 0    60   ~ 0
 MUX2B
 Text Label 5850 6300 2    60   ~ 0
 MUX1IO
-Text Label 6500 5550 2    60   ~ 0
-MUX2IO
 Text Label 7200 5650 0    60   ~ 0
 MUX2IO
 $Comp
@@ -1088,7 +1028,7 @@ U 1 1 564AFCEF
 P 3400 6700
 F 0 "P2" H 3400 7150 50  0000 C CNN
 F 1 "CONN_02X08" V 3400 6700 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Angled_1x16" H 3400 5500 60  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Angled_2x08" H 3400 5500 60  0001 C CNN
 F 3 "" H 3400 5500 60  0000 C CNN
 	1    3400 6700
 	1    0    0    -1  
@@ -1279,13 +1219,13 @@ GND
 $Comp
 L CONN_01X03 P1
 U 1 1 564DDDA7
-P 1100 6800
-F 0 "P1" H 1100 7000 50  0000 C CNN
-F 1 "CONN_01X03" V 1200 6800 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x03" H 1100 6800 60  0001 C CNN
-F 3 "" H 1100 6800 60  0000 C CNN
-	1    1100 6800
-	-1   0    0    1   
+P 1100 6900
+F 0 "P1" H 1100 7100 50  0000 C CNN
+F 1 "CONN_01X03" V 1200 6900 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x03" H 1100 6900 60  0001 C CNN
+F 3 "" H 1100 6900 60  0000 C CNN
+	1    1100 6900
+	-1   0    0    -1  
 $EndComp
 $Comp
 L CONN_01X01 P3
@@ -1620,8 +1560,6 @@ Wire Wire Line
 Wire Wire Line
 	10550 2150 10750 2150
 Wire Wire Line
-	10350 2950 11050 2950
-Wire Wire Line
 	10450 3700 10450 3800
 Wire Wire Line
 	10450 4200 10450 4100
@@ -1668,10 +1606,191 @@ Wire Wire Line
 	4750 2050 4750 1900
 Wire Wire Line
 	7950 1700 8100 1700
-NoConn ~ 1300 6700
-NoConn ~ 1300 6900
 Wire Wire Line
 	4400 5200 4450 5200
 Text Label 4800 4800 2    60   ~ 0
 GND
+Text Label 6500 5350 2    60   ~ 0
+GND
+Text Label 6500 5450 2    60   ~ 0
+GND
+Text Label 6500 5550 2    60   ~ 0
+GND
+Text Label 6500 5650 2    60   ~ 0
+GND
+Text Label 6500 5750 2    60   ~ 0
+GND
+Wire Wire Line
+	1300 6900 1300 7200
+Wire Wire Line
+	1300 7200 1450 7200
+Connection ~ 1300 7000
+Text Label 3050 5950 0    60   ~ 0
+GND
+Text Label 3050 5600 0    60   ~ 0
+GND
+$Comp
+L SW_PUSH SW2
+U 1 1 56431DBF
+P 2750 5600
+F 0 "SW2" H 2900 5710 50  0000 C CNN
+F 1 "SW_PUSH" H 2750 5520 50  0000 C CNN
+F 2 "Buttons_Switches_ThroughHole:SW_PUSH-12mm" H 2750 5600 60  0001 C CNN
+F 3 "" H 2750 5600 60  0000 C CNN
+	1    2750 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L SW_PUSH SW3
+U 1 1 56431899
+P 2750 5950
+F 0 "SW3" H 2900 6060 50  0000 C CNN
+F 1 "SW_PUSH" H 2750 5870 50  0000 C CNN
+F 2 "Buttons_Switches_ThroughHole:SW_PUSH-12mm" H 2750 5950 60  0001 C CNN
+F 3 "" H 2750 5950 60  0000 C CNN
+	1    2750 5950
+	1    0    0    -1  
+$EndComp
+Text Label 4150 5950 0    60   ~ 0
+GND
+$Comp
+L SW_PUSH SW5
+U 1 1 56436066
+P 3850 5950
+F 0 "SW5" H 4000 6060 50  0000 C CNN
+F 1 "SW_PUSH" H 3850 5870 50  0000 C CNN
+F 2 "Buttons_Switches_ThroughHole:SW_PUSH-12mm" H 3850 5950 60  0001 C CNN
+F 3 "" H 3850 5950 60  0000 C CNN
+	1    3850 5950
+	1    0    0    -1  
+$EndComp
+$Comp
+L SW_PUSH SW4
+U 1 1 5643606F
+P 3850 5600
+F 0 "SW4" H 4000 5710 50  0000 C CNN
+F 1 "SW_PUSH" H 3850 5520 50  0000 C CNN
+F 2 "Buttons_Switches_ThroughHole:SW_PUSH-12mm" H 3850 5600 60  0001 C CNN
+F 3 "" H 3850 5600 60  0000 C CNN
+	1    3850 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X05 P6
+U 1 1 565442CE
+P 8400 4550
+F 0 "P6" H 8400 4850 50  0000 C CNN
+F 1 "CONN_01X05" V 8500 4550 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x05" H 8400 4550 60  0001 C CNN
+F 3 "" H 8400 4550 60  0000 C CNN
+	1    8400 4550
+	1    0    0    -1  
+$EndComp
+Text Label 8200 4350 2    60   ~ 0
+BUP
+Text Label 8200 4450 2    60   ~ 0
+BDOWN
+Text Label 8200 4550 2    60   ~ 0
+BOK
+Text Label 8200 4650 2    60   ~ 0
+BSET
+Text Label 8200 4750 2    60   ~ 0
+GND
+$Comp
+L CONN_01X05 P5
+U 1 1 56545169
+P 8400 3900
+F 0 "P5" H 8400 4200 50  0000 C CNN
+F 1 "CONN_01X05" V 8500 3900 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x05" H 8400 3900 60  0001 C CNN
+F 3 "" H 8400 3900 60  0000 C CNN
+	1    8400 3900
+	1    0    0    -1  
+$EndComp
+Text Label 8200 3700 2    60   ~ 0
+BUP
+Text Label 8200 3800 2    60   ~ 0
+BDOWN
+Text Label 8200 3900 2    60   ~ 0
+BOK
+Text Label 8200 4000 2    60   ~ 0
+BSET
+Text Label 8200 4100 2    60   ~ 0
+GND
+Text Label 7550 3750 2    60   ~ 0
+GND
+Text Label 7550 3850 2    60   ~ 0
+VCC
+Text Label 5000 4800 3    60   ~ 0
+POTE
+Text Label 7550 3950 2    60   ~ 0
+POTE
+Text Label 7550 4050 2    60   ~ 0
+LCDRS
+Text Label 7550 4150 2    60   ~ 0
+LCDRW
+Text Label 7550 4250 2    60   ~ 0
+LCDE
+Text Label 7550 4350 2    60   ~ 0
+LCDD0
+Text Label 7550 4450 2    60   ~ 0
+LCDD1
+Text Label 7550 4550 2    60   ~ 0
+LCDD2
+Text Label 7550 4650 2    60   ~ 0
+LCDD3
+Text Label 7550 4750 2    60   ~ 0
+LCDD4
+Text Label 7550 4850 2    60   ~ 0
+LCDD5
+Text Label 7550 4950 2    60   ~ 0
+LCDD6
+Text Label 7550 5050 2    60   ~ 0
+LCDD7
+$Comp
+L CONN_01X16 P4
+U 1 1 5654759B
+P 7750 4500
+F 0 "P4" H 7750 5350 50  0000 C CNN
+F 1 "CONN_01X16" V 7850 4500 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x16" H 7750 4500 60  0001 C CNN
+F 3 "" H 7750 4500 60  0000 C CNN
+	1    7750 4500
+	1    0    0    -1  
+$EndComp
+Text Label 7550 5150 2    60   ~ 0
+VCC
+Text Label 7550 5250 2    60   ~ 0
+GND
+$Comp
+L R R31
+U 1 1 56548EC9
+P 10500 2950
+F 0 "R31" V 10580 2950 50  0000 C CNN
+F 1 "3.3k" V 10500 2950 50  0000 C CNN
+F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 10430 2950 30  0001 C CNN
+F 3 "" H 10500 2950 30  0000 C CNN
+	1    10500 2950
+	0    1    1    0   
+$EndComp
+$Comp
+L C C28
+U 1 1 56548ECF
+P 10800 3200
+F 0 "C28" H 10825 3300 50  0000 L CNN
+F 1 "10n" H 10825 3100 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Rect_L7_W6_P5" H 10838 3050 30  0001 C CNN
+F 3 "" H 10800 3200 60  0000 C CNN
+	1    10800 3200
+	1    0    0    -1  
+$EndComp
+Text Label 10800 3550 0    60   ~ 0
+GND
+Wire Wire Line
+	10800 3350 10800 3550
+Wire Wire Line
+	10650 2950 11300 2950
+Wire Wire Line
+	10800 3050 10800 2950
+Connection ~ 10800 2950
 $EndSCHEMATC
