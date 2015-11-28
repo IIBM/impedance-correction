@@ -16,13 +16,30 @@
 ;
 ; * Timer/Counter Interrupt Mask Register:
 ;     |  OCIE2 |  TOIE2 | TICIE1 | OCIE1A | OCIE1B |  TOIE1 |  OCIE0 |  TOIE0 |
-;     |    0   |    0   |    0   |    0   |    0   |    0   |    0   |    1   |
+;     |    x   |    x   |    x   |    x   |    x   |    x   |    x   |    1   |
 ;
 .equ PWM_FAST_PWM_CONFIG   = (1<<COM01) | (1<<WGM01) | (1<<WGM00) | (1<<CS00)
 .equ PWM_OFF_PWM_CONFIG    = 0
 .equ PWM_OV_INTERRUPT_MASK = (1<<TOIE0)
 .equ PWM_SINE_TABLE_LEN    = 62
 .equ PWM_SINE_MEDIAN       = 127
+
+;--------------------- Configuración del Timer1 (16 bits) ---------------------;
+;
+; Waveform Generation Mode: WGM13:WGM12:WGM11:WGM10 0:0:0:0 => Normal mode
+; Clock select: CS12:CS11:CS10 = 0:1:1 => CPU clock, divided by 64 -> 250 kHz
+; 
+; * Timer/Counter1 Control Register A:
+;     | COM1A1 | COM1A0 | COM1B1 | COM1B0 |  FOC1A |  FOC1B |  WGM11 |  WGM10 |
+;     |    0   |    0   |    0   |    0   |    0   |    0   |    0   |    0   |
+;
+; * Timer/Counter1 Control Register B:
+;     |  ICNC1 |  ICES1 |  *Res* |  WGM13 |  WGM12 |  CS12  |  CS11  |  CS10  |
+;     |    0   |    0   |    0   |    0   |    0   |    0   |    1   |    1   |
+;
+.equ TIMER1_CLOCK_64_PRESCALER = (1<<CS11) | (1<<CS10)
+.equ TIMER1_OFF                = 0
+.equ TIMER1_50ms_DELAY_START   = -12500 ; 12500 / 250 kHz = 50 ms
 
 ;---------------------------- Configuración del ADC ---------------------------;
 ;
@@ -49,7 +66,7 @@
 ;
 ; * Special Function I/O Register:
 ;     |  ADTS2 |  ADTS1 |  ADTS0 |  *Res* |  ACME  |   PUD  |  PSR2  |  PSR10 |
-;     |    0   |    0   |    0   |    0   |    0   |    0   |    0   |    0   |
+;     |    0   |    0   |    0   |    0   |    x   |    x   |    x   |    x   |
 ;
 .equ ADC_AREF_LEFT_ADJUST_CONFIG = (1<<REFS0) | (1<<ADLAR)
 .equ ADC_ENABLE_AUTO_INT_PRESC   = (1<<ADEN) | (1<<ADATE) | (1<<ADIE) |\
@@ -159,4 +176,3 @@ MEAS_RANGE_FLASH_SINAMPS:
 ; === Valores de continua de corrección para cada rango de medición ===
 MEAS_RANGE_FLASH_CONTINUE_MUX2_VALUES:
     .db MUX2_x30nA, MUX2_x80nA, MUX2_x120nA, MUX2_x200nA
-

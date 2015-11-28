@@ -45,7 +45,7 @@ ADC_SAMPLING_TO_RAM_FROM_IMPEDANCE_MEASURE_IN:
     sbi     ADCSRA,ADSC ; Inicio de la conversión
 
     ; Esperar hasta que todo esté muestreado en RAM 
-wait_for_completion:
-    brts    wait_for_completion
+wait_for_sampling_completion:
+    brts    wait_for_sampling_completion
 
     ret

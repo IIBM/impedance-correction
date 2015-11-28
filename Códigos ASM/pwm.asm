@@ -16,8 +16,8 @@ skip_go_beginning:
     pop     tmp
     out     SREG,tmp ; Se recupera el status register
     pop     tmp ; Se recupera el registro temporal
-
     reti
+
 
 ;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
 ;|///| Apuntado de la tabla del seno en RAM e inicialización del contador |\\\|;
@@ -44,7 +44,7 @@ SINE_RAM_TABLE_GO_BEGINNING:
 LOAD_SINE_RAM_TABLE_SCALED:
     push    R0
     push    R1
-    push    iter
+    push    tbl_i
     push    ZH
     push    ZL
     push    XH
@@ -52,10 +52,8 @@ LOAD_SINE_RAM_TABLE_SCALED:
 
     ldi     ZH,HIGH(PWM_SINE_FLASH_TABLE<<1)
     ldi     ZL,LOW(PWM_SINE_FLASH_TABLE<<1) ; Inicialización de puntero en flash
-    ldi     XH,HIGH(PWM_SINE_RAM_TABLE)
-    ldi     XL,LOW(PWM_SINE_RAM_TABLE) ; Inicialización de puntero en RAM
+    rcall   SINE_RAM_TABLE_GO_BEGINNING ; Carga el puntero X y el contador tbl_i
 
-    ldi     iter,PWM_SINE_TABLE_LEN    ; Contador
 loop_sine_table:
     lpm     tmp,Z+    ; Lectura desde flash, del sample original
     mulsu   tmp,param ; Sample escalado y multiplicado x 128 en R1:R0
@@ -64,14 +62,14 @@ loop_sine_table:
     ldi     tmp,PWM_SINE_MEDIAN
     add     R1,tmp    ; En R1 queda el sample más la media
     st      X+,R1     ; Carga en RAM del sample final
-    dec     iter      ; Decremento del contador
+    dec     tbl_i     ; Decremento del contador
     brne    loop_sine_table
 
     pop     XL
     pop     XH
     pop     ZL
     pop     ZH
-    pop     iter
+    pop     tbl_i
     pop     R1
     pop     R0 ; Registros recuperados del stack
     ret
