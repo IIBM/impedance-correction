@@ -1,20 +1,6 @@
 .INCLUDE "M32DEF.INC"
 	
-			LDI R16,HIGH(RAMEND) ;Inicialización de la pila al final de la RAM
-			OUT SPH,R16
-			LDI R16,LOW(RAMEND)
-			OUT SPL,R16
-
-			LDI R16,0x00 ;Configuración de todos los pines del puerto A como entrada
-			OUT DDRA,R16
-
-
-	
-		CALL LCD_INIT
-			
-	
-		LDI R16, 0x00  ;Puerto A entrada
-		OUT DDRA, R16
+MENU:
 		CALL LCD_INIT
 		
 		LDI R16, 0X01
@@ -68,7 +54,7 @@
 BOTONES:
 
 		IN R17, PINA
-		BST R17,1 ;Pin 3 del puerto A (MEDIR)
+		BST R17,3 ;Pin 3 del puerto A (MEDIR)
 		BRTS MEDIR
 		BST R17,4 ;Pin 4 del puerto A (CORREGIR)
 		BRTS CORREGIR
@@ -81,8 +67,8 @@ CALIBRAR:
 		NOP
 		RET
 		
-MEDIR:
-		NOP
+MEDIR_MENU:
+		CALL MEDIR
 		RET
 		
 CORREGIR:
@@ -139,7 +125,7 @@ CORREGIR:
 
 BOTONES_2:		
 		IN R17 ,PINA
-		BST R17,1  ;Pin 3 del puerto A (AUMENTAR)
+		BST R17,3  ;Pin 3 del puerto A (AUMENTAR)
 		BRTS AUMENTAR
 		BST R17,4  ;Pin 4 del puerto A (REDUCIR)
 		BRTS REDUCIR_OK
@@ -332,7 +318,7 @@ TMAX:
 		
 	BOTONES_3:		
 		IN R17 ,PINA
-		BST R17,1  ;Pin 3 del puerto A (AUMENTAR)
+		BST R17,3  ;Pin 3 del puerto A (AUMENTAR)
 		BRTS AUMENTAR_T
 		BST R17,4  ;Pin 4 del puerto A (REDUCIR)
 		BRTS REDUCIR_T
@@ -445,10 +431,7 @@ TMAX:
 	;***************************************************************************************************************************
 		
 		LCD_INIT:	
-			LDI R21,0xFF	  
-			OUT DDRB, R21
-			OUT DDRD, R21
-			CBI PORTD,2
+			CBI PORTA,2
 			CALL DELAY_40ms
 			LDI R16,0X38
 			CALL CMNDWRT
@@ -502,22 +485,22 @@ TMAX:
 
 		;**************************************************************************************************************************
 		CMNDWRT:
-			OUT PORTB,R16
-			CBI PORTD,0
-			CBI PORTD,1
-			SBI PORTD,2
+			OUT PORTC,R16
+			CBI PORTA,0
+			CBI PORTA,1
+			SBI PORTA,2
 			CALL SDELAY
-			CBI PORTD,2
+			CBI PORTA,2
 			CALL DELAY_100us
 			RET
 		;*************************************************************************************************************************
 		DATAWRT:
-			OUT PORTB,R16
-			SBI PORTD,0
-			CBI PORTD,1 
-			SBI PORTD,2
+			OUT PORTC,R16
+			SBI PORTA,0
+			CBI PORTA,1 
+			SBI PORTA,2
 			CALL SDELAY
-			CBI PORTD,2
+			CBI PORTA,2
 			CALL DELAY_100us
 			RET
 		
