@@ -10,7 +10,7 @@
 .include "adc.asm"
 .include "measure_routines.asm"
 .include "MEDIR.asm"
-.include "lcd.asm"
+.include "LCD.asm"
 .include "MENU.asm"
 
 
@@ -63,6 +63,11 @@ MAIN:
     ldi     tmp,0b01110000
     out     PORTD,tmp
 
+    ; Interrupción de escape
+    ldi     tmp,(1<<ISC11) ; ISC11:ISC10 = 1:0 => Flanco descendente en INT1
+    out     MCUCR,tmp
+    ldi     tmp,(1<<INT1)  ; Habilitación de interrupción INT1
+    out     GICR,tmp
 
 ;------------------------------------------------------------------------------;
     call    PWM_OFFSET_START ; Se inicializa la referencia del OpAmp
