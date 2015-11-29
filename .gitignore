@@ -13,3 +13,4 @@
 
 # LTspice raw data files
 *.raw
+*.net

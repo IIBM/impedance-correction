@@ -28,7 +28,7 @@
 ;
 ; Waveform Generation Mode: WGM13:WGM12:WGM11:WGM10 0:0:0:0 => Normal mode
 ; Clock select: CS12:CS11:CS10 = 0:1:1 => CPU clock, divided by 64 -> 250 kHz
-; 
+;
 ; * Timer/Counter1 Control Register A:
 ;     | COM1A1 | COM1A0 | COM1B1 | COM1B0 |  FOC1A |  FOC1B |  WGM11 |  WGM10 |
 ;     |    0   |    0   |    0   |    0   |    0   |    0   |    0   |    0   |
@@ -172,6 +172,14 @@ MEAS_RANGE_FLASH_SIN_MUX2_VALUES:
 ;  30 -->  23,4 % -->   7,0 nA de corriente pico
 MEAS_RANGE_FLASH_SINAMPS:
     .db 128, 84, 92, 30
+
+; === Valores de piso para cada rango de medición, en décimas de mega ohm ===
+MEAS_RANGE_FLASH_FLOOR_VALUES:
+    .db 0, 20, 80, 200 ; 0 Mohm, 2 Mohm, 8 Mohm, 20 Mohm
+
+; === Valores del parámetro p inicial para cada rango de medición (16 bit!) ===
+MEAS_RANGE_FLASH_P_FACTOR_DEFAULTS:
+    .dw 52, 202, 506, 1550
 
 ; === Valores de continua de corrección para cada rango de medición ===
 MEAS_RANGE_FLASH_CONTINUE_MUX2_VALUES:

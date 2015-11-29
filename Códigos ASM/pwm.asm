@@ -79,7 +79,7 @@ loop_sine_table:
 ;---------------- Macros que utilizarán las siguientes rutinas ----------------;
 ;------------------------------------------------------------------------------;
 
-; Carga en el puntero Z la dirección de flash recibida en como argumento + param
+; Carga en el puntero Z la dirección de flash recibida como argumento + param
 .macro flash_point_Z_plus_param
     ldi     ZH,HIGH(@0<<1)
     ldi     ZL,LOW(@0<<1) ; Puntero en flash

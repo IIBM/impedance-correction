@@ -153,11 +153,69 @@ GET_THE_PEAK_VALUE_IN_R2_FROM_ADC_RAM_TABLE:
     sub     R2,R1                       ; R1 = MIN, valor pico = (MAX-MIN)/2
     lsr     R2                          ; R2 contiene el valor pico medido
 
-    push    ZL
-    push    ZH
-    push    param
-    push    R1 ; Registros recuperados del stack
+    pop     ZL
+    pop     ZH
+    pop     param
+    pop     R1 ; Registros recuperados del stack
     ret
+
+
+;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
+;|///| Obtener impedancia en décimas de mega ohms, según rango de medición |\\|;
+;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
+;
+; param (R17) <- rango, 4 opciones: MEAS_RANGE_X con X en {2, 8, 20, 60}
+; R2 <- valor pico de la medición en bits (valor de lectura L)
+; Al finalizar R1:R0 contendrá el valor de impedancia en décimas de mega ohm.
+; Lee desde flash (TODO: EEPROM) los datos de calibración de cada rango.
+; Salva todos los registros que arruina. Incluso param (R17) y R2.
+;
+GET_DECIMEG_IMPEDANCE_FROM_PARAM_RANGE_R2_PEAK_VALUE_IN_R1_R0:
+    push    R2
+    push    R3
+    push    R4
+    push    R5
+    push    R6
+    push    R7
+    push    param
+    push    ZH
+    push    ZL ; Registros salvados en el stack
+
+    ldi     ZH,HIGH(MEAS_RANGE_FLASH_P_FACTOR_DEFAULTS<<1)
+    ldi     ZL,LOW(MEAS_RANGE_FLASH_P_FACTOR_DEFAULTS<<1)
+
+    lsl     param     ; param = param * 2
+    clr     tmp
+    add     ZL,param  ; Z = Z + param
+    adc     ZH,tmp    ; Actualización de la parte alta con el carry (tmp = 0)
+
+    lpm     R6,Z+ ; Lectura del parámetro P desde flash, little-endian (L)
+    lpm     R7,Z  ; Lectura del parámetro P desde flash, little-endian (H) 
+
+    ; Multiplicación: R2:R1:R0 = R7:R6 * R2
+    mul     R7,R2     ; R1:R0 = R2 * R7, parte alta del producto
+    mov     R5,R1     ; Se va a salvar en R5:R4
+    mov     R4,R0     ; R5:R4 = R1:R0
+    mul     R6,R2     ; R1:R0 = R2 * R6, parte baja del producto
+    clr     R2        ; R2 = 0
+    add     R1,R4     ; R1 = R1 + R4, suma de ambas partes del producto
+    adc     R2,R5     ; R2 = R5 + carry
+
+    ; División por 256 (el parámetro P fue calculado para esto)
+    mov     R0,R1     ; Basta con desplazar los dos registros
+    mov     R1,R2     ; Resultado de la medición en décimas de mega ohm en R1:R0
+
+    pop     ZL
+    pop     ZH
+    pop     param
+    pop     R7
+    pop     R6
+    pop     R5
+    pop     R4
+    pop     R3
+    pop     R2 ; Registros recuperados del stack
+    ret
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; Solo para testear, se cargan estos datos en RAM, generados con octave ;;;;

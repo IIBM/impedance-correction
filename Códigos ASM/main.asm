@@ -8,6 +8,10 @@
 .include "configs.asm"
 .include "pwm.asm"
 .include "adc.asm"
+.include "measure_routines.asm"
+.include "MEDIR.asm"
+.include "LCD.asm"
+.include "MENU.asm"
 
 
 ;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||;
@@ -61,12 +65,7 @@ MAIN:
 
 
 ;------------------------------------------------------------------------------;
-    ldi     param,MEAS_RANGE_2
-    rcall   PWM_SINE_START
-
-    ldi     param,60 ; 1 minuto de delay
-    call    DELAY_PARAM_SECONDS
-    nop
+    call    MEDIR
 
 here:
     rjmp    here
