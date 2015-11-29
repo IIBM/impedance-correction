@@ -10,7 +10,7 @@
 .include "adc.asm"
 .include "measure_routines.asm"
 .include "MEDIR.asm"
-.include "LCD.asm"
+.include "lcd.asm"
 .include "MENU.asm"
 
 

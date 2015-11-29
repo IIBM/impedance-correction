@@ -6,7 +6,7 @@
 			LDI R19,1 ;Electrodo 1
 			LDI ZL,0x60  ;Apunto a la direccion de memoria 60(esto es arbitrario), acá deberian estar los resultados
 			LDI ZH,0x00
-					
+			LDI R22,48	
 		
 			
 RESULTADOS:
@@ -21,6 +21,7 @@ RESULTADOS:
 			
 RESULTADOS_1:
 			
+			ADD R19,R22
 			LDI R16,'E'
 			CALL DATAWRT
 			LDI R16,'l'
@@ -53,6 +54,8 @@ RESULTADOS_1:
 			CALL DATAWRT
 			LD R16,Z+   ;El resultado de la corrección
 			CALL DATAWRT
+			LDI R16,'.'
+			CALL DATAWRT
 			LD R16,Z   ;El resultado de la corrección
 			CALL DATAWRT
 			LDI R16,'M'
@@ -63,7 +66,7 @@ RESULTADOS_1:
 		    CALL DATAWRT
 		    LDI R16,'m'  
 		    CALL DATAWRT
-	
+			SUB R19,R22
 			
 			LDI R16,0X0F
 			CALL CMNDWRT
@@ -140,6 +143,8 @@ DIEZ_I:
 			LD R16,Z+   ;El resultado de la corrección
 			CALL DATAWRT
 			LD R16,Z+   ;El resultado de la corrección
+			CALL DATAWRT
+			LDI R16,'.'
 			CALL DATAWRT
 			LD R16,Z   ;El resultado de la corrección
 			CALL DATAWRT
