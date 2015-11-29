@@ -4,19 +4,20 @@
 
 ;---------------------------- Configuración del PWM ---------------------------;
 ;
-; Compare Output Mode: COM01:COM00 = 1:0 => Clear OC0 on compare match
-; Waveform Generation Mode: WGM01:WGM00 1:1 => Fast PWM
-; Clock select: CS02:CS01:CS00 = 0:0:1 => CPU clock, no prescaling
+; Compare Output Mode: COMn1:COMn0 = 1:0 => Clear OCn on compare match
+; Waveform Generation Mode: WGMn1:WGMn0 1:1 => Fast PWM
+; Clock select: CSn2:CSn1:CSn0 = 0:0:1 => CPU clock, no prescaling
 ;
-; * Timer/Counter0 Control Register:
-;     |  FOC0  |  WGM00 |  COM01 |  COM00 |  WGM01 |  CS02  |  CS01  |  CS00  |
+; * Timer/Counter-n Control Register: (n = 0, 2. Timer/Counter0, Timer/Counter2)
+;     |  FOCn  |  WGMn0 |  COMn1 |  COMn0 |  WGMn1 |  CSn2  |  CSn1  |  CSn0  |
 ;     |    0   |    1   |    1   |    0   |    1   |    0   |    0   |    1   |
 ;
 ; Timer0 Overflow Interrupt Enable: TOIE0 = 1 => Enabled
+; Timer2 Overflow Interrupt Enable: TOIE2 = 0 => Disabled
 ;
 ; * Timer/Counter Interrupt Mask Register:
 ;     |  OCIE2 |  TOIE2 | TICIE1 | OCIE1A | OCIE1B |  TOIE1 |  OCIE0 |  TOIE0 |
-;     |    x   |    x   |    x   |    x   |    x   |    x   |    x   |    1   |
+;     |    x   |    0   |    x   |    x   |    x   |    x   |    x   |    1   |
 ;
 .equ PWM_FAST_PWM_CONFIG   = (1<<COM01) | (1<<WGM01) | (1<<WGM00) | (1<<CS00)
 .equ PWM_OFF_PWM_CONFIG    = 0
@@ -184,3 +185,7 @@ MEAS_RANGE_FLASH_P_FACTOR_DEFAULTS:
 ; === Valores de continua de corrección para cada rango de medición ===
 MEAS_RANGE_FLASH_CONTINUE_MUX2_VALUES:
     .db MUX2_x30nA, MUX2_x80nA, MUX2_x120nA, MUX2_x200nA
+
+; === Valor inicial de calibración del PWM de Offset ===
+PWM_OFFSET_FLASH_CALIB_VALUE:
+    .db PWM_SINE_MEDIAN,0 ; cero para completar la palabra de 16 bits

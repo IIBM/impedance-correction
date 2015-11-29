@@ -65,7 +65,8 @@ MAIN:
 
 
 ;------------------------------------------------------------------------------;
-    call    MEDIR
+    call    PWM_OFFSET_START ; Se inicializa la referencia del OpAmp
+    call    MENU
 
 here:
     rjmp    here

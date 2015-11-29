@@ -207,3 +207,29 @@ PWM_CONTINUE_CORRECTION_START:
     pop     ZH
     pop     R0 ; Registros recuperados del stack
     ret
+
+
+;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
+;|/////////////////| Encender el PWM de Offset de referencia |\\\\\\\\\\\\\\\\|;
+;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
+;
+; Lee desde flash (TODO: EEPROM) los datos de calibración de Offset.
+; Salva todos los registros que arruina. Incluso param (R17) y R2.
+;
+PWM_OFFSET_START:
+    push    ZH
+    push    ZL ; Registros salvados en el stack
+
+    ldi     ZH,HIGH(PWM_OFFSET_FLASH_CALIB_VALUE<<1)
+    ldi     ZL,LOW(PWM_OFFSET_FLASH_CALIB_VALUE<<1) ; Puntero en flash
+
+    lpm     tmp,Z      ; Carga el valor medio (duty cycle) desde flash
+    out     OCR2,tmp   ; Pone el valor medio en la salida
+
+    ; Configuración del Timer2 como PWM
+    ldi     tmp,PWM_FAST_PWM_CONFIG
+    out     TCCR2,tmp  ; Habilita el PWM en modo rápido
+
+    pop     ZL
+    pop     ZH ; Registros recuperados del stack
+    ret
