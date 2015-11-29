@@ -9,7 +9,7 @@ red    = [205,  50,  50]/255;
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|/////////////////////////////| Configuraciones |\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
-fCK = 18.432e6;  # frecuencia de clock: 18,432 MHz
+fCK = 16e6;      # frecuencia de clock: 16 MHz
 b = 8;           # bits del timer del PWM: 8
 fs = fCK/(2^b);  # frecuencia de muestreo: una muestra por período de PWM
 Ts = 1/fs;       # período de muestreo
