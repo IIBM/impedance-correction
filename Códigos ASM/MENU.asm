@@ -1,5 +1,4 @@
-.INCLUDE "M32DEF.INC"
-	
+
 MENU:
 		CALL LCD_INIT
 		
