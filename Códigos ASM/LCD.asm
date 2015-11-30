@@ -2,7 +2,7 @@
 
 ;HAY QUE CAMBIAR LOS PUERTOS DE A PARA LA LCD 
 		
-			
+RESULTADOS_INIC:			
 			LDI R19,1 ;Electrodo 1
 			LDI ZL,0x60  ;Apunto a la direccion de memoria 60(esto es arbitrario), acá deberian estar los resultados
 			LDI ZH,0x00
