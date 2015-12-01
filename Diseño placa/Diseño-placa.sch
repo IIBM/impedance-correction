@@ -45,17 +45,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L R R2
-U 1 1 563C57F5
-P 4500 1350
-F 0 "R2" V 4580 1350 50  0000 C CNN
-F 1 "470k" V 4500 1350 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 4430 1350 30  0001 C CNN
-F 3 "" H 4500 1350 30  0000 C CNN
-	1    4500 1350
-	0    1    1    0   
-$EndComp
-$Comp
 L C C9
 U 1 1 563C5CDE
 P 4750 1750
@@ -453,7 +442,7 @@ F 3 "" H 8100 5950 60  0000 C CNN
 $EndComp
 Text Label 4400 2050 0    60   ~ 0
 VCC/2
-Text Label 4000 1350 0    60   ~ 0
+Text Label 4300 1350 0    60   ~ 0
 MUX2IO
 Text Label 8650 5200 0    60   ~ 0
 VCC
@@ -1525,7 +1514,7 @@ Wire Wire Line
 Wire Wire Line
 	4500 3050 4150 3050
 Wire Wire Line
-	4000 1350 4350 1350
+	4300 1350 4650 1350
 Wire Wire Line
 	1350 3250 1350 3100
 Wire Wire Line
