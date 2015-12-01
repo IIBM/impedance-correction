@@ -13,16 +13,25 @@ El presente proyecto consiste en el diseño y desarrollo de un sistema de calibr
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Descripción del Proyecto}
 % En esta sección se responde la pregunta “¿cómo?”. Aquí se enumeran las prestaciones, las funciones y el comportamiento o uso del equipo.
-El equipo incluye una cuba conductora, que contiene una solución acuosa, donde se colocan los electrodos. Éstos son similares a un filamento de cobre recubierto con esmalte aislante en su totalidad, excepto en los extremos, los cuales uno va sumergido en la solución y el otro conectado al equipo por medio de un conector especial.\\
+El equipo consiste en un circuito con un microcontrolador que genera señales senoidales y continuas para medir y corregir las impedancias, respectivamente. Incluye una cuba conductora, que contiene una solución acuosa donde se colocan los electrodos. Éstos son similares a un filamento de cobre recubierto con esmalte aislante en su totalidad, excepto en los extremos, los cuales uno va sumergido en la solución y el otro conectado al equipo por medio de un conector especial.
 
-El sistema funciona con 1, 4, 8, 12 ó 16 electrodos, corrigiendo de a uno por vez. El usuario coloca los electrodos procurando que no se produzcan cortocircuitos entre los mismos (se detecta esto antes de comenzar), selecciona la impedancia final deseada y da la orden de inicio. Luego de algunos chequeos básicos se da comienzo al proceso mostrando un mensaje de inicio. Al terminar con todos los electrodos, se muestra la impedancia final de cada uno. 
+El sistema funciona con 1, 4, 8, 12 ó 16 electrodos, corrigiendo de a uno por vez. El usuario coloca los electrodos procurando que no se produzcan cortocircuitos entre los mismos (se debería detectar esto antes de comenzar). Hay tres opciones: medir, calibrar y corregir. La primera permite ver el/los valor/es de la/s impedancia/s colocada/s en los conectores. La segunda, calibrar el equipo tal como su nombre lo indica. La opción de corregir permite que el usuario seleccione la impedancia final deseada, el tiempo máximo de espera para la corrección y dé la orden de inicio. Luego de algunos chequeos básicos se da comienzo al proceso. Al terminar con todos los electrodos, se muestra la impedancia final de cada uno. 
 
-En líneas generales, el sistema consta de un primer módulo que consiste en una fuente de corriente alterna (se espera construirla con un amplificador de trasconductancia $i_o/v_i$, utilizando como entrada una señal senoidal de tensión generada en el microcontrolador, obteniendo en la salida una señal de corriente) que se emplea para medir la impedancia de cada electrodo a estudiar. La señal de salida de este circuito es una corriente senoidal de \SI{1}{\kilo\hertz}, con uno de los siguientes valores de amplitud: $\{\SI{30}{\nano\ampere}, \SI{80}{\nano\ampere}, \SI{120}{\nano\ampere}, \SI{200}{\nano\ampere}\}$. Considerando la ley de Ohm y midiendo el valor pico de tensión, se calcula la impedancia del electrodo en estudio como $Z@\SI{1}{\kilo\hertz} = \frac{\hat{v}}{\hat{\i}}$. Luego, este mismo módulo se encarga de imponer una corriente continua de referencia en el sistema, también con los mismos valores posibles citados, para disminuir el valor de la impedancia en caso de ser necesario. Esto es posible porque la solución acuosa contiene oro o plata, de modo de que se produce un recubrimiento por \emph{galvanoplastía} sobre el electrodo y así disminuye la impedancia. Si este proceso es necesario o no, dependerá del resultado previo y de la comparación entre el valor obtenido en la medición y el de referencia establecido previamente por el usuario. Estos dos circuitos se conectan mediante multiplexores analógicos (ver diagrama en bloques) que permiten seleccionar la opción correcta de acuerdo a la cantidad de electrodos analizados. 
+En líneas generales, el sistema consta de módulos de amplificación y filtros de PWM que permiten generar una señal senoidal con el microcontrolador, además de controlar la señal de offset. Asimismo, hay una fuente de corriente controlada por tensión que permite inyectar corriente continua al sistema para poder disminuir las impedancias necesarias por galvanoplastía. 
 
-Como se mencionó, previo a la medición hay que verificar que ningún electrodo esté en cortocircuito con otro. Para ello se propuso inyectar señal en cada electrodo chequeando sobre cada uno de los restantes que no se reciba un nivel elevado de la misma, siendo necesario un multiplexor más, en paralelo con el que se utiliza para inyectar las señales.
+La señal de salida del PWM es una corriente senoidal de \SI{1}{\kilo\hertz}, con uno de los siguientes valores de amplitud: $\{\SI{30}{\nano\ampere}, \SI{80}{\nano\ampere}, \SI{120}{\nano\ampere}, \SI{200}{\nano\ampere}\}$. Éstos se seleccionan con un multiplexor dependiendo del rango de impedancias: $\{0-\SI{2}{\mega\ohm}, 0-\SI{8}{\mega\ohm}, 0-\SI{20}{\mega\ohm}, 0-\SI{60}{\mega\ohm}\}$. Considerando la ley de Ohm y midiendo el valor pico de tensión, se calcula la impedancia del electrodo en estudio como $Z@\SI{1}{\kilo\hertz} = \frac{\hat{v}}{\hat{\i}}$. Este valor se puede disminuir porque la solución acuosa contiene oro o plata, de modo de que se produce un recubrimiento por galvanoplastía sobre el electrodo y así disminuye la impedancia. Si este proceso es necesario o no, dependerá del resultado previo y de la comparación entre el valor obtenido en la medición y el de referencia establecido previamente por el usuario. Se emplea un multiplexor analógico para ir seleccionando cada electrodo y otro en paralelo con éste, que será eventualmente utilizado para verificar que no haya cortocircuitos entre electrodos (inyectando señal en cada electrodo y chequeando sobre cada uno de los restantes que no se reciba un nivel elevado de ésta). 
 
-Cada determinado tiempo (del orden de \SI{1}{\minute}) tiene que medirse la impedancia y corregirla de ser necesario del modo explicado. Este proceso debe repetirse tantas veces como sea necesario hasta llegar al valor de impedancia deseada determinado previamente en la configuración (los valores aceptables para empezar el proceso están entre \SI{1}{\mega\ohm} y \SI{5}{\mega\ohm}), junto con la cantidad de electrodos utilizados. Además, hay que pautar un tiempo máximo de sensado y corrección, para que el sistema deje de actuar en caso de haber pasado ese tiempo sin haber llegado al valor buscado.
+Cada \SI{1}{\minute}) se mide la impedancia y se corrige de ser necesario. Este proceso se repite tantas veces como se requiera hasta llegar al valor de impedancia deseada determinado previamente en la configuración. Los valores aceptables para empezar el proceso están entre \SI{1}{\mega\ohm} y \SI{8}{\mega\ohm}. Además, hay que pautar un tiempo máximo de sensado y corrección, para que el sistema deje de actuar en caso de haber pasado ese tiempo sin haber llegado al valor buscado. Éste puede valer 10, 20, 30, 40, 50 ó 60 minutos.
 
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|/////////////////////////| Periféricos Principales |\\\\\\\\\\\\\\\\\\\\\\\\|%
+%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
+
+% Los periféricos son los elementos ajenos al microcontrolador con los que interactúa el equipo y deben estar claramente definidos (por ejemplo: motores, display, teclado, puertos de comunicación, sensores, etc.)
+
+El dispositivo tiene una pantalla LCD donde se muestran las opciones de configuración para seleccionar a través de un menú y también los resultados del proceso, además de los mensajes de error o alerta (en caso de ocurrir algún imprevisto o no llegar al valor deseado en el tiempo pautado, por ejemplo). Las opciones se seleccionan desde un teclado de 4 botones (\texttt{ok}, \texttt{cancelar}, \texttt{mover izquierda}, \texttt{mover derecha}).
+
+Además, como periféricos principales están los circuitos mencionados antes, a través de los cuales se interactúa directamente con los electrodos. Asimismo, otros elementos importantes con los que interactúa el microcontrolador son los multiplexores, que tienen 2 ó 4 entradas de control, según sean de 4 canales o 16, y la cuba electrolítica donde se produce la reacción química para disminuir la impedancia, que está compuesta por un material conductor, el cual también debe conectarse.
 
 
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
@@ -31,7 +40,7 @@ Cada determinado tiempo (del orden de \SI{1}{\minute}) tiene que medirse la impe
 
 % Las especificaciones acotan las bondades del equipo. Deben listarse los rangos de funcionamiento o requerimientos externos (por ejemplo: tensión de alimentación, consumo, temperatura de funcionamiento, protocolos de comunicaciones, rangos de medición, etc.)
 
-Se presentan las siguientes especificaciones a cumplir:
+Las especificaciones del sistema son:
 
 \begin{table}[H]
 \begin{center}
@@ -57,18 +66,6 @@ Se presentan las siguientes especificaciones a cumplir:
 \end{table}
 
 (*) una vez cumplido este tiempo se abandonan los esfuerzos.
-
-
-
-%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
-%|/////////////////////////| Periféricos Principales |\\\\\\\\\\\\\\\\\\\\\\\\|%
-%|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
-
-% Los periféricos son los elementos ajenos al microcontrolador con los que interactúa el equipo y deben estar claramente definidos (por ejemplo: motores, display, teclado, puertos de comunicación, sensores, etc.)
-
-El dispositivo tiene una pantalla LCD donde se muestran las opciones de configuración para seleccionar a través de un menú y también los resultados del proceso, además de los mensajes de error o alerta (en caso de ocurrir algún imprevisto o no llegar al valor deseado en el tiempo pautado, por ejemplo). Las opciones se seleccionan desde un teclado de 4 ó [6] botones (\texttt{ok}, \texttt{cancelar}, \texttt{mover izquierda}, \texttt{mover derecha}).
-
-Además, como periféricos principales están los circuitos mencionados antes, el de medición y el de corrección, a través de los cuales se interactúa directamente con los electrodos. Asimismo, otros elementos importantes con los que interactúa el microcontrolador son los multiplexores, que tienen 2 ó 4 entradas de control, según sean de 4 canales o 16, y la cuba electrolítica donde se produce la reacción química para disminuir la impedancia, que está compuesta por un material conductor, el cual también debe conectarse.
 
 
 
@@ -122,25 +119,27 @@ Los componentes que se emplearon para la construcción del dispositivo se muestr
 \begin{tabular}{|l|rr|}
     \hline
     \textbf{Componente} & \multicolumn{2}{c|}{\textbf{Costo}} \\ \hline
-    Atmega32            & \hspace{2.8cm}\$ &   130 \\ \hline
+    Atmega32            & \hspace{2.8cm}\$ &   164.5 \\ \hline
     OPA625 x6 (*)       & \$               &   166.2 \\ \hline
-    REG104 (*)          & \$               &   70 \\ \hline
+    REG104 (*)          & \$               &   70.0 \\ \hline
     CD74HC4067 x2 (*)   & \$               &   16.8 \\ \hline
-    SN74LV4052 (*)      & \$               &   5 \\ \hline
-    Resistencias x31    & \$               &   11.5 \\ \hline
+    SN74LV4052 (*)      & \$               &   5.0 \\ \hline
+    Resistencias x30    & \$               &   9.6 \\ \hline
     Potenciómetro       & \$               &   6.7 \\ \hline
     Capacitores x31     & \$               &   43.1 \\ \hline
-    Display LCD         & \$               &   120 \\ \hline
+    Display LCD         & \$               &   120.0 \\ \hline
     Pulsadores x5       & \$               &   18.8 \\ \hline
     Cristal 16 Mhz      & \$               &   6.0 \\ \hline 
     Conectores          & \$               &   8.6 \\ \hline       
-    Placa PCB           & \$               &   95 \\ \hline       
-    TOTAL               & \$               &   697.7 \\ \hline
+    Placa Epoxy         & \$               &   120.0 \\ \hline
+    Zócalo              & \$               &   3.0 \\ \hline
+    Jack power          & \$               &   3.2 \\ \hline           
+    TOTAL               & \$               &   761.5 \\ \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-Los componentes marcados con un asterisco(*) son de Texas Instruments y en el marco del IIBM y de la Facultad se obtuvieron como muestras gratis. Por ende, para este trabajo en particular el costo de los componentes utilizados fue de $\$ 439.7$.\\
+Los componentes marcados con un asterisco(*) son de Texas Instruments y en el marco del IIBM y de la Facultad se obtuvieron como muestras gratis. Por ende, para este trabajo en particular el costo de los componentes utilizados fue de $\$ 503.5$.\\
 
 En cuanto a las horas-hombre involucradas, se puede estimar un número de 200 horas/hombre. 
 
@@ -158,7 +157,7 @@ En cuanto a las horas-hombre involucradas, se puede estimar un número de 200 ho
 %|//////////////////////////////| Conclusiones |\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Conclusiones}
-% En este punto tienen que describir mejoras posibles que podrían hacerse al equipo, cambios sugeridos en función de las experiencias aprendidas y cualquier otra sugerencia relacionada con el proyecto.
+% En este punto tienen que describir mejoras posibles que podrían hacerse al equipo, cambios sugeridos en función de las experiencias aprendidas  y cualquier otra sugerencia relacionada con el proyecto.
 
 
 
@@ -173,6 +172,42 @@ A continuación se muestran los cálculos involucrados en la obtención de los p
 
 \hspace{-1cm}
 \includegraphics[scale=0.45]{calculos}
+
+\subsection{Hojas de datos}
+
+Los componentes empleados son:
+%\begin{table}[H]
+%\begin{center}
+%\begin{tabular}{|l|c|}
+%    \hline
+%    \textbf{Componente} & \textbf{Hoja de datos}
+%    \hline
+%    Atmega32     & http://www.atmel.com/images/doc2503.pdf \\ \hline
+%    OPA625       &  http://www.ti.com/lit/ds/symlink/opa625.pdf \\ \hline
+%    REG104       &  http://www.ti.com/lit/ds/symlink/reg104.pdf \\ \hline
+%    CD74HC4067   &  http://www.ti.com/lit/ds/symlink/cd74hc4067.pdf \\ \hline
+%    SN74LV4052   & http://www.ti.com/lit/ds/symlink/sn74lv4052a.pdf \\ \hline
+%    Display LCD  &  http://elmicro.com/files/lcd/gdm1602a_datasheet.pdf \\ \hline
+%\end{tabular}
+%\end{center}
+%\end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|l|c|}
+    \hline
+    \textbf{Componente} & \textbf{Hoja de datos} \\ \hline
+    Atmega32      & \url{http://www.atmel.com/images/doc2503.pdf} \\ \hline
+    OPA625        & \url{http://www.ti.com/lit/ds/symlink/opa625.pdf} \\ \hline
+    REG104        & \url{http://www.ti.com/lit/ds/symlink/reg104.pdf} \\ \hline
+    CD74HC4067    & \url{http://www.ti.com/lit/ds/symlink/cd74hc4067.pdf} \\ \hline
+    SN74LV4052    & \url{http://www.ti.com/lit/ds/symlink/sn74lv4052a.pdf} \\ \hline
+    Display LCD   & \url{http://elmicro.com/files/lcd/gdm1602a\_datasheet.pdf} \\ \hline        
+\end{tabular}
+\end{center}
+\end{table}
+
+
 
 \subsection{Códigos fuente}
 En las siguientes páginas se incluyen a modo de apéndice todos los archivos que conforman el firmware de equipo.
