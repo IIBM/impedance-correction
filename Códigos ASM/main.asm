@@ -10,6 +10,7 @@
 .include "adc.asm"
 .include "measure_routines.asm"
 .include "MEDIR.asm"
+.include "BCD.asm"
 .include "LCD.asm"
 .include "MENU.asm"
 
@@ -64,9 +65,7 @@ MAIN:
     out     PORTD,tmp
 
     ; Interrupción de escape
-    ldi     tmp,(1<<ISC11) ; ISC11:ISC10 = 1:0 => Flanco descendente en INT1
-    out     MCUCR,tmp
-    ldi     tmp,(1<<INT1)  ; Habilitación de interrupción INT1
+    ldi     tmp,(1<<INT2) ; Interrupción INT2 (flanco descendente por defecto)
     out     GICR,tmp
 
 ;------------------------------------------------------------------------------;

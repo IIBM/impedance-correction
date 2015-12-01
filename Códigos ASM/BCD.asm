@@ -1,8 +1,8 @@
 	
 	BCD:
 			
-			LDI ZL,0x60
-			LDI ZH,0x00
+			LDI ZH,HIGH(BCD_TO_ASCII_CONVERT_RAM)
+			LDI ZL,LOW(BCD_TO_ASCII_CONVERT_RAM)
 			.def rBin1H =r1  ;REGISTROS MULTIPLICACION
 			.def rBin1L =r0
 			.def rBin2H =r19
@@ -10,11 +10,6 @@
 			.def rmp =r18
 	       
 			
-			CALL Bin2ToAsc5
-			
-			RET
-	
-	
 	Bin2ToAsc5:
 	rcall Bin2ToBcd5 
 	ldi rmp,4 
@@ -87,6 +82,3 @@ Bin2ToDigitb:
 Bin2ToDigitc:
 	st z+,rmp 
 	ret 
-	
-	
-	

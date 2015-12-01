@@ -2,8 +2,8 @@
 		
 RESULTADOS_INIC:			
 			LDI R19,1 ;Electrodo 1
-			LDI ZL,0x60  ;Apunto a la direccion de memoria 60(esto es arbitrario), acá deberian estar los resultados
-			LDI ZH,0x00
+			LDI ZH,HIGH(BCD_TO_ASCII_CONVERT_RAM)
+			LDI ZL,LOW(BCD_TO_ASCII_CONVERT_RAM)
 			LDI R22,48	
 		
 			
@@ -74,33 +74,33 @@ RESULTADOS_1:
 			CALL DELAY_40ms
 			
 BOTONES_4:		
-		IN R17 ,PINA
-		BST R17,4  ;Pin 3 del puerto A (AUMENTAR)
-		BRTS SUBIR
-		BST R17,5  ;Pin 4 del puerto A (REDUCIR)
-		BRTS BAJAR
+		IN R17,PINA
+		BST R17,3  ;Pin 3 del puerto A (AUMENTAR)
+		BRTC SUBIR
+		BST R17,4  ;Pin 4 del puerto A (REDUCIR)
+		BRTC BAJAR
 JMP BOTONES_4
 			
 SUBIR:
-		INC ZL ;Avanza el puntero
+        ADIW ZL,1 ; Avanza el puntero
 		INC R19
 		CPI R19,17 ;Si se pasa del 16, vuelve al 1
 		BREQ PRIMERO
 		JMP RESULTADOS
 PRIMERO:
 		LDI R19,16
-		DEC ZL
+        SBIW ZL,1
 		JMP BOTONES_4
 BAJAR: 
-		SUBI ZL,5 ;Retrocede el puntero
+        SBIW ZL,5 ; Retrocede el puntero
 		DEC R19
 		CPI R19,0 ;Si se pasa del 1, vuelve al 16
 		BREQ ULTIMO
 		JMP RESULTADOS
 ULTIMO:
 		LDI R19,1
-		LDI ZL,0x60  ;Apunto a la direccion de memoria 60(esto es arbitrario), acá deberian estar los resultados
-		LDI ZH,0x00
+        LDI ZH,HIGH(BCD_TO_ASCII_CONVERT_RAM)
+        LDI ZL,LOW(BCD_TO_ASCII_CONVERT_RAM)
 		JMP BOTONES_4
 		
 		

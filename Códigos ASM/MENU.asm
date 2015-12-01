@@ -1,3 +1,7 @@
+INT2_ESC_BUTTON_ISR:
+        POP R16
+        POP R16
+        SEI     ; Deshace los cambios de la llamada a la interrupción y continúa hacia MENU
 
 MENU:
 		CALL LCD_INIT
@@ -54,21 +58,19 @@ BOTONES:
 
 		IN R17, PINA
 		BST R17,3 ;Pin 3 del puerto A (MEDIR)
-		BRTS MEDIR_MENU
+		BRTC MEDIR_MENU
 		BST R17,4 ;Pin 4 del puerto A (CORREGIR)
-		BRTS CORREGIR
+		BRTC CORREGIR
 		BST R17,5  ;PIN 5 DEL PUERTO A (OK)
-		BRTS CALIBRAR
+		BRTC CALIBRAR
 						
 JMP BOTONES
 
 CALIBRAR:
 		NOP
-		RET
 		
 MEDIR_MENU:
-		CALL MEDIR
-		RET
+        CALL MEDIR
 		
 CORREGIR:
 		LDI R22, 0
@@ -115,9 +117,7 @@ CORREGIR:
 		LDI R16,'m'  
 		CALL DATAWRT
 
-		CALL DELAY_40ms
-		CALL DELAY_40ms
-		CALL DELAY_40ms
+		CALL DELAY_50ms
 		
 		LDI R20,0 
 		LDI R21,0 
@@ -125,11 +125,11 @@ CORREGIR:
 BOTONES_2:		
 		IN R17 ,PINA
 		BST R17,3  ;Pin 3 del puerto A (AUMENTAR)
-		BRTS AUMENTAR
+		BRTC AUMENTAR
 		BST R17,4  ;Pin 4 del puerto A (REDUCIR)
-		BRTS REDUCIR_OK
+		BRTC REDUCIR_OK
 		BST R17,5  ;PIN 5 DEL PUERTO A (OK)
-		BRTS TMAX_OK
+		BRTC TMAX_OK
 JMP BOTONES_2
 
 REDUCIR_OK:JMP REDUCIR ;CON EL BRANCH NO ALCANZA PARA SALTAR
@@ -198,9 +198,7 @@ AUMENTAR_A:
 		SUB R21,R22  ;VUELVO A LA VARIABLE
 		SUB R20,R22
 		
-		CALL DELAY_40ms
-		CALL DELAY_40ms
-		CALL DELAY_40ms
+		CALL DELAY_50ms
 
 		JMP BOTONES_2
 		
@@ -272,9 +270,7 @@ REDUCIR_A:
 		SUB R21,R22  ;VUELVO A LA VARIABLE
 		SUB R20,R22
 		
-		CALL DELAY_40ms
-		CALL DELAY_40ms
-		CALL DELAY_40ms
+		CALL DELAY_50ms
 
 		JMP BOTONES_2		
 
@@ -310,19 +306,17 @@ TMAX:
 		LDI R23,0
 		LDI R22,48 
 
-		CALL DELAY_40ms
-		CALL DELAY_40ms
-		CALL DELAY_40ms
+		CALL DELAY_50ms
 		
 		
 	BOTONES_3:		
 		IN R17 ,PINA
 		BST R17,3  ;Pin 3 del puerto A (AUMENTAR)
-		BRTS AUMENTAR_T
+		BRTC AUMENTAR_T
 		BST R17,4  ;Pin 4 del puerto A (REDUCIR)
-		BRTS REDUCIR_T
+		BRTC REDUCIR_T
 		BST R17,5  ;PIN 5 DEL PUERTO A (OK)
-		BRTS FIN
+		BRTC FIN
 	JMP BOTONES_3
 	FIN:RJMP FIN ;Acá debería saltar a otra subrutina 
 		
@@ -366,9 +360,7 @@ TMAX:
 		
 		SUB R23,R22
 		
-		CALL DELAY_40ms
-		CALL DELAY_40ms
-		CALL DELAY_40ms	
+		CALL DELAY_50ms	
 		
 	JMP BOTONES_3
 
@@ -415,9 +407,7 @@ TMAX:
 		
 		SUB R23,R22
 		
-		CALL DELAY_40ms
-		CALL DELAY_40ms
-		CALL DELAY_40ms	
+		CALL DELAY_50ms	
 		
 	JMP BOTONES_3
 		
@@ -426,20 +416,19 @@ TMAX:
 		
 		FIN2:RJMP FIN2
 	
-	
+
 	;***************************************************************************************************************************
 		
 		LCD_INIT:	
 			CBI PORTA,2
-			CALL DELAY_40ms
+			CALL DELAY_50ms
 			LDI R16,0X38
-			CALL CMNDWRT
 			CALL CMNDWRT
 			LDI R16,0X0E
 			CALL CMNDWRT
 			LDI R16,0X01
 			CALL CMNDWRT
-			CALL DELAY_1_6ms
+			CALL DELAY_50ms
 			LDI R16,0X06
 			CALL CMNDWRT
 			RET
@@ -488,9 +477,9 @@ TMAX:
 			CBI PORTA,0
 			CBI PORTA,1
 			SBI PORTA,2
-			CALL SDELAY
-			CBI PORTA,2
 			CALL DELAY_100us
+			CBI PORTA,2
+			CALL DELAY_50ms
 			RET
 		;*************************************************************************************************************************
 		DATAWRT:
@@ -498,8 +487,7 @@ TMAX:
 			SBI PORTA,0
 			CBI PORTA,1 
 			SBI PORTA,2
-			CALL SDELAY
-			CBI PORTA,2
 			CALL DELAY_100us
+			CBI PORTA,2
+			CALL DELAY_50ms
 			RET
-		

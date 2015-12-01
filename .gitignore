@@ -14,3 +14,10 @@
 # LTspice raw data files
 *.raw
 *.net
+
+# AVR build files
+*.cof
+*.hex
+*.lss
+*.map
+*.obj

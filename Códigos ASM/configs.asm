@@ -129,6 +129,10 @@ ADC_MAXS_RAM_TABLE:
 ADC_MINS_RAM_TABLE:
     .byte ADC_PERIODS_TO_SAMPLE
 
+; Conversión de BCD a ASCII, en esta posición queda el resultado en ASCII
+BCD_TO_ASCII_CONVERT_RAM:
+    .byte 5
+
 
 ;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
 ;|////////////////////////| Vector de interrupciones |\\\\\\\\\\\\\\\\\\\\\\\\|;
@@ -146,6 +150,10 @@ ADC_MINS_RAM_TABLE:
 ; Interrupción de conversión completa del ADC
 .org ADCCaddr
     jmp     ADC_SAMPLE_STORE_TO_RAM_ISR
+
+; Interrupción de botón de ESC (INT2)
+.org INT2addr
+    jmp     INT2_ESC_BUTTON_ISR
 
 ; Final del vector de interrupciones
 .org INT_VECTORS_SIZE
