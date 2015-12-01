@@ -1,5 +1,5 @@
 MEDIR:
-		LDI PARAM,MEAS_RANGE_60
+		LDI param,MEAS_RANGE_60
 		
 MEDIR_GRAL:		
         CALL PWM_SINE_START
@@ -21,4 +21,4 @@ MEDIR_GRAL:
 
 meas_ready:
 		CALL BCD
-		CALL RESULTADOS_INIC
+        RET

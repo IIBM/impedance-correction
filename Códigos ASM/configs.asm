@@ -19,11 +19,12 @@
 ;     |  OCIE2 |  TOIE2 | TICIE1 | OCIE1A | OCIE1B |  TOIE1 |  OCIE0 |  TOIE0 |
 ;     |    x   |    0   |    x   |    x   |    x   |    x   |    x   |    1   |
 ;
-.equ PWM_FAST_PWM_CONFIG   = (1<<COM01) | (1<<WGM01) | (1<<WGM00) | (1<<CS00)
-.equ PWM_OFF_PWM_CONFIG    = 0
-.equ PWM_OV_INTERRUPT_MASK = (1<<TOIE0)
-.equ PWM_SINE_TABLE_LEN    = 62
-.equ PWM_SINE_MEDIAN       = 127
+.equ PWM_FAST_PWM_CONFIG_T1 = (1<<COM01) | (1<<WGM01) | (1<<WGM00) | (1<<CS00)
+.equ PWM_FAST_PWM_CONFIG_T2 = (1<<COM21) | (1<<WGM21) | (1<<WGM20) | (1<<CS20)
+.equ PWM_OFF_PWM_CONFIG     = 0
+.equ PWM_OV_INTERRUPT_MASK  = (1<<TOIE0)
+.equ PWM_SINE_TABLE_LEN     = 62
+.equ PWM_SINE_MEDIAN        = 127
 
 ;--------------------- Configuración del Timer1 (16 bits) ---------------------;
 ;
@@ -55,22 +56,17 @@
 ;     |    0   |    1   |    1   |    0   |    0   |    x   |    x   |    x   |
 ;
 ; ADC enable: ADEN = 1 => Enabled
-; ADC Auto Trigger Mode: ADATE = 1 => Enabled
+; ADC Auto Trigger Mode: ADATE = 0 => Disabled
 ; ADC Interrupt Enable: ADIE = 1 => Enabled
 ; ADC Prescaler Select Bits: ADPS2:ADPS1:ADPS0 = 1:0:1 => fCk_ADC = fCk/32
 ;
 ; * ADC Control and Status Register A:
 ;     |  ADEN  |  ADSC  |  ADATE |  ADIF  |  ADIE  |  ADPS2 |  ADPS1 |  ADPS0 |
-;     |    1   |    0   |    1   |    0   |    1   |    1   |    0   |    1   |
+;     |    1   |    0   |    0   |    0   |    1   |    1   |    0   |    1   |
 ;
-; ADC Auto Trigger Source: ADTS2:ADTS1:ADTS0 = 0:0:0 => Free Running mode
-;
-; * Special Function I/O Register:
-;     |  ADTS2 |  ADTS1 |  ADTS0 |  *Res* |  ACME  |   PUD  |  PSR2  |  PSR10 |
-;     |    0   |    0   |    0   |    0   |    x   |    x   |    x   |    x   |
-;
+
 .equ ADC_AREF_LEFT_ADJUST_CONFIG = (1<<REFS0) | (1<<ADLAR)
-.equ ADC_ENABLE_AUTO_INT_PRESC   = (1<<ADEN) | (1<<ADATE) | (1<<ADIE) |\
+.equ ADC_ENABLE_AUTO_INT_PRESC   = (1<<ADEN)  | (1<<ADIE) | \
                                    (1<<ADPS2) | (1<<ADPS0)
 .equ ADC_DISABLE            = 0
 .equ ADC_PERIODS_TO_SAMPLE  = 9
@@ -196,4 +192,5 @@ MEAS_RANGE_FLASH_CONTINUE_MUX2_VALUES:
 
 ; === Valor inicial de calibración del PWM de Offset ===
 PWM_OFFSET_FLASH_CALIB_VALUE:
-    .db PWM_SINE_MEDIAN,0 ; cero para completar la palabra de 16 bits
+    .db 0,0 ; cero para completar la palabra de 16 bits
+    ;.db PWM_SINE_MEDIAN,0 ; cero para completar la palabra de 16 bits

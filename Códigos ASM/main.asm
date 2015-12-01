@@ -13,6 +13,7 @@
 .include "BCD.asm"
 .include "LCD.asm"
 .include "MENU.asm"
+.include "CORREGIR_FIN.asm"
 
 
 ;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||;
@@ -69,8 +70,9 @@ MAIN:
     out     GICR,tmp
 
 ;------------------------------------------------------------------------------;
+    call    PWM_SINE_STOP    ; Se inicializa el PWM de senoidal
     call    PWM_OFFSET_START ; Se inicializa la referencia del OpAmp
-    call    MENU
+    jmp     MENU
 
 here:
     rjmp    here

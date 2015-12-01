@@ -24,14 +24,14 @@ AVR = avrdude
 AVRFLAGS = -c $(PROGRAMMER) -p m$(IC)
 
 
-
 #|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|#
 #|////////////////////////| Objetivos y dependencias |\\\\\\\\\\\\\\\\\\\\\\\\|#
 #|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|#
 
 #--------------------------- Reglas de construcción ---------------------------#
-$(NAME).hex: $(NAME).asm
-$(NAME).eep.hex: $(NAME).hex
+SRC_FILES = $(wildcard *.asm)
+$(NAME).hex: $(SRC_FILES)
+$(NAME).eep.hex: $(SRC_FILES)
 
 %.hex: %.asm
 	$(AS) $(ASFLAGS) $< -o $@

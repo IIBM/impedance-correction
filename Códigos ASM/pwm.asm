@@ -129,7 +129,7 @@ PWM_SINE_START:
     rcall   SINE_RAM_TABLE_GO_BEGINNING
 
     ; Configuración del Timer0 como PWM
-    ldi     tmp,PWM_FAST_PWM_CONFIG
+    ldi     tmp,PWM_FAST_PWM_CONFIG_T1
     out     TCCR0,tmp   ; Habilita el PWM en modo rápido
     in      tmp,TIMSK
     sbr     tmp,PWM_OV_INTERRUPT_MASK
@@ -158,7 +158,7 @@ PWM_SINE_STOP:
     set_MUX2_with_R0_value
 
     ; Configuración del Timer0 como PWM
-    ldi     tmp,PWM_FAST_PWM_CONFIG
+    ldi     tmp,PWM_FAST_PWM_CONFIG_T1
     out     TCCR0,tmp   ; Habilita el PWM en modo rápido
     in      tmp,TIMSK
     cbr     tmp,PWM_OV_INTERRUPT_MASK
@@ -220,15 +220,15 @@ PWM_OFFSET_START:
     push    ZH
     push    ZL ; Registros salvados en el stack
 
+    ; Configuración del Timer2 como PWM
+    ldi     tmp,PWM_FAST_PWM_CONFIG_T2
+    out     TCCR2,tmp  ; Habilita el PWM en modo rápido
+
     ldi     ZH,HIGH(PWM_OFFSET_FLASH_CALIB_VALUE<<1)
     ldi     ZL,LOW(PWM_OFFSET_FLASH_CALIB_VALUE<<1) ; Puntero en flash
 
     lpm     tmp,Z      ; Carga el valor medio (duty cycle) desde flash
     out     OCR2,tmp   ; Pone el valor medio en la salida
-
-    ; Configuración del Timer2 como PWM
-    ldi     tmp,PWM_FAST_PWM_CONFIG
-    out     TCCR2,tmp  ; Habilita el PWM en modo rápido
 
     pop     ZL
     pop     ZH ; Registros recuperados del stack

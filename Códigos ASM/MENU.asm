@@ -6,72 +6,187 @@ INT2_ESC_BUTTON_ISR:
 MENU:
 		CALL LCD_INIT
 		
+MED:	
 		LDI R16, 0X01
 		CALL CMNDWRT	  ;Pone el cursor al principio de la 1ra línea 
 		CALL DELAY_1_6ms
 		
-		LDI R16,62   ;Para medir se usa el botón de aumentar (El 62 es un caracter del codigo ASCII)
-		CALL DATAWRT
-		LDI R16,' '		
-		CALL DATAWRT
+		
 		LDI R16,'M'
 		CALL DATAWRT
 		LDI R16,'E'
 		CALL DATAWRT
 		LDI R16,'D'		
 		CALL DATAWRT
+		LDI R16,'I'		
+		CALL DATAWRT
+		LDI R16,'R'		
+		CALL DATAWRT
+		LDI R16,' '		
+		CALL DATAWRT
 		LDI R16,' '		
 		CALL DATAWRT
 		LDI R16,' '		
 		CALL DATAWRT
-		LDI R16,'O'		;Para calibrar se usa el boton de OK
+		LDI R16,'O'		
 		CALL DATAWRT
 		LDI R16,'K'		
 		CALL DATAWRT
-		LDI R16,' '		
-		CALL DATAWRT
-		LDI R16,'C'		
-		CALL DATAWRT
-		LDI R16,'A'		
-		CALL DATAWRT
-		LDI R16,'L'		
-		CALL DATAWRT
-		
-		
-		
+
+
 		LDI R16,$C0   
 		CALL CMNDWRT
 		
-		LDI R16,60        ;Para corregir se usa el botón de reducir
+		LDI R16,60  
+		CALL DATAWRT
+		LDI R16,62   
+		CALL DATAWRT
+			
+BOTONES:
+
+		IN R17, PINA
+		BST R17,3 
+		BRTC CALIBRAR_1
+		BST R17,4 
+		BRTC CORREGIR_JMP
+		BST R17,5  
+		BRTC MEDIR_JMP
+						
+JMP BOTONES
+
+MEDIR_JMP:
+		JMP MEDIR_MENU
+
+CORREGIR_JMP:
+		JMP CORREGIR_1
+
+CALIBRAR_1:
+		LDI R16, 0X01
+		CALL CMNDWRT	  ;Pone el cursor al principio de la 1ra línea 
+		CALL DELAY_1_6ms
+		
+		
+		LDI R16,'C'
+		CALL DATAWRT
+		LDI R16,'A'
+		CALL DATAWRT
+		LDI R16,'L'		
+		CALL DATAWRT
+		LDI R16,'I'		
+		CALL DATAWRT
+		LDI R16,'B'		
+		CALL DATAWRT
+		LDI R16,'R'		
+		CALL DATAWRT
+		LDI R16,'A'		
+		CALL DATAWRT
+		LDI R16,'R'		
 		CALL DATAWRT
 		LDI R16,' '		
 		CALL DATAWRT
+		LDI R16,' '		
+		CALL DATAWRT
+		LDI R16,' '		
+		CALL DATAWRT
+		LDI R16,'O'		
+		CALL DATAWRT
+		LDI R16,'K'		
+		CALL DATAWRT
+
+
+		LDI R16,$C0   
+		CALL CMNDWRT
+		
+		LDI R16,60  
+		CALL DATAWRT
+		LDI R16,62   
+		CALL DATAWRT
+
+		CALL DELAY_50ms
+BOT:		
+		IN R17, PINA
+		BST R17,3 
+		BRTC CORREGIR_1
+		BST R17,4 
+		BRTC MED_JMP
+		BST R17,5  
+		BRTC CALIBRAR_JMP
+JMP BOT
+
+CALIBRAR_JMP:
+		JMP CALIBRAR
+
+MED_JMP:
+		JMP MED
+
+		
+MEDIR_MENU:
+		CALL MEDIR
+		JMP RESULTADOS_INIC
+		RET
+
+CALIBRAR:
+	RJMP CALIBRAR
+		
+CORREGIR_1:
+		LDI R16, 0X01
+		CALL CMNDWRT	  ;Pone el cursor al principio de la 1ra línea 
+		CALL DELAY_1_6ms
+		
+		
 		LDI R16,'C'
 		CALL DATAWRT
 		LDI R16,'O'
 		CALL DATAWRT
-		LDI R16,'R'
+		LDI R16,'R'		
 		CALL DATAWRT
-		
-		
-BOTONES:
+		LDI R16,'R'		
+		CALL DATAWRT
+		LDI R16,'E'		
+		CALL DATAWRT
+		LDI R16,'G'		
+		CALL DATAWRT
+		LDI R16,'I'		
+		CALL DATAWRT
+		LDI R16,'R'		
+		CALL DATAWRT
+		LDI R16,' '		
+		CALL DATAWRT
+		LDI R16,' '		
+		CALL DATAWRT
+		LDI R16,' '		
+		CALL DATAWRT
+		LDI R16,'O'		
+		CALL DATAWRT
+		LDI R16,'K'		
+		CALL DATAWRT
 
+
+		LDI R16,$C0   
+		CALL CMNDWRT
+		
+		LDI R16,60  
+		CALL DATAWRT
+		LDI R16,62   
+		CALL DATAWRT
+
+		CALL DELAY_50ms
+BOT2:		
 		IN R17, PINA
-		BST R17,3 ;Pin 3 del puerto A (MEDIR)
-		BRTC MEDIR_MENU
-		BST R17,4 ;Pin 4 del puerto A (CORREGIR)
+		BST R17,3 
+		BRTC MED_JMP1
+		BST R17,4 
+		BRTC CALIBRAR_JMP1
+		BST R17,5  
 		BRTC CORREGIR
-		BST R17,5  ;PIN 5 DEL PUERTO A (OK)
-		BRTC CALIBRAR
-						
-JMP BOTONES
+JMP BOT2		
 
-CALIBRAR:
-		NOP
-		
-MEDIR_MENU:
-        CALL MEDIR
-		
+MED_JMP1:
+	JMP MED
+
+CALIBRAR_JMP1:
+	JMP CALIBRAR_1
+
 CORREGIR:
 		LDI R22, 0
 		LDI R16, 0X01
@@ -117,7 +232,7 @@ CORREGIR:
 		LDI R16,'m'  
 		CALL DATAWRT
 
-		CALL DELAY_50ms
+	CALL DELAY_50ms
 		
 		LDI R20,0 
 		LDI R21,0 
@@ -199,6 +314,7 @@ AUMENTAR_A:
 		SUB R20,R22
 		
 		CALL DELAY_50ms
+		CALL DELAY_50ms
 
 		JMP BOTONES_2
 		
@@ -271,6 +387,7 @@ REDUCIR_A:
 		SUB R20,R22
 		
 		CALL DELAY_50ms
+		CALL DELAY_50ms
 
 		JMP BOTONES_2		
 
@@ -318,8 +435,38 @@ TMAX:
 		BST R17,5  ;PIN 5 DEL PUERTO A (OK)
 		BRTC FIN
 	JMP BOTONES_3
-	FIN:RJMP FIN ;Acá debería saltar a otra subrutina 
+	FIN:
+		LDI R16, 0X01
+		CALL CMNDWRT	 
+		CALL DELAY_1_6ms
 		
+		LDI R16,'E'
+		CALL DATAWRT
+		LDI R16,'S'
+		CALL DATAWRT
+		LDI R16,'P'
+		CALL DATAWRT
+		LDI R16,'E'
+		CALL DATAWRT
+		LDI R16,'R'
+		CALL DATAWRT
+		LDI R16,'E'
+		CALL DATAWRT
+		LDI R16,'.'
+		CALL DATAWRT
+		LDI R16,'.'
+		CALL DATAWRT
+		LDI R16,'.'
+		CALL DATAWRT
+        JMP CORREGIR_ELECTRODO
+		
+	REDUCIR_T:
+	
+		CPI R23,0
+		BRNE REDUCIR_TP
+		JMP BOTONES_3
+
+
 	AUMENTAR_T:
 		CPI R23,9
 		BRSH BOTONES_3
@@ -364,13 +511,6 @@ TMAX:
 		
 	JMP BOTONES_3
 
-
-	REDUCIR_T:
-	
-		CPI R23,0
-		BRNE REDUCIR_TP
-		JMP BOTONES_3
-		
 		
 	REDUCIR_TP:
 		
@@ -416,7 +556,6 @@ TMAX:
 		
 		FIN2:RJMP FIN2
 	
-
 	;***************************************************************************************************************************
 		
 		LCD_INIT:	

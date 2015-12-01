@@ -3,8 +3,6 @@
 ;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||;
 ADC_SAMPLE_STORE_TO_RAM_ISR:
     push    tmp ; En una interrupción hay que salvar el registro temporal
-    in      tmp,SREG
-    push    tmp ; También hay que salvar el status register
 
     in      tmp,ADCH   ; Muestra de 8 bits, ya que el ajuste es a izquierda
     st      Y+,tmp
@@ -14,9 +12,12 @@ ADC_SAMPLE_STORE_TO_RAM_ISR:
     clt ; El borrado del flag T indica que la conversión ha terminado
     ldi     tmp,ADC_DISABLE
     out     ADCSRA,tmp ; Se desactiva el ADC
+    out     ADCSRA,tmp ; Se desactiva el ADC
+    rjmp    skip_adc_reenabling
+
 skip_stop_sampling:
-    pop     tmp
-    out     SREG,tmp ; Se recupera el status register
+    sbi     ADCSRA,ADSC ; Inicio de la conversión
+skip_adc_reenabling:
     pop     tmp ; Se recupera el registro temporal
 
     reti
@@ -30,17 +31,17 @@ skip_stop_sampling:
 ; ADC_SAMPLES_TABLE_LEN muestras. Salva todos los registros que arruina.
 ;
 ADC_SAMPLING_TO_RAM_FROM_IMPEDANCE_MEASURE_IN:
-    ldi     tmp,ADC_AREF_LEFT_ADJUST_CONFIG | ADC_IMPEDANCE_MEASURE
-    out     ADMUX,tmp
-
-    ldi     tmp,ADC_ENABLE_AUTO_INT_PRESC
-    out     ADCSRA,tmp
-
     ldi     YH,HIGH(ADC_SAMPLES_RAM_TABLE)
     ldi     YL,LOW(ADC_SAMPLES_RAM_TABLE)     ; Inicialización del puntero
     ldi     tbl_jh,HIGH(ADC_SAMPLES_TABLE_LEN)
     ldi     tbl_jl,LOW(ADC_SAMPLES_TABLE_LEN) ; Inicialización del contador
     set ; El flag T de SREG indicará que el muestreo está en curso
+
+    ldi     tmp,ADC_AREF_LEFT_ADJUST_CONFIG | ADC_IMPEDANCE_MEASURE
+    out     ADMUX,tmp
+
+    ldi     tmp,ADC_ENABLE_AUTO_INT_PRESC
+    out     ADCSRA,tmp
 
     sbi     ADCSRA,ADSC ; Inicio de la conversión
 
