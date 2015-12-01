@@ -19,7 +19,7 @@ El sistema funciona con 1, 4, 8, 12 ó 16 electrodos, corrigiendo de a uno por v
 
 En líneas generales, el sistema consta de módulos de amplificación y filtros de PWM que permiten generar una señal senoidal con el microcontrolador, además de controlar la señal de offset. Asimismo, hay una fuente de corriente controlada por tensión que permite inyectar corriente continua al sistema para poder disminuir las impedancias necesarias por galvanoplastía. 
 
-La señal de salida del PWM es una corriente senoidal de \SI{1}{\kilo\hertz}, con uno de los siguientes valores de amplitud: $\{\SI{30}{\nano\ampere}, \SI{80}{\nano\ampere}, \SI{120}{\nano\ampere}, \SI{200}{\nano\ampere}\}$. Éstos se seleccionan con un multiplexor dependiendo del rango de impedancias: $\{0-\SI{2}{\mega\ohm}, 0-\SI{8}{\mega\ohm}, 0-\SI{20}{\mega\ohm}, 0-\SI{60}{\mega\ohm}\}$. Considerando la ley de Ohm y midiendo el valor pico de tensión, se calcula la impedancia del electrodo en estudio como $Z@\SI{1}{\kilo\hertz} = \frac{\hat{v}}{\hat{\i}}$. Este valor se puede disminuir porque la solución acuosa contiene oro o plata, de modo de que se produce un recubrimiento por galvanoplastía sobre el electrodo y así disminuye la impedancia. Si este proceso es necesario o no, dependerá del resultado previo y de la comparación entre el valor obtenido en la medición y el de referencia establecido previamente por el usuario. Se emplea un multiplexor analógico para ir seleccionando cada electrodo y otro en paralelo con éste, que será eventualmente utilizado para verificar que no haya cortocircuitos entre electrodos (inyectando señal en cada electrodo y chequeando sobre cada uno de los restantes que no se reciba un nivel elevado de ésta). 
+La señal de salida del PWM es una corriente senoidal de \SI{1}{\kilo\hertz}, con uno de los siguientes valores de amplitud: $\{\SI{30}{\nano\ampere}, \SI{80}{\nano\ampere}, \SI{120}{\nano\ampere}, \SI{200}{\nano\ampere}\}$. Éstos se seleccionan con un multiplexor dependiendo del rango de impedancias: $\{0-\SI{2}{\mega\ohm}, 0-\SI{8}{\mega\ohm}, 0-\SI{20}{\mega\ohm}, 0-\SI{60}{\mega\ohm}\}$. Considerando la ley de Ohm y midiendo el valor pico de tensión, se calcula la impedancia del electrodo en estudio como $Z@\SI{1}{\kilo\hertz} = \frac{\hat{v}}{\hat{\i}}$. Este valor se puede disminuir porque la solución acuosa contiene oro o plata, de modo de que se produce un recubrimiento por galvanoplastía sobre el electrodo y así disminuye la impedancia. Si este proceso es necesario o no, dependerá del resultado previo y de la comparación entre el valor obtenido en la medición y el de referencia establecido previamente por el usuario. Se emplea un multiplexor analógico para ir seleccionando cada electrodo y otro en paralelo con éste, que será eventualmente utilizado para verificar que no haya cortocircuitos entre electrodos. 
 
 Cada \SI{1}{\minute}) se mide la impedancia y se corrige de ser necesario. Este proceso se repite tantas veces como se requiera hasta llegar al valor de impedancia deseada determinado previamente en la configuración. Los valores aceptables para empezar el proceso están entre \SI{1}{\mega\ohm} y \SI{8}{\mega\ohm}. Además, hay que pautar un tiempo máximo de sensado y corrección, para que el sistema deje de actuar en caso de haber pasado ese tiempo sin haber llegado al valor buscado. Éste puede valer 10, 20, 30, 40, 50 ó 60 minutos.
 
@@ -48,10 +48,6 @@ Las especificaciones del sistema son:
     \hline
     Tensión de alimentación &
     \SI{5}{\volt} \\ \hline
-    Consumo &
-    $<$ \SI{500}{\milli\ampere} (\SI{2.5}{\watt}) \\ \hline
-    Temperatura de funcionamiento &
-    \SI{5}{\celsius} - \SI{70}{\celsius} \\ \hline
     Rango de impedancias de los electrodos medidos &
     \SI{0}{\mega\ohm} - \SI{60}{\mega\ohm} (@ \SI{1}{\kilo\hertz})\\ \hline
     Impedancia buscada & $\simeq$ \SI{1}{\mega\ohm}\\ \hline
@@ -89,7 +85,7 @@ El diagrama de bloques aquí abajo muestra la interconexión de los dispositivos
 % El diagrama de flujo ilustra de manera general la interacción entre los distintos bloques (o rutinas) de código.
 El diagrama de flujo final del proyecto es el siguiente:
 \begin{center}
-    \includegraphics[scale=1.1]{flujo}
+    \includegraphics[scale=1]{flujo}
 \end{center}
 
 
@@ -102,7 +98,7 @@ El diagrama de flujo final del proyecto es el siguiente:
 A continuación se muestra el circuito esquemático correspondiente al prototipo, así como también el diseño del PCB. Ambos fueron realizados con el programa KiCad.\\
  
 \hspace{-1.8cm}
-\includegraphics[scale=0.6]{circuito_esquematico}
+\includegraphics[scale=0.7]{circuito_esquematico}
 
 
 
@@ -150,7 +146,9 @@ En cuanto a las horas-hombre involucradas, se puede estimar un número de 200 ho
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Resultados}
 % No siempre se logran los objetivos propuestos (o al menos en su totalidad); es importante que puedan validar y/o ajustar las expectativas indicando las limitaciones finales del prototipo construido.
-
+Debido a las complicaciones en el diseño del hardware y los reiterados cambios que fueron hechos con el desarrollo del proyecto, no se llegó a un resultado óptimo en la medición de impedancias en la entrada. Esto perjudica también las rutinas de corrección de impedancias. 
+De todos modos, fue posible observar el correcto funcionamiento de las rutinas de impresión por display, conversión ADC, obtención de la mediana a través de ordenamiento de tablas por burbujeo, utilización de pulsadores externos, timers, interrupciones, PWM.
+ 
 
 
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
@@ -158,8 +156,9 @@ En cuanto a las horas-hombre involucradas, se puede estimar un número de 200 ho
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 \section{Conclusiones}
 % En este punto tienen que describir mejoras posibles que podrían hacerse al equipo, cambios sugeridos en función de las experiencias aprendidas  y cualquier otra sugerencia relacionada con el proyecto.
+Como mejoras, se puede mencionar que es altamente recomendable contar con una opción más en el menú para determinar si dos electrodos están o no en cortocircuito. Para ello, se emplea el segundo multiplexor (que aparece en el diseño pero no forma parte de este proyecto). Se podría realizar inyectando señal en cada electrodo y chequeando sobre cada uno de los restantes que no se reciba un nivel elevado de ésta.
 
-
+Por otro lado, sería útil para el usuario que hubiera alguna identificación para ver cuándo mide correctamente cada electrodo, si hay dos en cortocircuito y demás cuestiones que momentáneamente sólo aparecen al final del proceso (leds, por pantalla, etc), así el usuario no tiene que esperar hasta el final para ver si funcionó correctamente o no. 
 
 %|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
 %|////////////////////////////////| Apéndices |\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|%
