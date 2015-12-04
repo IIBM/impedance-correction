@@ -4,6 +4,19 @@ INT2_ESC_BUTTON_ISR:
         SEI     ; Deshace los cambios de la llamada a la interrupción y continúa hacia MENU
 
 MENU:
+		LDI param,MEAS_RANGE_4
+		CALL PWM_SINE_STOP    ; Se inicializa el PWM de senoidal
+		CALL PWM_OFFSET_START ; Se inicializa la referencia del OpAmp
+
+        ; Se limpia la RAM de pantalla LCD
+        LDI R16,80
+        LDI ZH,HIGH(BCD_TO_ASCII_CONVERT_RAM)
+        LDI ZL,LOW(BCD_TO_ASCII_CONVERT_RAM)
+        LDI R17,'*'
+LCD_RAM_INIT:
+        ST Z+,R17
+        DEC R16
+        BRNE LCD_RAM_INIT
 		CALL LCD_INIT
 		
 MED:	
@@ -219,11 +232,9 @@ CORREGIR:
 		
 		LDI R16,0X30
 		CALL DATAWRT
-		LDI R16,'.'
-		CALL DATAWRT	  
 		LDI R16,0X30
 		CALL DATAWRT	
-		LDI R16,'M'
+		LDI R16,'k'
 		CALL DATAWRT	  
 		LDI R16,'O'  
 		CALL DATAWRT
@@ -297,11 +308,9 @@ AUMENTAR_A:
 		
 		MOV R16,R21   
 		CALL DATAWRT
-		LDI R16,'.'
-		CALL DATAWRT	  
 		MOV R16,R20   
 		CALL DATAWRT	
-		LDI R16,'M'
+		LDI R16,'k'
 		CALL DATAWRT	  
 		LDI R16,'O'  
 		CALL DATAWRT
@@ -370,11 +379,9 @@ REDUCIR_A:
 		
 		MOV R16,R21   ;CAMBIAR
 		CALL DATAWRT
-		LDI R16,'.'
-		CALL DATAWRT	  
 		MOV R16,R20   ;CAMBIAR
 		CALL DATAWRT	
-		LDI R16,'M'
+		LDI R16,'k'
 		CALL DATAWRT	  
 		LDI R16,'O'  
 		CALL DATAWRT

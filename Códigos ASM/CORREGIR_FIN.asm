@@ -1,39 +1,50 @@
 CORREGIR_ELECTRODO:
-			;R21 TIENE EL VALOR ALTO
-			;R20 EL VALOR BAJO
-			;R23 TIENE TMAX
-			
-        CLR iter
+    ; R21 -> R11 Tiene las decenas de la impedancia en kohms
+    ; R20 -> R10 Tiene la unidad de la impedancia en kohms
+    ; R23 -> R12 Tiene TMAX en cantidades de a 10 min
+        
+    clr     iter    ; iterador de la cantidad de minutos de corrección
+    mov     R10,R20 ; copia hacia registros no utilizados por las rutinas
+    mov     R11,R21 ; copia hacia registros no utilizados por las rutinas
+    mov     R12,R23 ; copia hacia registros no utilizados por las rutinas
 
-CONTINUAR_CORRIGIENDO:
-		CALL MEDIR ; Esto sirve para saber en qué rango corregir (param)
-		CALL PWM_CONTINUE_CORRECTION_START
-        LDI PARAM,60
-        CALL DELAY_PARAM_SECONDS
-        INC iter
-        CALL MEDIR
+continuar_corrigiendo:
+    ; Se mide para saber en qué rango corregir (queda en param)
+    ; o si no es necesario hacerlo (medición en R1:R0)
+    call    MEDIR
 
-        ; Copiar la impedancia medida hacia R3:R2
-        MOV R3,R1
-        MOV R2,R0
+    ; Se copia la impedancia medida hacia R3:R2
+    mov     R3,R1
+    mov     R2,R0
 
-		;VERIFICAR TMAX
-        LDI TMP,10
-        MUL TMP,R23 ; TMAX en minutos: R1:R0, como es < 90, sólo interesa R0
-        ; Aquí: R0 = TMAX; iter = TACTUAL
-        CP iter,R0
-        BREQ FINAL_CORRECCION ; Se ha cumplido el tiempo máximo
+    ; Verificación de la impedancia
+    ldi     tmp,10
+    mul     tmp,R11 ; R1:R0 <- Decenas de la impedancia en kohms * 10
+    add     R0,R10  ; R1:R0 <- R1:R0 + Unidad de la impedancia en kohms
+    clr     tmp
+    adc     R1,tmp  ; Suma del carry a la parte alta (ya que tmp = 0)
 
+    ; R1:R0 <- valor de impedancia deseada que se comparará con R3:R2 (medida)
+    cp      R0,R2
+    cpc     R1,R3
+    brsh    final_correccion ; Si R1:R0 (deseada) >= R3:R2 (medida)
 
-        MUL TMP,R21 ; Decenas de la impedancia deciMegOhms
-        CLR TMP
-        ADD R0,R20  ; Unidad de la impedancia en deciMegOhms
-        ADC R1,TMP  ; Suma del carry (ya que TMP = 0)
+    call    PWM_CONTINUE_CORRECTION_START
+    ldi     param,60
+    call    DELAY_PARAM_SECONDS
+    inc     iter
 
-        ; R1:R0 es el valor de impedancia deseada que se comparará con R3:R2
-        CP R2,R0
-        CPC R3,R1
-        BRLO CONTINUAR_CORRIGIENDO ; Salta si R3:R2 (medida) > R1:R0 (deseada)
+    ; Verificación de TMAX
+    ldi     tmp,10
+    mul     tmp,R12 ; R1:R0 <- TMAX en minutos, como es < 90, sólo interesa R0
+    ; Aquí: R0 = TMAX; iter = TACTUAL (en minutos)
+    cp      iter,R0
+    brsh    final_correccion ; Si iter >= R0, se ha cumplido el tiempo máximo
 
-FINAL_CORRECCION:
-	CALL RESULTADOS_INIC
+    rjmp    continuar_corrigiendo
+
+final_correccion:
+    call    PWM_SINE_STOP
+    call    DELAY_50ms
+    call    MEDIR
+    jmp     RESULTADOS_INIC

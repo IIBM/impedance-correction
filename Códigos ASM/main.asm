@@ -70,12 +70,9 @@ MAIN:
     out     GICR,tmp
 
 ;------------------------------------------------------------------------------;
-    call    PWM_SINE_STOP    ; Se inicializa el PWM de senoidal
-    call    PWM_OFFSET_START ; Se inicializa la referencia del OpAmp
     jmp     MENU
 
-here:
-    rjmp    here
+    rjmp    MAIN ; Si se llega hasta aquí por error, se comienza de nuevo
 
 
 ;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;

@@ -85,10 +85,10 @@
 .equ MUX2_x200nA = 3
 
 ; Enumerativo para los rangos de medición
-.equ MEAS_RANGE_2  = 0
-.equ MEAS_RANGE_8  = 1
-.equ MEAS_RANGE_20 = 2
-.equ MEAS_RANGE_60 = 3
+.equ MEAS_RANGE_1 = 0
+.equ MEAS_RANGE_2 = 1
+.equ MEAS_RANGE_3 = 2
+.equ MEAS_RANGE_4 = 3
 ;---------------------------- Registros especiales ----------------------------;
 .def tmp   = R16        ; Temporario, siempre se podrá pisar sin salvarlo
 .def param = R17        ; Parámetro para rutinas
@@ -127,7 +127,7 @@ ADC_MINS_RAM_TABLE:
 
 ; Conversión de BCD a ASCII, en esta posición queda el resultado en ASCII
 BCD_TO_ASCII_CONVERT_RAM:
-    .byte 5
+    .byte 5*16
 
 
 ;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
@@ -168,7 +168,7 @@ PWM_SINE_FLASH_TABLE:
 
 ; === Multiplexor MUX2 para cada rango de medición ===
 MEAS_RANGE_FLASH_SIN_MUX2_VALUES:
-    .db MUX2_x200nA, MUX2_x80nA, MUX2_x30nA, MUX2_x30nA
+    .db MUX2_x200nA, MUX2_x120nA, MUX2_x80nA, MUX2_x30nA
 
 ; === Valor de amplitud para cada rango de medición ===
 ; 128 --> 100,0 % --> 200,0 nA de corriente pico
@@ -176,15 +176,15 @@ MEAS_RANGE_FLASH_SIN_MUX2_VALUES:
 ;  92 -->  71,9 % -->  21,6 nA de corriente pico
 ;  30 -->  23,4 % -->   7,0 nA de corriente pico
 MEAS_RANGE_FLASH_SINAMPS:
-    .db 128, 84, 92, 30
+    .db 128, 128, 128, 128
 
-; === Valores de piso para cada rango de medición, en décimas de mega ohm ===
+; === Valores de piso para cada rango de medición, en kilo ohm (16 bit!) ===
 MEAS_RANGE_FLASH_FLOOR_VALUES:
-    .db 0, 20, 80, 200 ; 0 Mohm, 2 Mohm, 8 Mohm, 20 Mohm
+    .dw 0, 143, 243, 335 ; Unidad: kohm
 
 ; === Valores del parámetro p inicial para cada rango de medición (16 bit!) ===
 MEAS_RANGE_FLASH_P_FACTOR_DEFAULTS:
-    .dw 52, 202, 506, 1550
+    .dw 421, 649, 901, 2607
 
 ; === Valores de continua de corrección para cada rango de medición ===
 MEAS_RANGE_FLASH_CONTINUE_MUX2_VALUES:
@@ -192,5 +192,4 @@ MEAS_RANGE_FLASH_CONTINUE_MUX2_VALUES:
 
 ; === Valor inicial de calibración del PWM de Offset ===
 PWM_OFFSET_FLASH_CALIB_VALUE:
-    .db 0,0 ; cero para completar la palabra de 16 bits
-    ;.db PWM_SINE_MEDIAN,0 ; cero para completar la palabra de 16 bits
+    .db 210, 218, 218, 223

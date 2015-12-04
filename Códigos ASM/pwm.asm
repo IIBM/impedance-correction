@@ -103,7 +103,7 @@ loop_sine_table:
 ;|/////////| Encender la senoidal, para el rango de medición deseado |\\\\\\\\|;
 ;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
 ;
-; param (R17) <- rango, 4 opciones: MEAS_RANGE_X con X en {2, 8, 20, 60}
+; param (R17) <- rango, 4 opciones: MEAS_RANGE_X con X en {1, 2, 3, 4}
 ; Encenderá el PWM de la senoidal para un rango de medición determinado,
 ; especificado en el parámetro de entrada, por medio de un valor "enumerativo"
 ; MEAS_RANGE_X, no hace chequeos de borde, se asume que se recibe un valor
@@ -175,7 +175,7 @@ PWM_SINE_STOP:
 ;|//| Encender la continua de corrección, para el rango de medición deseado |\|;
 ;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
 ;
-; param (R17) <- rango, 4 opciones: MEAS_RANGE_X con X en {2, 8, 20, 60}
+; param (R17) <- rango, 4 opciones: MEAS_RANGE_X con X en {1, 2, 3, 4}
 ; Encenderá el PWM en el modo de corrección, es decir, señales continuas. Según
 ; el rango especificado en el parámetro de entrada, por medio de un valor
 ; "enumerativo" MEAS_RANGE_X, no hace chequeos de borde, se asume que se recibe
@@ -213,6 +213,7 @@ PWM_CONTINUE_CORRECTION_START:
 ;|/////////////////| Encender el PWM de Offset de referencia |\\\\\\\\\\\\\\\\|;
 ;|//////////////////////////////////////|\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|;
 ;
+; param (R17) <- rango, 4 opciones: MEAS_RANGE_X con X en {1, 2, 3, 4}
 ; Lee desde flash (TODO: EEPROM) los datos de calibración de Offset.
 ; Salva todos los registros que arruina. Incluso param (R17) y R2.
 ;
@@ -224,9 +225,7 @@ PWM_OFFSET_START:
     ldi     tmp,PWM_FAST_PWM_CONFIG_T2
     out     TCCR2,tmp  ; Habilita el PWM en modo rápido
 
-    ldi     ZH,HIGH(PWM_OFFSET_FLASH_CALIB_VALUE<<1)
-    ldi     ZL,LOW(PWM_OFFSET_FLASH_CALIB_VALUE<<1) ; Puntero en flash
-
+    flash_point_Z_plus_param PWM_OFFSET_FLASH_CALIB_VALUE
     lpm     tmp,Z      ; Carga el valor medio (duty cycle) desde flash
     out     OCR2,tmp   ; Pone el valor medio en la salida
 

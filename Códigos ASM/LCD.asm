@@ -52,11 +52,9 @@ RESULTADOS_1:
 			CALL DATAWRT
 			LD R16,Z+   ;El resultado de la corrección
 			CALL DATAWRT
-			LDI R16,'.'
-			CALL DATAWRT
 			LD R16,Z   ;El resultado de la corrección
 			CALL DATAWRT
-			LDI R16,'M'
+			LDI R16,'k'
 			CALL DATAWRT
 			LDI R16,'O'  
 		    CALL DATAWRT
@@ -91,16 +89,19 @@ PRIMERO:
         SBIW ZL,1
 		JMP BOTONES_4
 BAJAR: 
-        SBIW ZL,5 ; Retrocede el puntero
 		DEC R19
-		CPI R19,0 ;Si se pasa del 1, vuelve al 16
+		CPI R19,0  ; Si se pasa del 1, vuelve al 16
 		BREQ ULTIMO
+        SBIW ZL,9  ; Retrocede el puntero
 		JMP RESULTADOS
 ULTIMO:
 		LDI R19,1
         LDI ZH,HIGH(BCD_TO_ASCII_CONVERT_RAM)
         LDI ZL,LOW(BCD_TO_ASCII_CONVERT_RAM)
-		JMP BOTONES_4
+		LDI R16, 0X01
+		CALL CMNDWRT	  ;Pone el cursor al principio de la 1ra línea 
+		CALL DELAY_1_6ms
+		JMP RESULTADOS_1
 		
 		
 DIEZ_I:     
@@ -141,11 +142,9 @@ DIEZ_I:
 			CALL DATAWRT
 			LD R16,Z+   ;El resultado de la corrección
 			CALL DATAWRT
-			LDI R16,'.'
-			CALL DATAWRT
 			LD R16,Z   ;El resultado de la corrección
 			CALL DATAWRT
-			LDI R16,'M'
+			LDI R16,'k'
 			CALL DATAWRT
 			LDI R16,'O'  
 		    CALL DATAWRT
