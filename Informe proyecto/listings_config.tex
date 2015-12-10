@@ -1,0 +1,160 @@
+% Paquete para insertar código fuente:
+\usepackage{listings}
+
+% Necesario para imprimir las comillas rectas y no las de LaTeX:
+\usepackage{textcomp}
+
+% ------------------------- Configuraciones generales ------------------------ %
+\lstset
+{
+    extendedchars=\true,%               Incluir caracteres extendidos
+    inputencoding=utf8x,%               Codificación utilizada
+    linewidth=\textwidth,%              Ancho máximo de una linea de código
+    xleftmargin=16pt,%                  Margen izquierdo
+    xrightmargin=5pt,%                  Margen derecho
+    breaklines=true,%                   Corte de lineas largas
+    numbers=left,%                      Números de línea a la izquierda
+    stepnumber=1,%                      Avance de los números de línea de a 1
+    numbersep=5pt,%                     Separación de los números de línea
+    tabsize=4,showtabs=false,%          Los TABs miden 4 espacios, y no se ven
+    showstringspaces=false,%            Los espacios en las cadenas no se marcan
+    upquote=true,%                      Impresión correcta de las comillas
+    numberstyle=\tiny,%                 Estilo de los números de línea
+    basicstyle=\ttfamily\scriptsize,%   Estilo básico del código fuente
+    commentstyle=\color{Gray},%         Estilo de los comentarios
+    stringstyle=\color{BrickRed},%      Estilo de las cadenas
+%                 Definiciones de caracteres especiales
+    literate={á}{{\'a}}1   {é}{{\'e}}1   {í}{{\'i}}1   {ó}{{\'o}}1   {ú}{{\'u}}1
+             {Á}{{\'A}}1   {É}{{\'E}}1   {Í}{{\'I}}1   {Ó}{{\'O}}1   {Ú}{{\'U}}1
+             {ñ}{{\~n}}1   {°}{{\textsuperscript{o}}}1
+             {Ñ}{{\~N}}1   {º}{{\textsuperscript{\underline{o}}}}1
+             {à}{{\`a}}1   {è}{{\`e}}1   {ì}{{\`i}}1   {ò}{{\`o}}1   {ù}{{\`u}}1
+             {À}{{\`A}}1   {È}{{\`E}}1   {Ì}{{\`I}}1   {Ò}{{\`O}}1   {Ù}{{\`U}}1
+}
+
+
+%-------------------------- Lenguaje Assembly de AVR --------------------------%
+\lstdefinelanguage{asmAVR}[x86masm]{Assembler}
+{
+    keywordstyle=[1]{\color{Black}},%         Estilo: en comentarios
+    keywordstyle=[2]{\color{ForestGreen}},%   Estilo: definiciones de bits
+    keywordstyle=[3]{\color{BurntOrange}},%   Estilo: mnemónicos
+    keywordstyle=[4]{\color{MidnightBlue}},%  Estilo: definiciones de registros
+    keywordstyle=[5]{\color{Violet}},%        Estilo: directivas del ensamblador
+    %
+    sensitive=false,%                         Case insensitive
+    %
+    otherkeywords=
+    {TODO,XXX,FIXME,NOTE},
+    %
+    deletekeywords=
+    {EEDR0,EEDR1,EEDR2,EEDR3,EEDR4,EEDR5,EEDR6,EEDR7,EERE,EEWE,EEMWE,EERIE,WDP0,
+    WDP1,WDP2,WDE,WDTOE,WDDE,IVCE,IVSEL,INT2,INT0,INT1,INTF2,INTF0,INTF1,ISC00,
+    ISC01,ISC10,ISC11,ISC2,CS00,CS01,CS02,WGM01,CTC0,COM00,COM01,WGM00,PWM0,
+    FOC0,TCNT0_0,TCNT0_1,TCNT0_2,TCNT0_3,TCNT0_4,TCNT0_5,TCNT0_6,TCNT0_7,OCR0_0,
+    OCR0_1,OCR0_2,OCR0_3,OCR0_4,OCR0_5,OCR0_6,OCR0_7,TOIE0,OCIE0,TOV0,OCF0,
+    TOIE2,OCIE2,TOV2,OCF2,CS20,CS21,CS22,WGM21,CTC2,COM20,COM21,WGM20,PWM2,FOC2,
+    TCNT2_0,TCNT2_1,TCNT2_2,TCNT2_3,TCNT2_4,TCNT2_5,TCNT2_6,TCNT2_7,OCR2_0,
+    OCR2_1,OCR2_2,OCR2_3,OCR2_4,OCR2_5,OCR2_6,OCR2_7,TCR2UB,OCR2UB,TCN2UB,AS2,
+    TOIE1,OCIE1B,OCIE1A,TICIE1,TOV1,OCF1B,OCF1A,ICF1,WGM10,PWM10,WGM11,PWM11,
+    FOC1B,FOC1A,COM1B0,COM1B1,COM1A0,COM1A1,CS10,CS11,CS12,WGM12,CTC10,CTC1,
+    WGM13,CTC11,ICES1,ICNC1,SPDR0,SPDR1,SPDR2,SPDR3,SPDR4,SPDR5,SPDR6,SPDR7,
+    SPI2X,WCOL,SPIF,SPR0,SPR1,CPHA,CPOL,MSTR,DORD,SPE,SPIE,UDR0,UDR1,UDR2,UDR3,
+    UDR4,UDR5,UDR6,UDR7,MPCM,U2X,UPE,PE,DOR,FE,UDRE,TXC,RXC,TXB8,RXB8,UCSZ2,
+    CHR9,TXEN,RXEN,UDRIE,TXCIE,RXCIE,UCPOL,UCSZ0,UCSZ1,USBS,UPM0,UPM1,UMSEL,
+    URSEL,ACME,ACIS0,ACIS1,ACIC,ACIE,ACI,ACO,ACBG,ACD,MUX0,MUX1,MUX2,MUX3,MUX4,
+    ADLAR,REFS0,REFS1,ADPS0,ADPS1,ADPS2,ADIE,ADIF,ADATE,ADFR,ADSC,ADEN,ADCH0,
+    ADCH1,ADCH2,ADCH3,ADCH4,ADCH5,ADCH6,ADCH7,ADCL0,ADCL1,ADCL2,ADCL3,ADCL4,
+    ADCL5,ADCL6,ADCL7,ADTS0,ADTS1,ADTS2,PORTA0,PA0,PORTA1,PA1,PORTA2,PA2,PORTA3,
+    PA3,PORTA4,PA4,PORTA5,PA5,PORTA6,PA6,PORTA7,PA7,DDA0,DDA1,DDA2,DDA3,DDA4,
+    DDA5,DDA6,DDA7,PINA0,PINA1,PINA2,PINA3,PINA4,PINA5,PINA6,PINA7,PORTB0,PB0,
+    PORTB1,PB1,PORTB2,PB2,PORTB3,PB3,PORTB4,PB4,PORTB5,PB5,PORTB6,PB6,PORTB7,
+    PB7,DDB0,DDB1,DDB2,DDB3,DDB4,DDB5,DDB6,DDB7,PINB0,PINB1,PINB2,PINB3,PINB4,
+    PINB5,PINB6,PINB7,PORTC0,PC0,PORTC1,PC1,PORTC2,PC2,PORTC3,PC3,PORTC4,PC4,
+    PORTC5,PC5,PORTC6,PC6,PORTC7,PC7,DDC0,DDC1,DDC2,DDC3,DDC4,DDC5,DDC6,DDC7,
+    PINC0,PINC1,PINC2,PINC3,PINC4,PINC5,PINC6,PINC7,PORTD0,PD0,PORTD1,PD1,
+    PORTD2,PD2,PORTD3,PD3,PORTD4,PD4,PORTD5,PD5,PORTD6,PD6,PORTD7,PD7,DDD0,DDD1,
+    DDD2,DDD3,DDD4,DDD5,DDD6,DDD7,PIND0,PIND1,PIND2,PIND3,PIND4,PIND5,PIND6,
+    PIND7,SREG_C,SREG_Z,SREG_N,SREG_V,SREG_S,SREG_H,SREG_T,SREG_I,SM0,SM1,SM2,
+    SE,PORF,EXTRF,BORF,WDRF,JTRF,JTD,CAL0,CAL1,CAL2,CAL3,CAL4,CAL5,CAL6,CAL7,
+    PSR10,PSR2,PUD,SPMEN,PGERS,PGWRT,BLBSET,RWWSRE,ASRE,RWWSB,ASB,SPMIE,TWBR0,
+    TWBR1,TWBR2,TWBR3,TWBR4,TWBR5,TWBR6,TWBR7,TWIE,TWEN,TWWC,TWSTO,TWSTA,TWEA,
+    TWINT,TWPS0,TWPS1,TWS3,TWS4,TWS5,TWS6,TWS7,TWD0,TWD1,TWD2,TWD3,TWD4,TWD5,
+    TWD6,TWD7,TWGCE,TWA0,TWA1,TWA2,TWA3,TWA4,TWA5,TWA6,LB1,LB2,BLB01,BLB02,
+    BLB11,BLB12,CKSEL0,CKSEL1,CKSEL2,CKSEL3,BODEN,BODLEVEL,BOOTRST,BOOTSZ0,
+    BOOTSZ1,EESAVE,SPIEN,JTAGEN,OCDEN},
+    keywords=[2]
+    {EEDR0,EEDR1,EEDR2,EEDR3,EEDR4,EEDR5,EEDR6,EEDR7,EERE,EEWE,EEMWE,EERIE,WDP0,
+    WDP1,WDP2,WDE,WDTOE,WDDE,IVCE,IVSEL,INT2,INT0,INT1,INTF2,INTF0,INTF1,ISC00,
+    ISC01,ISC10,ISC11,ISC2,CS00,CS01,CS02,WGM01,CTC0,COM00,COM01,WGM00,PWM0,
+    FOC0,TCNT0_0,TCNT0_1,TCNT0_2,TCNT0_3,TCNT0_4,TCNT0_5,TCNT0_6,TCNT0_7,OCR0_0,
+    OCR0_1,OCR0_2,OCR0_3,OCR0_4,OCR0_5,OCR0_6,OCR0_7,TOIE0,OCIE0,TOV0,OCF0,
+    TOIE2,OCIE2,TOV2,OCF2,CS20,CS21,CS22,WGM21,CTC2,COM20,COM21,WGM20,PWM2,FOC2,
+    TCNT2_0,TCNT2_1,TCNT2_2,TCNT2_3,TCNT2_4,TCNT2_5,TCNT2_6,TCNT2_7,OCR2_0,
+    OCR2_1,OCR2_2,OCR2_3,OCR2_4,OCR2_5,OCR2_6,OCR2_7,TCR2UB,OCR2UB,TCN2UB,AS2,
+    TOIE1,OCIE1B,OCIE1A,TICIE1,TOV1,OCF1B,OCF1A,ICF1,WGM10,PWM10,WGM11,PWM11,
+    FOC1B,FOC1A,COM1B0,COM1B1,COM1A0,COM1A1,CS10,CS11,CS12,WGM12,CTC10,CTC1,
+    WGM13,CTC11,ICES1,ICNC1,SPDR0,SPDR1,SPDR2,SPDR3,SPDR4,SPDR5,SPDR6,SPDR7,
+    SPI2X,WCOL,SPIF,SPR0,SPR1,CPHA,CPOL,MSTR,DORD,SPE,SPIE,UDR0,UDR1,UDR2,UDR3,
+    UDR4,UDR5,UDR6,UDR7,MPCM,U2X,UPE,PE,DOR,FE,UDRE,TXC,RXC,TXB8,RXB8,UCSZ2,
+    CHR9,TXEN,RXEN,UDRIE,TXCIE,RXCIE,UCPOL,UCSZ0,UCSZ1,USBS,UPM0,UPM1,UMSEL,
+    URSEL,ACME,ACIS0,ACIS1,ACIC,ACIE,ACI,ACO,ACBG,ACD,MUX0,MUX1,MUX2,MUX3,MUX4,
+    ADLAR,REFS0,REFS1,ADPS0,ADPS1,ADPS2,ADIE,ADIF,ADATE,ADFR,ADSC,ADEN,ADCH0,
+    ADCH1,ADCH2,ADCH3,ADCH4,ADCH5,ADCH6,ADCH7,ADCL0,ADCL1,ADCL2,ADCL3,ADCL4,
+    ADCL5,ADCL6,ADCL7,ADTS0,ADTS1,ADTS2,PORTA0,PA0,PORTA1,PA1,PORTA2,PA2,PORTA3,
+    PA3,PORTA4,PA4,PORTA5,PA5,PORTA6,PA6,PORTA7,PA7,DDA0,DDA1,DDA2,DDA3,DDA4,
+    DDA5,DDA6,DDA7,PINA0,PINA1,PINA2,PINA3,PINA4,PINA5,PINA6,PINA7,PORTB0,PB0,
+    PORTB1,PB1,PORTB2,PB2,PORTB3,PB3,PORTB4,PB4,PORTB5,PB5,PORTB6,PB6,PORTB7,
+    PB7,DDB0,DDB1,DDB2,DDB3,DDB4,DDB5,DDB6,DDB7,PINB0,PINB1,PINB2,PINB3,PINB4,
+    PINB5,PINB6,PINB7,PORTC0,PC0,PORTC1,PC1,PORTC2,PC2,PORTC3,PC3,PORTC4,PC4,
+    PORTC5,PC5,PORTC6,PC6,PORTC7,PC7,DDC0,DDC1,DDC2,DDC3,DDC4,DDC5,DDC6,DDC7,
+    PINC0,PINC1,PINC2,PINC3,PINC4,PINC5,PINC6,PINC7,PORTD0,PD0,PORTD1,PD1,
+    PORTD2,PD2,PORTD3,PD3,PORTD4,PD4,PORTD5,PD5,PORTD6,PD6,PORTD7,PD7,DDD0,DDD1,
+    DDD2,DDD3,DDD4,DDD5,DDD6,DDD7,PIND0,PIND1,PIND2,PIND3,PIND4,PIND5,PIND6,
+    PIND7,SREG_C,SREG_Z,SREG_N,SREG_V,SREG_S,SREG_H,SREG_T,SREG_I,SM0,SM1,SM2,
+    SE,PORF,EXTRF,BORF,WDRF,JTRF,JTD,CAL0,CAL1,CAL2,CAL3,CAL4,CAL5,CAL6,CAL7,
+    PSR10,PSR2,PUD,SPMEN,PGERS,PGWRT,BLBSET,RWWSRE,ASRE,RWWSB,ASB,SPMIE,TWBR0,
+    TWBR1,TWBR2,TWBR3,TWBR4,TWBR5,TWBR6,TWBR7,TWIE,TWEN,TWWC,TWSTO,TWSTA,TWEA,
+    TWINT,TWPS0,TWPS1,TWS3,TWS4,TWS5,TWS6,TWS7,TWD0,TWD1,TWD2,TWD3,TWD4,TWD5,
+    TWD6,TWD7,TWGCE,TWA0,TWA1,TWA2,TWA3,TWA4,TWA5,TWA6,LB1,LB2,BLB01,BLB02,
+    BLB11,BLB12,CKSEL0,CKSEL1,CKSEL2,CKSEL3,BODEN,BODLEVEL,BOOTRST,BOOTSZ0,
+    BOOTSZ1,EESAVE,SPIEN,JTAGEN,OCDEN},
+    %
+    deletekeywords=
+    {adc,add,adiw,and,andi,asr,bclr,bld,brbc,brbs,brcc,brcs,break,breq,brge,
+    brhc,brhs,brid,brie,brlo,brlt,brmi,brne,brpl,brsh,brtc,brts,brvc,brvs,bset,
+    bst,call,cbi,cbr,clc,clh,cli,cln,clr,cls,clt,clv,clz,com,cp,cpi,cpse,dec,
+    des,eicall,eijmp,elpm,eor,fmul,fmuls,fmulsu,icall,ijmp,in,inc,jmp,lac,las,
+    lat,ld,ldd,ldi,lds,lpm,lsl,lsr,mov,movw,mul,muls,mulsu,neg,nop,or,ori,out,
+    pop,push,rcall,ret,reti,rjmp,rol,ror,sbc,sbci,sbi,sbic,sbis,sbiw,sbr,sbrc,
+    sbrs,sec,seh,sei,sen,ser,ses,set,sev,sez,sleep,spm,st,std,sts,sub,subi,swap,
+    tst,wdr,xch},
+    keywords=[3]
+    {adc,add,adiw,and,andi,asr,bclr,bld,brbc,brbs,brcc,brcs,break,breq,brge,
+    brhc,brhs,brid,brie,brlo,brlt,brmi,brne,brpl,brsh,brtc,brts,brvc,brvs,bset,
+    bst,call,cbi,cbr,clc,clh,cli,cln,clr,cls,clt,clv,clz,com,cp,cpi,cpse,dec,
+    des,eicall,eijmp,elpm,eor,fmul,fmuls,fmulsu,icall,ijmp,in,inc,jmp,lac,las,
+    lat,ld,ldd,ldi,lds,lpm,lsl,lsr,mov,movw,mul,muls,mulsu,neg,nop,or,ori,out,
+    pop,push,rcall,ret,reti,rjmp,rol,ror,sbc,sbci,sbi,sbic,sbis,sbiw,sbr,sbrc,
+    sbrs,sec,seh,sei,sen,ser,ses,set,sev,sez,sleep,spm,st,std,sts,sub,subi,swap,
+    tst,wdr,xch},
+    %
+    keywords=[4]
+    {SREG,SPL,SPH,OCR0,GICR,GIFR,TIMSK,TIFR,SPMCR,TWCR,MCUCR,MCUCSR,MCUSR,TCCR0,
+    TCNT0,OSCCAL,OCDR,SFIOR,TCCR1A,TCCR1B,TCNT1L,TCNT1H,OCR1AL,OCR1AH,OCR1BL,
+    OCR1BH,ICR1L,ICR1H,TCCR2,TCNT2,OCR2,ASSR,WDTCR,UBRRH,UCSRC,EEARL,EEARH,EEDR,
+    EECR,PORTA,DDRA,PINA,PORTB,DDRB,PINB,PORTC,DDRC,PINC,PORTD,DDRD,PIND,SPDR,
+    SPSR,SPCR,UDR,UCSRA,USR,UCSRB,UCR,UBRRL,ACSR,ADMUX,ADCSRA,ADCSR,ADCH,ADCL,
+    TWDR,TWAR,TWSR,TWBR,GIMSK,UBRRHI,FLASHEND,IOEND,SRAM_START,SRAM_SIZE,RAMEND,
+    XRAMEND,E2END,EEPROMEND,EEADRBITS,NRWW_START_ADDR,NRWW_STOP_ADDR,
+    RWW_START_ADDR,RWW_STOP_ADDR,PAGESIZE,FIRSTBOOTSTART,SECONDBOOTSTART,
+    THIRDBOOTSTART,FOURTHBOOTSTART,SMALLBOOTSTART,LARGEBOOTSTART,INT0addr,
+    INT1addr,INT2addr,OC2addr,OVF2addr,ICP1addr,OC1Aaddr,OC1Baddr,OVF1addr,
+    OC0addr,OVF0addr,SPIaddr,URXCaddr,UDREaddr,UTXCaddr,ADCCaddr,ERDYaddr,
+    ACIaddr,TWIaddr,SPMRaddr,INT_VECTORS_SIZE},
+    %
+    keywords=[5]
+    {.byte,.cseg,.db,.def,.device,.dseg,.dw,.endmacro,.equ,.eseg,.exit,.include,
+    .list,.listmac,.macro,.nolist,.org,.set,low,high,byte2,byte3,byte4,lwrd,
+    hwrd,page,exp2,log2}
+}

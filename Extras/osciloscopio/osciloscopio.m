@@ -6,9 +6,7 @@ clc;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Colores y configuraciones globales %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-green  = [ 50, 205,  50]/255;
-pinky  = [250, 160, 180]/255;
-grey   = [180, 180, 180]/255;
+green  = [ 10, 140,  10]/255;
 
 lwp = 1;        % Grosor de primario de línea para gráficos
 msp = 4;        % Tamaño primario de los marcadores para gráficos
@@ -33,7 +31,7 @@ signal = downsample(signal, 2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure(1);
     hold on;
-    plot(signal(:,1), signal(:,2), 'linewidth', lwp, 'color', pinky);
+    plot(signal(:,1), signal(:,2), 'linewidth', lwp, 'color', green);
     grid minor;
     xlabel('$t\ [\SI{}{\milli\second}]$');
     ylabel('$V\ [\SI{}{\milli\volt}]$');
